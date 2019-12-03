@@ -1,0 +1,27 @@
+gym_malware\envs\controls
+*.pth
+.DS_Store
+virtual_environments
+Data
+Logs
+portable-executable/project-add-imports/bin
+portable-executable/project-add-imports/obj
+portable-executable/project-add-imports/project-add-imports.cbp
+portable-executable/project-add-imports/project-add-imports.layout
+tester.log
+feature_vector_directory
+__pycache__
+.vscode
+evaded-samples
+runs
+Mutated Files
+testing-samples
+mutated_dataset
+*.exe 
+*.pk
+Mutated_malware
+adversarial_feature_vector_directory
+gym_malware/envs/utils/samples
+evaded/score
+*.bak
+gym_malware\envs\controls

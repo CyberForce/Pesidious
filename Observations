@@ -1,0 +1,4 @@
+More imports = higher TPR
+    -> Maybe the anti-virus has a condition for the number of imports. 
+    -> If a binary has more than a certain number of imports, it can be malicious.
+

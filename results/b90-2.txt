@@ -1,0 +1,654 @@
+704dd7ed9595cc0d71c38e442ce00bb40c2e6ba3
+61
+original score : 61
+added section : rqvmxkb
+
+b9471bcb78417632903f10a2ae049318927fa79b
+42
+score : 42
+added section : PAGE
+
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+33
+score : 33
+section renamed from .tsustu to .code
+
+c10c836a97b92af44989cebdbc0f74ac52e5afec
+34
+score : 34
+appended random bytes
+
+c399926262490f307b261664477978e2cbfb6322
+35
+score : 35
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+33
+score : 33
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+33
+score : 33
+appended random bytes
+
+1964a1359dad7c53fb5296c669269c3df28ebd4b
+34
+score : 34
+PE was rebuilt and saved to modified.exe
+appended import : shlwapi.dll
+
+d8a3e16b72bf2349dc69cef2c4a064724224e2f7
+40
+score : 40
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+33
+score : 33
+appended random bytes
+
+96587bcb886936ebec1f1f803fe2e7e1691659a9
+35
+score : 35
+added section : kakxcjb
+
+321f658cfe346a6467d1cc598809da82ff1d0875
+43
+score : 43
+added section : .tsustub
+
+8eb13445f3c8b1322d8c460dfa4267ed47cb4296
+42
+score : 42
+appended random bytes
+
+0100033d6c0baab5a39727accd749328efbdd6da
+35
+score : 35
+PE was rebuilt and saved to modified.exe
+appended import : opengl32.dll
+
+3f2f80763c8946d4d37f1f8c24a2616fe74d58f4
+43
+score : 43
+added section : .sdata
+
+52379b8e2c90f60b38a83833f27f4094e8f03c5f
+35
+score : 35
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+33
+score : 33
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+33
+score : 33
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+33
+score : 33
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+33
+score : 33
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+33
+score : 33
+section renamed from tkjdelw to .extjmp
+
+e6eca23d68cf3dcacc6a9e1a5dc4c3996ad80d85
+43
+score : 43
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+36
+score : 36
+appended random bytes
+
+63a49d0026b20bd8002fa8dcdf9632b07f0960a6
+35
+score : 35
+added section : .vmp1
+
+4005866209fb1af886ec45a9a5047de3f2e15053
+34
+score : 34
+appended random bytes
+
+25df63c0a740f16d0f78272d3a017d3ca4486db7
+35
+score : 35
+appended random bytes
+
+21c2044702a1b9c56c80c0eae8020474800f6281
+35
+score : 35
+added section : .cdata
+
+c0aa5ec67d9aeea91d93f0e696dc11249d4ee461
+35
+score : 35
+added section : .xdata
+
+e8114cbad0bca2a784df49ec524eaf8a0448bec5
+35
+score : 35
+section renamed from vryeypb to .edata
+
+a525bd48a9246506e81c0228c359c3d659f12e5f
+43
+score : 43
+added section : .brdata
+
+517b3fb9fd1911be7b0ef834afd587ae8a8c6610
+43
+score : 43
+PE was rebuilt and saved to modified.exe
+appended import : mscms.dll
+
+0396742938e4f0012bef73d1554afb0c0f423f69
+41
+score : 41
+section renamed from .adata to qxejodg
+
+36d2324c482f776d89fe060489a8823560af527f
+35
+score : 35
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+36
+score : 36
+appended random bytes
+
+84828e3aa45782ceb3876b7a91e61da8f53f552c
+35
+score : 35
+added section : rqvmxkb
+
+323bc5648c096e16a23b883255f1d875abbb3c83
+43
+score : 43
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+36
+score : 36
+PE was rebuilt and saved to modified.exe
+appended import : setupapi.dll
+
+77eda13ece1d1f69600c0c2b100f02d53a121380
+40
+score : 40
+added section : camztlf
+
+d77e6c7b56a2278cc4f180e7bb6551663cd21975
+43
+score : 43
+section renamed from .cdata to .bss
+
+91d410a841fb9d7ccc5a41e67e2cc7fd0317be90
+35
+score : 35
+b0a3d56cdfcc152ca618cf3056fc20198c2e3682
+36
+score : 36
+section renamed from .vmp0 to .rmnet
+
+0ef66a9cbf66495e0f7717fda5a0c017cc4c53be
+34
+score : 34
+appended random bytes
+
+cd0eff25a0f40cda2b2a2a1c3da475eac99a415e
+35
+score : 35
+appended random bytes
+
+ea534f4881387a1d0f6c4490098842baa8cc934b
+35
+score : 35
+added section : INIT
+
+e1b0454d8aa539ad6d8e106a2513a90afd9e00bc
+35
+score : 35
+appended random bytes
+
+259e70128313fd45f009e531b4b68372371769e7
+35
+score : 35
+section renamed from .pdata to .data-c
+
+06e980ad711ea740f53b14497dc0b786edc0723e
+35
+score : 35
+section renamed from tkjdelw to .bss
+
+8288105490a7fd71fa8686413070f9bd260372f1
+35
+score : 35
+appended random bytes
+
+a1f26a22e447f78e44c75d9e26d0fabfe0ff2f7e
+35
+score : 35
+PE was rebuilt and saved to modified.exe
+appended import : cmutil.dll
+
+08e439c15d421b999b67074d59e28cde1dd4f0fb
+32
+score : 32
+appended random bytes
+
+bdcd23a9643a0d1eb878880ce58bc1ce1e8914c2
+32
+score : 32
+bdcd23a9643a0d1eb878880ce58bc1ce1e8914c2
+32
+score : 32
+appended random bytes
+
+fb6d2224fbf0bc40fa891975682f98dfa3b2badd
+32
+score : 32
+added section : .cdata
+
+9b3c9e0f4202bb0dbd7ed4e5f6954f33850c1105
+32
+score : 32
+added section : .rdata
+
+020d421d8decc3f3a6d44598f113fac9773a8774
+33
+score : 33
+PE was rebuilt and saved to modified.exe
+appended import : setupapi.dll
+
+065d2ff93ea916d2ae50628b0795925597dd6eab
+32
+score : 32
+065d2ff93ea916d2ae50628b0795925597dd6eab
+32
+score : 32
+section renamed from DATA to .sdata
+
+e7a261270ac180efa4f806468bf339cf95c5368d
+32
+score : 32
+section renamed from new_imp to dgbwqbp
+
+df3ff207a1d92e4e6a797137d78d7e627bb2549d
+33
+score : 33
+added section : PAGE
+
+a4ecb927f3a8325394d77aef0151ff9d1735127e
+33
+score : 33
+appended random bytes
+
+ec94ea26cee1db8458997b6a657bbfa4e4f695bf
+32
+score : 32
+section renamed from .didat to .CRT
+
+01fceac54726a8d139c1a155b924c20aa61bd918
+33
+score : 33
+PE was rebuilt and saved to modified.exe
+appended import : powrprof.dll
+
+071d635cd589de2d45d27070ba0deca2293dab87
+33
+score : 33
+ec94ea26cee1db8458997b6a657bbfa4e4f695bf
+32
+score : 32
+appended random bytes
+
+630c955e45de2670eedee77078081369ef65f58d
+33
+score : 33
+PE was rebuilt and saved to modified.exe
+appended import : wsock32.dll
+
+fbf5bc8ecf9a13feb239f25fa4f4229c1141d773
+32
+score : 32
+added section : .sdata
+
+d5c0d5ee34e00e110b9b3929c5fa188be879c272
+33
+score : 33
+fbf5bc8ecf9a13feb239f25fa4f4229c1141d773
+32
+score : 32
+appended random bytes
+
+d24f38df8791f78732736d4df3fa5420b295546d
+33
+score : 33
+appended random bytes
+
+da138ace40338bf9d883c5d098a5da040acac010
+33
+score : 33
+PE was rebuilt and saved to modified.exe
+appended import : user32.dll
+
+38be4b49e4c7776fcc172f63cb9cf6d2522c71f9
+33
+score : 33
+PE was rebuilt and saved to modified.exe
+appended import : gdi32.dll
+
+c230ac6ed2a596450b33d860cd84fc15de866af6
+32
+score : 32
+PE was rebuilt and saved to modified.exe
+appended import : wininet.dll
+
+aa3cb52693d0951a6d74121293304df787b821ad
+33
+score : 33
+PE was rebuilt and saved to modified.exe
+appended import : winmm.dll
+
+fb8e2bcbdf2553a90e9929297f6e8a994e66fda3
+33
+score : 33
+PE was rebuilt and saved to modified.exe
+appended import : esent.dll
+
+f6afe4327aa36fd1a9a55e3bdae5cae1bb717b48
+33
+score : 33
+added section : .xdata
+
+a5a189941d6def693a1bcc7215eb1419e49c30bc
+33
+score : 33
+c230ac6ed2a596450b33d860cd84fc15de866af6
+32
+score : 32
+section renamed from .pdata to .itext
+
+8b9764a3708249d741d6b9404a1248c806b981a0
+33
+score : 33
+PE was rebuilt and saved to modified.exe
+appended import : ole32.dll
+
+5be90edcfc8f0d182e92f0e7bf81d23cf5018a9a
+32
+score : 32
+added section : .rdata
+
+6472ec6928e71c8764d2a4e1e6897dacf47f3da3
+33
+score : 33
+appended random bytes
+
+f335b91be2bd69d1d1b44fb2934d09281f54beb1
+33
+score : 33
+appended random bytes
+
+323efac888ccebeae05af4417feb26ac37a301fc
+33
+score : 33
+added section : .data3
+
+7e0bdedc65f8348339c29758fb144480bc954046
+33
+score : 33
+PE was rebuilt and saved to modified.exe
+appended import : wininet.dll
+
+0733ecd26c30f7a2c8e76ca8a167c8f382bdbbcd
+33
+score : 33
+5be90edcfc8f0d182e92f0e7bf81d23cf5018a9a
+32
+score : 32
+section renamed from .sdata to .rmnet
+
+476aeef034964c7270f80baa9d0db846c1e10178
+33
+score : 33
+5be90edcfc8f0d182e92f0e7bf81d23cf5018a9a
+32
+score : 32
+PE was rebuilt and saved to modified.exe
+appended import : msvcrt.dll
+
+f70055e8bc8b6a32b3bc1520a69a7911128e33cf
+33
+score : 33
+section renamed from .rmnet to .textbs
+
+cb37b35e04d485bff354fece8aee2102f17d9c97
+33
+score : 33
+section renamed from new_imp to .brdata
+
+f5b4505b74b3e0b96f206c9dd3d4cde3c9bee430
+33
+score : 33
+5be90edcfc8f0d182e92f0e7bf81d23cf5018a9a
+32
+score : 32
+added section : .data3
+
+7e0bdedc65f8348339c29758fb144480bc954046
+33
+score : 33
+added section : .data-co
+
+d6574b5cf1b61c53c6aebfc38a32deac32234dae
+33
+score : 33
+added section : PAGE
+
+0621c5bf184dc90591d15d5e38b9c62a02744a0e
+33
+score : 33
+5be90edcfc8f0d182e92f0e7bf81d23cf5018a9a
+34
+score : 34
+appended random bytes
+
+e3bba7e516c7501866ad86d46454ba25541759a5
+33
+score : 33
+5be90edcfc8f0d182e92f0e7bf81d23cf5018a9a
+34
+score : 34
+added section : tkjdelw
+
+a1c0232132931227494c540c1916579c299f73b8
+32
+score : 32
+added section : .tsuarch
+
+efc133ef4de0dc4c2840fd97bd8cdfb3a2158e5e
+32
+score : 32
+appended random bytes
+
+0c9dae560e5f6dc1bc1dc4dab37250eede2f218c
+33
+score : 33
+efc133ef4de0dc4c2840fd97bd8cdfb3a2158e5e
+32
+score : 32
+appended random bytes
+
+831dc5888442b5cddd1d5a13964db51c4153fef3
+32
+score : 32
+section renamed from kakxcjb to .extjmp
+
+c53898d98688d49a431acfb5e8e4c95b85d10e4c
+31
+score : 31
+section renamed from .gfids to .reloc
+
+854de7f3210f42f6693c55a4e8cf686957ef456d
+31
+score : 31
+appended random bytes
+
+f3a01233595ac4681e21be6010475ac4d9912f3f
+40
+score : 40
+PE was rebuilt and saved to modified.exe
+appended import : clusapi.dll
+
+9df5b6701ca9381c33d72da1ea60be916e16bd3d
+32
+score : 32
+section renamed from ExeS to vryeypb
+
+da3a6af8a0e4939144b5697be3910450aed74f7b
+32
+score : 32
+added section : PAGE
+
+82ed7235ab2311b6815cd7a966b491d00338d81b
+32
+score : 32
+section renamed from PAGE to .rsrc
+
+5ee2eb9d77d78cdca91111e34563e13c729dd42f
+33
+score : 33
+appended random bytes
+
+354cee32215038e9ad0eaadcdd99424c09f58730
+40
+score : 40
+section renamed from .code to .pdata
+
+7817621ed40757df1a2395f527040e5ec8aa94b8
+33
+score : 33
+added section : gumrkvc
+
+71a563774f8a4e65ca218acc99883da3a86ec719
+32
+score : 32
+added section : .text-co
+
+9398e8a56d208c4ffb987e15f84f4750f3733697
+31
+score : 31
+appended random bytes
+
+d029af6dc90b4611a02c48481140013330c43dda
+40
+score : 40
+section renamed from .cdata to .reloc
+
+5cbbcfcb9fbfa05712c3b767584224e20e196773
+33
+score : 33
+9398e8a56d208c4ffb987e15f84f4750f3733697
+31
+score : 31
+9398e8a56d208c4ffb987e15f84f4750f3733697
+31
+score : 31
+added section : .idata
+
+08ada0e584c47063fc8f35d30b07253ddeb95bdb
+32
+score : 32
+added section : vryeypb
+
+73530ea56e5f6f9e14e7b81eb582e8463af54a42
+31
+score : 31
+appended random bytes
+
+9a6f2abae78dfbf7f0ded2034596f3ef166286cf
+38
+score : 38
+added section : .itext
+
+8785c99de227140345b8858f5111557fbbba6823
+32
+score : 32
+73530ea56e5f6f9e14e7b81eb582e8463af54a42
+31
+score : 31
+PE was rebuilt and saved to modified.exe
+appended import : p2pcollab.dll
+
+2e406917e78fe2668aa99582315e331a48cd2938
+32
+score : 32
+73530ea56e5f6f9e14e7b81eb582e8463af54a42
+31
+score : 31
+section renamed from .rdata to camztlf
+
+e0beb00ac9aa076fe9f499df29442c21e6b6b487
+31
+score : 31
+added section : CODE
+
+b530f0a9c721d3e23dcdebf9caf594314a4f8aea
+32
+score : 32
+added section : .zrdata
+
+a5c4050c9303af34807d67f5c32d86957e11d35d
+32
+score : 32
+e0beb00ac9aa076fe9f499df29442c21e6b6b487
+31
+score : 31
+appended random bytes
+
+d38c0a84fed5738962213119b588567979de44d9
+32
+score : 32
+added section : .sxdata
+
+2adae44b28d25f31f5ec3fd788dd82499f094cbc
+32
+score : 32
+e0beb00ac9aa076fe9f499df29442c21e6b6b487
+31
+score : 31
+appended random bytes
+
+84378171f2e254a126c4bda46c3adf6bdc9688e5
+32
+score : 32
+section renamed from .reloc to .CRT
+
+01827f40026e7d63146312a595f2203ecaba85b0
+32
+score : 32
+e0beb00ac9aa076fe9f499df29442c21e6b6b487
+31
+score : 31
+PE was rebuilt and saved to modified.exe
+appended import : wsock32.dll
+
+7d739773c8031f33db682774c9baaf54fbdd51bc
+33
+score : 33
+e0beb00ac9aa076fe9f499df29442c21e6b6b487
+31
+score : 31
+section renamed from .cdata to BSS
+
+7b18fae5f75302fa463c07f992e96475665cef14
+32
+score : 32
+appended random bytes
+
+a26001e97b5909f6de7ea75a31aeec4ba9ce3c76
+31
+score : 31
+PE was rebuilt and saved to modified.exe
+appended import : wer.dll
+
+c9be2f30541176cd50f0bebad779fca04195cda9
+33
+score : 33
+appended random bytes
+
+dacb09983bb57cc86c3da2f53cd38654d762c9cc

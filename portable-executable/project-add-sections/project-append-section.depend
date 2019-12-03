@@ -1,0 +1,162 @@
+# depslib dependency file v1.0
+<<<<<<< HEAD
+1570822677 source:/home/bedang_sen/Documents/tAIchi/portable-executable/project-add-sections/main.cpp
+=======
+1570305082 source:/home/bedang_sen/Documents/tAIchi/portable-executable/project-add-sections/main.cpp
+>>>>>>> 73c74a534211342f1172d73f45b5847d9e4e110b
+	<iostream>
+	<fstream>
+	"../portable-executable-library2/pe_lib/pe_bliss.h"
+	"../portable-executable-library2/samples/lib.h"
+	<vector>
+	<cstdlib>
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_bliss.h
+	"pe_base.h"
+	"pe_rebuilder.h"
+	"pe_factory.h"
+	"pe_bound_import.h"
+	"pe_debug.h"
+	"pe_dotnet.h"
+	"pe_exception_directory.h"
+	"pe_exports.h"
+	"pe_imports.h"
+	"pe_load_config.h"
+	"pe_relocations.h"
+	"pe_resources.h"
+	"pe_rich_data.h"
+	"pe_tls.h"
+	"pe_properties_generic.h"
+	"pe_checksum.h"
+	"entropy.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_base.h
+	<string>
+	<vector>
+	<istream>
+	<ostream>
+	<map>
+	"pe_exception.h"
+	"pe_structures.h"
+	"utils.h"
+	"pe_section.h"
+	"pe_properties.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_exception.h
+	<exception>
+	<stdexcept>
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_structures.h
+	<string>
+	<sstream>
+	"stdint_defs.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/stdint_defs.h
+	<stdint.h>
+	<stdint.h>
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/utils.h
+	<istream>
+	<string>
+	"stdint_defs.h"
+	"pe_structures.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_section.h
+	<string>
+	<vector>
+	"pe_structures.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_properties.h
+	<memory>
+	"pe_structures.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_rebuilder.h
+	<ostream>
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_factory.h
+	<memory>
+	<istream>
+	"pe_base.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_bound_import.h
+	<vector>
+	<string>
+	"pe_structures.h"
+	"pe_base.h"
+	"pe_directory.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_directory.h
+	"stdint_defs.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_debug.h
+	<vector>
+	"pe_structures.h"
+	"pe_base.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_dotnet.h
+	"pe_structures.h"
+	"pe_base.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_exception_directory.h
+	<vector>
+	"pe_structures.h"
+	"pe_base.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_exports.h
+	<vector>
+	<string>
+	"pe_structures.h"
+	"pe_base.h"
+	"pe_directory.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_imports.h
+	<vector>
+	<string>
+	"pe_structures.h"
+	"pe_directory.h"
+	"pe_base.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_load_config.h
+	<vector>
+	"pe_structures.h"
+	"pe_base.h"
+	"pe_directory.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_relocations.h
+	<vector>
+	"pe_structures.h"
+	"pe_base.h"
+	"pe_directory.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_resources.h
+	<vector>
+	<string>
+	<set>
+	"pe_structures.h"
+	"pe_base.h"
+	"pe_directory.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_rich_data.h
+	<vector>
+	"pe_structures.h"
+	"pe_base.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_tls.h
+	<memory>
+	<istream>
+	"pe_base.h"
+	"pe_directory.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_properties_generic.h
+	"pe_properties.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/pe_checksum.h
+	<istream>
+	"stdint_defs.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/pe_lib/entropy.h
+	<istream>
+	"pe_base.h"
+
+1570204835 /home/bedang_sen/Documents/tAIchi/portable-executable/portable-executable-library2/samples/lib.h
+

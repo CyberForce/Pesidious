@@ -1,0 +1,553 @@
+added section : .pdata
+appended import : esent.dll
+appended random bytes
+Remove
+appended import : opengl32.dll
+Remove
+section renamed from odyqxub to rqvmxkb
+Remove
+added section : .xdata
+added section : .reloc
+Remove
+appended random bytes
+added section : .rrdata
+Remove
+appended random bytes
+Remove
+appended random bytes
+added section : rdata
+Remove
+appended import : esent.dll
+Remove
+appended import : wsock32.dll
+Remove
+section renamed from BSS to .sxdata
+appended import : p2pcollab.dll
+Remove
+section renamed from dgbwqbp to .data
+appended random bytes
+Remove
+section renamed from .cdata to .rsrc
+Remove
+appended import : crypt32.dll
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+section renamed from .extrel to .tsuarc
+Remove
+section renamed from .bss to .reloc
+Remove
+appended import : netapi32.dll
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended import : mscms.dll
+Remove
+added section : .itext
+Remove
+section renamed from UPX1 to .bss
+Remove
+added section : .orpc
+Remove
+Remove
+appended import : esent.dll
+Remove
+added section : PAGE
+Remove
+section renamed from .CRT to tkjdelw
+added section : tkjdelw
+Remove
+added section : .sdata
+Remove
+section renamed from .tsuarc to .CRT
+Remove
+added section : gumrkvc
+Remove
+appended import : esent.dll
+Remove
+appended import : ole32.dll
+Remove
+added section : rdata
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended import : kernel32.dll
+Remove
+added section : odyqxub
+Remove
+added section : .cdata
+Remove
+section renamed from .code to gumrkvc
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+added section : .idata
+Remove
+section renamed from .gfids to BSS
+Remove
+section renamed from .vmp0 to camztlf
+Remove
+section renamed from .pdata to .tls
+Remove
+added section : .adata
+Remove
+Remove
+appended random bytes
+Remove
+Remove
+appended random bytes
+Remove
+Remove
+section renamed from PAGE to gumrkvc
+Remove
+appended import : winmm.dll
+Remove
+Remove
+added section : .extjmp
+Remove
+Remove
+added section : .code
+Remove
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+section renamed from .tls to .code
+added section : gumrkvc
+Remove
+section renamed from rdata to rqvmxkb
+Remove
+appended import : winmm.dll
+Remove
+added section : vryeypb
+Remove
+added section : gumrkvc
+Remove
+appended random bytes
+Remove
+appended import : advapi32.dll
+Remove
+added section : gumrkvc
+Remove
+appended random bytes
+Remove
+appended import : rpcrt4.dll
+Remove
+appended random bytes
+Remove
+appended import : winmm.dll
+Remove
+added section : .xdata
+Remove
+added section : qxejodg
+Remove
+section renamed from .vmp1 to .extrel
+Remove
+section renamed from .text-c to .textbs
+Remove
+section renamed from vryeypb to .vmp0
+Remove
+Remove
+added section : gumrkvc
+Remove
+Remove
+appended random bytes
+Remove
+added section : .code
+Remove
+appended random bytes
+Remove
+Remove
+Remove
+appended random bytes
+Remove
+appended import : opengl32.dll
+Remove
+appended random bytes
+Remove
+section renamed from .xdata to .edata
+Remove
+appended random bytes
+Remove
+section renamed from .adata to .cdata
+Remove
+section renamed from odyqxub to odyqxub
+Remove
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+section renamed from .data1 to odyqxub
+Remove
+Remove
+Remove
+added section : INIT
+Remove
+appended import : winmm.dll
+Remove
+appended random bytes
+Remove
+added section : DATA
+Remove
+appended import : winsta.dll
+Remove
+appended import : winsta.dll
+Remove
+appended random bytes
+Remove
+added section : .extjmp
+Remove
+section renamed from .itext to .tsuarc
+Remove
+appended random bytes
+Remove
+appended import : wininet.dll
+Remove
+section renamed from .didat to .vmp1
+Remove
+Remove
+appended import : ntdll.dll
+Remove
+appended import : ole32.dll
+Remove
+appended random bytes
+Remove
+section renamed from .edata to .data3
+Remove
+Remove
+section renamed from .cdata to .data3
+Remove
+added section : .itext
+Remove
+appended random bytes
+Remove
+section renamed from ExeS to tkjdelw
+Remove
+section renamed from .sxdata to CODE
+Remove
+appended random bytes
+Remove
+appended import : wer.dll
+Remove
+appended random bytes
+Remove
+section renamed from .brdata to .rsrc
+Remove
+added section : .data2
+Remove
+section renamed from .tsuarc to .data
+Remove
+Remove
+section renamed from .didat to .data3
+Remove
+added section : tkjdelw
+Remove
+section renamed from .rdata to .tsustu
+Remove
+appended random bytes
+Remove
+added section : .text-co
+Remove
+Remove
+Remove
+section renamed from .text-c to rdata
+Remove
+added section : odyqxub
+Remove
+added section : .pdata
+Remove
+appended random bytes
+Remove
+section renamed from .rrdata to .data1
+Remove
+appended import : winsta.dll
+Remove
+added section : .adata
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+section renamed from kakxcjb to .tsuarc
+Remove
+appended random bytes
+Remove
+appended import : cmutil.dll
+Remove
+Remove
+appended import : mscms.dll
+Remove
+section renamed from .code to camztlf
+Remove
+section renamed from INIT to .pdata
+Remove
+appended random bytes
+Remove
+section renamed from camztlf to .didat
+Remove
+Remove
+added section : .cdata
+Remove
+added section : camztlf
+Remove
+appended import : p2pcollab.dll
+Remove
+appended random bytes
+Remove
+appended import : user32.dll
+Remove
+section renamed from .text-c to odyqxub
+Remove
+Remove
+added section : .data-co
+Remove
+appended import : ole32.dll
+Remove
+appended random bytes
+Remove
+added section : .text
+Remove
+section renamed from ExeS to .brdata
+Remove
+section renamed from .tsuarc to .reloc
+Remove
+Remove
+added section : .vmp1
+Remove
+Remove
+appended import : kernel32.dll
+Remove
+Remove
+appended import : ws2_32.dll
+Remove
+appended random bytes
+Remove
+Remove
+added section : .rdata
+Remove
+added section : gumrkvc
+Remove
+appended import : clusapi.dll
+Remove
+appended random bytes
+Remove
+Remove
+Remove
+Remove
+appended import : crtdll.dll
+Remove
+appended random bytes
+Remove
+section renamed from .rmnet to .edata
+Remove
+appended import : ws2_32.dll
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+section renamed from rqvmxkb to .code
+Remove
+Remove
+Remove
+Remove
+Remove
+appended random bytes
+Remove
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended import : ntdll.dll
+Remove
+section renamed from .pdata to .edata
+Remove
+appended import : mscms.dll
+Remove
+appended random bytes
+Remove
+section renamed from gumrkvc to .didat
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+Remove
+Remove
+appended random bytes
+Remove
+Remove
+appended random bytes
+Remove
+Remove
+added section : .rdata
+Remove
+Remove
+Remove
+Remove
+appended import : opengl32.dll
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+added section : .data-co
+Remove
+section renamed from dgbwqbp to rdata
+Remove
+appended import : opengl32.dll
+Remove
+added section : .cdata
+Remove
+Remove
+added section : .cdata
+Remove
+appended import : opengl32.dll
+Remove
+appended import : oleaut32.dll
+Remove
+Remove
+section renamed from .idata to .xdata
+Remove
+appended import : shell32.dll
+Remove
+section renamed from rqvmxkb to .gfids
+Remove
+added section : .data1
+Remove
+Remove
+appended random bytes
+appended import : advapi32.dll
+Remove
+appended random bytes
+Remove
+added section : BSS
+Remove
+appended import : kernel32.dll
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended import : powrprof.dll
+Remove
+appended random bytes
+Remove
+added section : .data2
+Remove
+added section : .itext
+Remove
+added section : gumrkvc
+Remove
+added section : .tsuarch
+Remove
+section renamed from .rmnet to .extjmp
+Remove
+added section : .rmnet
+Remove
+added section : .textbss
+Remove
+appended import : crtdll.dll
+Remove
+added section : DATA
+Remove
+section renamed from .tsuarc to .extrel
+Remove
+added section : camztlf
+Remove
+section renamed from camztlf to .orpc
+Remove
+section renamed from .vmp1 to .tsustu
+Remove
+appended random bytes
+Remove
+Remove
+section renamed from .didata to .data2
+Remove
+appended random bytes
+Remove
+section renamed from .tls to .textbs
+Remove
+added section : kakxcjb
+Remove
+added section : .orpc
+Remove
+Remove
+added section : kakxcjb
+Remove
+added section : .data3
+Remove
+appended random bytes
+Remove
+added section : .code
+Remove
+appended import : advapi32.dll
+Remove
+appended random bytes
+Remove
+Remove
+added section : .data
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+section renamed from DATA to .adata
+Remove
+section renamed from .orpc to .tsuarc
+Remove
+added section : .cdata
+Remove
+appended import : netapi32.dll
+Remove
+Remove
+section renamed from .rdata to .rsrc
+Remove
+section renamed from .pdata to qxejodg
+Remove
+appended import : ole32.dll
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended import : netapi32.dll
+Remove
+Remove
+Remove
+appended import : opengl32.dll
+Remove
+appended import : wer.dll
+Remove
+added section : .textbss
+Remove
+section renamed from .cdata to .sdata
+Remove
+appended import : cmutil.dll
+Remove
+appended import : netapi32.dll
+Remove
+section renamed from .pdata to rdata
+Remove
+section renamed from .data2 to .code

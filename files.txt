@@ -1,0 +1,10 @@
+RL_Features/adversarial_imports_set.pk
+RL_Features/adversarial_sections_set.pk
+adversarial_feature_vector_directory/adversarial_feature_set.pk
+gym_malware/envs/controls/adversarial_imports_set.pk
+gym_malware/envs/controls/adversarial_sections_set.pk
+gym_malware/envs/controls/modified.exe
+gym_malware/envs/controls/modified1.exe
+malgan/MalGAN_saved_models/malgan_z=10_d-gen=[256,_256]_d-disc=[256,_256]_bs=32_bb=randomforest_g=leakyrelu_final.pth
+malgan/MalGAN_saved_models/malgan_z=20_d-gen=[256,_256]_d-disc=[256,_256]_bs=64_bb=randomforest_g=leakyrelu_final.pth
+saved_models/malgan_z=10_d-gen=[256,_256]_d-disc=[256,_256]_bs=32_bb=randomforest_g=leakyrelu_final.pth

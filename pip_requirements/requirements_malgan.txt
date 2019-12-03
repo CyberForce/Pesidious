@@ -1,0 +1,6 @@
+tqdm==4.30.0
+numpy>=1.16.0
+torch==1.0.0
+typing>=3.6.6
+scikit_learn>=0.20.3
+tensorboardX==1.6

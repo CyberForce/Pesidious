@@ -1,0 +1,483 @@
+appended import : kernel32.dll
+appended random bytes
+appended random bytes
+appended import : crtdll.dll
+appended random bytes
+Remove
+section renamed from .xdata to Zdata
+appended random bytes
+Remove
+added section : INIT
+section renamed from .erloc to \\\\xb8
+Remove
+appended random bytes
+Remove
+added section : knut
+Remove
+appended random bytes
+Remove
+section renamed from .CRT to .adata
+Remove
+appended random bytes
+Remove
+added section : .gfcd
+Remove
+appended random bytes
+Remove
+Remove
+added section : new_imp
+Remove
+section renamed from .rrdata to .lol0
+Remove
+section renamed from Zdata to CPADinf
+Remove
+Remove
+Remove
+appended random bytes
+Remove
+appended import : opengl32.dll
+Remove
+added section : PAGEVRFY
+Remove
+section renamed from /4 to .Text
+Remove
+section renamed from UFO0 to ordo
+Remove
+appended import : ws2_32.dll
+Remove
+added section : .sdata
+Remove
+added section : _PAGELK
+Remove
+section renamed from RT_CODE to .UPX
+appended import : crtdll.dll
+Remove
+appended import : setupapi.dll
+Remove
+appended import : powrprof.dll
+Remove
+section renamed from .data1 to UPX0
+Remove
+appended import : shell32.dll
+Remove
+added section : UFO0
+Remove
+appended random bytes
+Remove
+section renamed from /4 to RT_CODE
+Remove
+added section : INIT
+Remove
+appended import : winsta.dll
+Remove
+added section : .bin
+Remove
+appended random bytes
+Remove
+Remove
+appended random bytes
+Remove
+appended import : crypt32.dll
+Remove
+appended random bytes
+Remove
+appended import : shlwapi.dll
+Remove
+section renamed from .po2 to .show
+Remove
+section renamed from .data2 to S
+Remove
+appended random bytes
+Remove
+section renamed from .rsrc to K\\\\xd
+Remove
+added section : .bss
+Remove
+section renamed from .data1 to gfelmge
+Remove
+appended import : kernel32.dll
+Remove
+Remove
+Remove
+appended import : hal.dll
+Remove
+added section : .der
+Remove
+section renamed from .rsrc to .data2
+Remove
+appended import : wer.dll
+Remove
+added section : .rdata
+Remove
+added section : .extrel
+Remove
+appended import : hal.dll
+Remove
+added section : .orpc
+Remove
+Remove
+added section : .text/DE
+Remove
+appended import : rpcrt4.dll
+Remove
+appended random bytes
+Remove
+Remove
+added section : /97
+Remove
+appended random bytes
+Remove
+section renamed from .UPX to .idata2
+Remove
+added section : C+Mmal+J
+Remove
+section renamed from .YOSWO to /86
+Remove
+section renamed from .brdata to .mackt
+Remove
+Remove
+appended import : oleaut32.dll
+Remove
+appended import : crypt32.dll
+Remove
+section renamed from rdata to UPX1
+Remove
+appended import : mscms.dll
+Remove
+section renamed from Zdata to /30
+Remove
+added section : .qtmetad
+Remove
+appended import : ntdll.dll
+Remove
+Remove
+Remove
+added section : gfelmge
+Remove
+added section : .bss
+Remove
+appended import : opengl32.dll
+Remove
+section renamed from UPX1 to flag_da
+Remove
+Remove
+appended random bytes
+Remove
+Remove
+Remove
+section renamed from .erloc to .idata
+Remove
+section renamed from rdata to .engine
+Remove
+appended random bytes
+Remove
+appended import : p2pcollab.dll
+Remove
+appended random bytes
+Remove
+appended import : user32.dll
+Remove
+added section : .bss
+Remove
+section renamed from .idata2 to .loikut
+Remove
+appended random bytes
+Remove
+added section : ordo
+Remove
+section renamed from Zdata to .UPX
+Remove
+section renamed from .tc to /4
+Remove
+appended import : oleaut32.dll
+Remove
+added section : PAGEVRFY
+Remove
+Remove
+section renamed from .t to .rdata4
+Remove
+appended import : user32.dll
+Remove
+appended import : p2pcollab.dll
+Remove
+Remove
+Remove
+appended random bytes
+Remove
+appended import : msvcrt.dll
+Remove
+section renamed from .gfcd to \\xffX?
+Remove
+section renamed from gfelmge to \\xffX?
+section renamed from \\u0014 to \\xffX?
+Remove
+appended random bytes
+Remove
+added section : .mackt
+Remove
+appended import : crtdll.dll
+Remove
+section renamed from .opc to .UJYHTG
+Remove
+appended import : netapi32.dll
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+Remove
+appended import : p2pcollab.dll
+Remove
+Remove
+section renamed from .UPX to INITDAT
+Remove
+Remove
+appended random bytes
+Remove
+appended import : kernel32.dll
+Remove
+added section : .po5
+Remove
+added section : ordo
+Remove
+appended random bytes
+Remove
+Remove
+added section : E
+Remove
+section renamed from o\\xfe\ to PAGEKDD
+Remove
+appended random bytes
+Remove
+Remove
+section renamed from .ndata to PAGEVRF
+Remove
+section renamed from f5cD to .dHGmL
+added section : 0\\\\xc8\\\\
+Remove
+appended import : winsta.dll
+Remove
+section renamed from .bin to .gfids
+Remove
+appended import : gdi32.dll
+Remove
+appended import : winmm.dll
+Remove
+added section : .YOSWO
+Remove
+section renamed from .t to UFO1
+Remove
+section renamed from f5cD to .ffgg
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+added section : gfelmge
+Remove
+appended import : user32.dll
+Remove
+section renamed from .NewSec to .GOMHWW
+Remove
+section renamed from \\\\xad to kM\\\\x
+Remove
+added section : .NewSec
+Remove
+appended random bytes
+Remove
+appended import : wer.dll
+Remove
+section renamed from .NewSec to .extrel
+Remove
+section renamed from .idata2 to E
+Remove
+appended random bytes
+Remove
+added section : .fwQO
+Remove
+appended import : kernel32.dll
+Remove
+added section : .engine
+Remove
+added section : petite
+Remove
+Remove
+appended import : wer.dll
+Remove
+appended random bytes
+Remove
+appended import : ws2_32.dll
+Remove
+appended random bytes
+Remove
+appended import : wininet.dll
+Remove
+appended import : wsock32.dll
+Remove
+Remove
+section renamed from .der to .tect
+Remove
+appended import : shlwapi.dll
+Remove
+Remove
+appended import : ntdll.dll
+Remove
+appended random bytes
+Remove
+section renamed from .idata2 to 
+Remove
+section renamed from .8NzKTb to /4
+Remove
+added section : .ffgg
+Remove
+section renamed from .show to .po5
+Remove
+appended random bytes
+Remove
+appended import : opengl32.dll
+Remove
+appended import : winsta.dll
+Remove
+appended random bytes
+Remove
+appended import : setupapi.dll
+Remove
+appended import : p2pcollab.dll
+Remove
+Remove
+section renamed from .rrdata to \\xffX?
+Remove
+section renamed from .itext to UFO0
+Remove
+appended import : netapi32.dll
+Remove
+Remove
+added section : gfelmge
+Remove
+section renamed from .YOSWO to .gfids
+Remove
+Remove
+Remove
+added section : /108
+Remove
+section renamed from .idata2 to rdata
+Remove
+appended random bytes
+Remove
+appended import : cmutil.dll
+Remove
+added section : .ndata
+Remove
+appended random bytes
+Remove
+added section : .bss
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended import : wininet.dll
+Remove
+section renamed from .dHGmL to .rdata4
+Remove
+appended random bytes
+Remove
+Remove
+added section : .ikutyhg
+Remove
+appended import : winsta.dll
+Remove
+Remove
+added section : .rodata
+Remove
+section renamed from .00cfg to .xdata
+Remove
+appended import : clusapi.dll
+Remove
+added section : .data
+Remove
+Remove
+appended random bytes
+Remove
+appended import : user32.dll
+Remove
+Remove
+section renamed from .mackt to .rdata4
+Remove
+appended random bytes
+Remove
+Remove
+appended import : advapi32.dll
+Remove
+added section : \\\\xb7e;5
+Remove
+Remove
+added section : .site
+Remove
+Remove
+appended import : hal.dll
+Remove
+appended import : user32.dll
+Remove
+section renamed from .teext to POOLCOD
+Remove
+section renamed from _RDATA to .ffgg
+Remove
+appended random bytes
+Remove
+appended import : wer.dll
+Remove
+added section : .NewSec
+Remove
+section renamed from FE_TEXT to .code
+Remove
+section renamed from _RDATA to kAV\\xc
+Remove
+Remove
+section renamed from CPADinf to .idata
+Remove
+added section : FE_TEXT
+Remove
+Remove
+appended random bytes
+Remove
+added section : rfvc
+Remove
+Remove
+section renamed from FE_TEXT to prot
+Remove
+added section : o\\xfe\\x95\\x99\\xa3uK
+Remove
+appended import : gdi32.dll
+Remove
+appended random bytes
+Remove
+appended import : esent.dll
+Remove
+appended import : crypt32.dll
+Remove
+appended random bytes
+Remove
+appended random bytes
+Remove
+appended import : oleaut32.dll
+Remove
+added section : .aajaic
+Remove
+Remove
+Remove
+section renamed from .idata2 to .rdata4
+Remove
+section renamed from Zdata to S
+Remove
+appended random bytes
+Remove
+appended import : wer.dll
+Remove
+section renamed from UPX0 to Zdata
+Remove
+appended random bytes
