@@ -43,12 +43,12 @@ The following steps will guide you through all the installations required to set
 
 1. Clone the repository. 
     ```sh
-    git clone https://github.com/hitb-aichallenge/tAIchi.git
+    git clone https://github.ibm.com/pesidious/Malware-Mutation-using-AI.git
     ```
 1. Move into the project directory. 
 
     ```sh
-    cd tAIchi
+    cd Malware-Mutation-using-AI
     ```
     
 1. Download malware and benign binary samples from [here](#training-and-testing-data).
@@ -116,17 +116,17 @@ The following steps will guide you through all the installations required to set
    + **1682 Benign binaries** - _Scraped from our host computers_.
    + **2094 Malware binaries** - _Downloaded from VirusTotal_.
 
-1. Downaload the training dataset from [here](https://uowmailedu-my.sharepoint.com/:f:/g/personal/cvrv570_uowmail_edu_au/Ep8qkEt-XvFCiOBbQS9FynQBQh6gULH1RpoA9Wdlh8xn_A?e=VdjH1D)
-
 1. Create a folder to store the datasets.
 
    ```
    mkdir Data
    ```
 
+1. Downaload the training dataset from [here](https://uowmailedu-my.sharepoint.com/:f:/g/personal/cvrv570_uowmail_edu_au/Ep8qkEt-XvFCiOBbQS9FynQBQh6gULH1RpoA9Wdlh8xn_A?e=VdjH1D)
+
 1. Once you have downloaded the datasets, take care to place the files in the right directory in order to run the application with no errors. 
 
-   1. Keep the downloaded folder `Data` in the root directory `tAIchi`. 
+   1. Keep the downloaded folder `Data` in the root directory `Malware-Mutation-using-AI`. 
    
       ```
       Data/
