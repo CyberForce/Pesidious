@@ -339,7 +339,20 @@ The training tests the learning agent after every 550 episodes with 200 samples.
       ```
       pip install torch==1.2.0+cpu torchvision==0.4.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
       ```
+
+1. **Error with the execution of edit-tls, import-append, section-append or load-config-dir (not found)**
      
+     Solution
+     Give execute permission to these executables using the following commands on your terminal
+     
+     ```
+     cd portable-executable/
+     chmod 777 test-other/bin/load-config-dir/test-other
+     chmod 777 test-other/bin/edit-tls/test-other
+     chmod 777 project-add-sections/bin/Debug/project-append-section
+     chmod 777 project-add-imports/bin/Debug/project-append-imports
+     
+     ```
 
 ## To Do
 
