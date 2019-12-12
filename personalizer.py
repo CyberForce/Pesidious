@@ -83,6 +83,7 @@ if __name__ == "__main__":
 
 		state_dict = { str(i) : str(state_norm[i]) for i in range(0, len(state_norm) ) }
 
+		print(type(state_dict))
 	
 		for mutation in range(1, 80):
 			rank_request = RankRequest( actions=actions, context_features=state_dict, eventid=eventid)
