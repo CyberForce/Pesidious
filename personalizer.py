@@ -81,7 +81,7 @@ if __name__ == "__main__":
 		state = env.reset()
 		state_norm = rn(state)
 
-		state_dict = { i : state_norm[i] for i in range(0, len(state_norm) ) }
+		state_dict = { str(i) : str(state_norm[i]) for i in range(0, len(state_norm) ) }
 
 	
 		for mutation in range(1, 80):
