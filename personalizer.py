@@ -19,13 +19,13 @@ ACTION_LOOKUP = {i: act for i, act in enumerate(manipulate.ACTION_TABLE.keys())}
 key_var_name = '378c80137f884780af7783cdd3ee6bdd'
 #if not key_var_name in os.environ:
 #    raise Exception('Please set/export the environment variable: {}'.format(key_var_name))
-personalizer_key = os.environ[key_var_name]
+personalizer_key = key_var_name
 
 # Replace <your-resource-name>: https://<your-resource-name>.api.cognitive.microsoft.com/
 endpoint_var_name = 'https://rl-agent.cognitiveservices.azure.com/'
 #if not endpoint_var_name in os.environ:
 #    raise Exception('Please set/export the environment variable: {}'.format(endpoint_var_name))
-personalizer_endpoint = os.environ[endpoint_var_name]
+personalizer_endpoint = endpoint_var_name
 
 # Instantiate a Personalizer client
 client = PersonalizerClient(personalizer_endpoint, CognitiveServicesCredentials(personalizer_key))
@@ -67,7 +67,7 @@ if __name__ == "__main__":
 		for mutation in range(1, 80):
 			rank_request = RankRequest( actions=actions, context_features=context)
 			response = client.rank(rank_request=rank_request)
-			
+
 			print("Personalizer service ranked the actions with the probabilities listed below:")
     
 			rankedList = response.ranking
