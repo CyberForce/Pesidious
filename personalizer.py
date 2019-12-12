@@ -58,10 +58,10 @@ class RangeNormalize(object):
         return outputs if idx > 1 else outputs[0]
 
 def get_actions():
-	action1 = RankableAction(id=1, features=[{"name":"overlay_append"}])
-	action2 = RankableAction(id=2, features=[{"name":"section_rename"}])
-	action3 = RankableAction(id=3, features=[{"name":"section_add"}])
-	action4 = RankableAction(id=4, features=[{'name':'imports_append'}])
+	action1 = RankableAction(id='overlay_append', features=[{"name":"overlay_append"}])
+	action2 = RankableAction(id='section_rename', features=[{"name":"section_rename"}])
+	action3 = RankableAction(id='section_add', features=[{"name":"section_add"}])
+	action4 = RankableAction(id='imports_append', features=[{'name':'imports_append'}])
 	return [action1, action2, action3, action4]
 
 if __name__ == "__main__":
