@@ -23,5 +23,5 @@ for line in imports:
 
 for key in adversarial_imports_dict:
 	for value in adversarial_imports_dict[key]:
-		outfile.write(key + ':' + value + '\n')
+		outfile.write(value + ':' + key + '\n')
 
