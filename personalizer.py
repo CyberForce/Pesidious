@@ -94,7 +94,7 @@ if __name__ == "__main__":
 	# for key in ACTION_LOOKUP:
 	# 	actions.append(ACTION_LOOKUP[key])
 
-	# print(actions)
+	print(actions)
 
 
 
@@ -105,7 +105,7 @@ if __name__ == "__main__":
 
 		#state_dict = { str(i) : str(state_norm[i]) for i in range(0, len(state_norm) ) }
 
-		state_dict = get_user_preference()
+		state_dict = [get_user_preference()]
 
 
 		print(state_dict)
