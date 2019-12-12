@@ -99,7 +99,8 @@ if __name__ == "__main__":
 			for ranked in rankedList:
 			    print(ranked.id, ':',ranked.probability)
 
-			next_state, reward, done, _ = env.step(rankedList[0].id)
+			action = ACTION_LOOKUP.index(rankedList[0].id)
+			next_state, reward, done, _ = env.step(action)
 
 			client.events.reward(event_id=eventid, value=reward)
 
