@@ -60,6 +60,7 @@ class RangeNormalize(object):
 if __name__ == "__main__":
 
 	rn = RangeNormalize(-0.5,0.5)
+	print(ACTION_LOOKUP)
 
 	for episode in range(1, 2000):
 		state = env.reset()
