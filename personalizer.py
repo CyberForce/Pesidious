@@ -66,12 +66,13 @@ if __name__ == "__main__":
 	# 	actions.append(ACTION_LOOKUP[key])
 
 	# print(actions)
-	
+
 	for episode in range(1, 2000):
+		eventid = str(uuid.uuid4())
 		state = env.reset()
 		state_norm = rn(state)
 		for mutation in range(1, 80):
-			rank_request = RankRequest( actions=actions, context_features=state_norm)
+			rank_request = RankRequest( actions=actions, context_features=state_norm, eventid=eventid)
 			response = client.rank(rank_request=rank_request)
 
 			print("Personalizer service ranked the actions with the probabilities listed below:")
