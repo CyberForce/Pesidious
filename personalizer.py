@@ -82,39 +82,43 @@ if __name__ == "__main__":
 
 
 	for episode in range(1, 2000):
-		eventid = str(uuid.uuid4())
-		state = env.reset()
-		state_norm = rn(state)
+		try:
+			eventid = str(uuid.uuid4())
+			state = env.reset()
+			state_norm = rn(state)
 
-		state_dict = { str(i) : str(state_norm[i]) for i in range(0, len(state_norm) ) }
+			state_dict = { str(i) : str(state_norm[i]) for i in range(0, len(state_norm) ) }
 
-		state_dict = [state_dict]
+			state_dict = [state_dict]
 
 
-		#print(state_dict)
-	
-		for mutation in range(1, 80):
-			rank_request = RankRequest( actions=actions, context_features=state_dict, event_id=eventid)
-			response = client.rank(rank_request=rank_request)
+			#print(state_dict)
+		
+			for mutation in range(1, 80):
+				rank_request = RankRequest( actions=actions, context_features=state_dict, event_id=eventid)
+				response = client.rank(rank_request=rank_request)
 
-			print("Personalizer service ranked the actions with the probabilities listed below:")
-    
-			rankedList = response.ranking
-			for ranked in rankedList:
-			    print(ranked.id, ':',ranked.probability)
+				print("Personalizer service ranked the actions with the probabilities listed below:")
+	    
+				rankedList = response.ranking
+				for ranked in rankedList:
+				    print(ranked.id, ':',ranked.probability)
 
-			action = actionList.index(rankedList[0].id)
-			next_state, reward, done, _ = env.step(action)
+				action = actionList.index(rankedList[0].id)
+				next_state, reward, done, _ = env.step(action)
 
-			print('reward : ' + str(reward))
+				print('reward : ' + str(reward))
 
-			client.events.reward(event_id=eventid, value=reward)
+				client.events.reward(event_id=eventid, value=reward)
 
-			next_state_norm = rn(next_state) 
-			next_state_dict = { str(i) : str(next_state_norm[i]) for i in range(0, len(next_state_norm) ) } 
-			state_dict = [next_state_dict]
+				next_state_norm = rn(next_state) 
+				next_state_dict = { str(i) : str(next_state_norm[i]) for i in range(0, len(next_state_norm) ) } 
+				state_dict = [next_state_dict]
 
-			if done:
-				break
+				if done:
+					break
+		except:
+			pass
+
 
 
