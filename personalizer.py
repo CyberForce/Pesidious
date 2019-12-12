@@ -108,7 +108,7 @@ if __name__ == "__main__":
 		state_dict = [state_dict]
 
 
-		print(state_dict)
+		#print(state_dict)
 	
 		for mutation in range(1, 80):
 			rank_request = RankRequest( actions=actions, context_features=state_dict, eventid=eventid)
