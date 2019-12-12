@@ -61,12 +61,17 @@ if __name__ == "__main__":
 
 	rn = RangeNormalize(-0.5,0.5)
 	print(ACTION_LOOKUP)
+	actions = []
+	for key in ACTION_LOOKUP:
+		actions.append(ACTION_LOOKUP[key])
 
+	print(actions)
+	
 	for episode in range(1, 2000):
 		state = env.reset()
 		state_norm = rn(state)
 		for mutation in range(1, 80):
-			rank_request = RankRequest( actions=ACTION_LOOKUP, context_features=state_norm)
+			rank_request = RankRequest( actions=actions, context_features=state_norm)
 			response = client.rank(rank_request=rank_request)
 
 			print("Personalizer service ranked the actions with the probabilities listed below:")
