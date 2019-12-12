@@ -64,6 +64,13 @@ def get_actions():
 	action4 = RankableAction(id='imports_append', features=[{'name':'imports_append'}])
 	return [action1, action2, action3, action4]
 
+def get_actions1():
+    action1 = RankableAction(id='pasta', features=[{"taste":"salty", "spice_level":"medium"},{"nutrition_level":5,"cuisine":"italian"}])
+    action2 = RankableAction(id='ice cream', features=[{"taste":"sweet", "spice_level":"none"}, { "nutritional_level": 2 }])
+    action3 = RankableAction(id='juice', features=[{"taste":"sweet", 'spice_level':'none'}, {'nutritional_level': 5}, {'drink':True}])
+    action4 = RankableAction(id='salad', features=[{'taste':'salty', 'spice_level':'none'},{'nutritional_level': 2}])
+    return [action1, action2, action3, action4]
+
 def get_user_preference():
     res = {}
     taste_features = ['salty','sweet']
@@ -83,7 +90,7 @@ if __name__ == "__main__":
 
 	rn = RangeNormalize(-0.5,0.5)
 	print(ACTION_LOOKUP)
-	actions = get_actions()
+	actions = get_actions1()
 	# for key in ACTION_LOOKUP:
 	# 	actions.append(ACTION_LOOKUP[key])
 
