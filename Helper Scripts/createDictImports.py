@@ -21,7 +21,7 @@ for line in imports:
 	else:
 		adversarial_imports_dict[dll] = line
 
-for keys in adversarial_imports_dict:
+for key in adversarial_imports_dict:
 	for value in adversarial_imports_dict[key]:
 		outfile.write(key + ':' + value)
 
