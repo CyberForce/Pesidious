@@ -14,6 +14,7 @@ adversarial_imports_dict = {}
 dll = ""
 
 for line in imports:
+	print(line)
 	if ".dll" in line:
 		dll = line[:-1]
 		if(dll not in adversarial_imports_dict):
