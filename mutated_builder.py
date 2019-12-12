@@ -83,10 +83,7 @@ def show_output(line):
 def evaluate( action_function, pefolder, pefile , show):
     global min_score
     print("min score : " + str(min_score))
-    with open("actions.txt" , "r") as a:
-        actions = a.readlines()
 
-    print(actions)
 
     with open(join(pefolder, pefile), "rb") as binfile:
         bytez = binfile.read()
