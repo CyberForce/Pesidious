@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
 		#print(state_dict)
 	
-		for mutation in range(1, 2):
+		for mutation in range(1, 80):
 			rank_request = RankRequest( actions=actions, context_features=state_dict, event_id=eventid)
 			response = client.rank(rank_request=rank_request)
 
@@ -99,7 +99,12 @@ if __name__ == "__main__":
 			for ranked in rankedList:
 			    print(ranked.id, ':',ranked.probability)
 
+			next_state, reward, done, _ = env.step(rankedList[0].id)
 
-			client.events.reward(event_id=eventid, value=0)
+			client.events.reward(event_id=eventid, value=reward)
+
+			next_state_norm = rn(next_state) 
+			next_state_dict = { str(i) : str(next_state_norm[i]) for i in range(0, len(next_state_norm) ) } 
+			state_dict = [next_state_dict]
 
 
