@@ -57,15 +57,24 @@ class RangeNormalize(object):
             outputs.append(_input)
         return outputs if idx > 1 else outputs[0]
 
+def get_actions():
+	action1 = RankableAction(id=1, features=[{"name":"overlay_append"}])
+	action2 = RankableAction(id=2, features=[{"name":"section_rename"}])
+	action3 = RankableAction(id=3, features=[{"name":"section_add"}])
+	action4 = RankableAction(id=4, features=[{'name':'imports_append'}])
+	return [action1, action2, action3, action4]
+
 if __name__ == "__main__":
 
 	rn = RangeNormalize(-0.5,0.5)
 	print(ACTION_LOOKUP)
-	actions = ['overlay_append', 'section_rename', 'section_add', 'imports_append']
+	actions = get_actions()
 	# for key in ACTION_LOOKUP:
 	# 	actions.append(ACTION_LOOKUP[key])
 
 	# print(actions)
+
+
 
 	for episode in range(1, 2000):
 		eventid = str(uuid.uuid4())
