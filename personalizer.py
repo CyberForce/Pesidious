@@ -103,9 +103,9 @@ if __name__ == "__main__":
 		state = env.reset()
 		state_norm = rn(state)
 
-		#state_dict = { str(i) : str(state_norm[i]) for i in range(0, len(state_norm) ) }
+		state_dict = { str(i) : str(state_norm[i]) for i in range(0, 5 ) }
 
-		state_dict = [get_user_preference()]
+		state_dict = [state_dict]
 
 
 		print(state_dict)
