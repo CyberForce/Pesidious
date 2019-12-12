@@ -64,6 +64,21 @@ def get_actions():
 	action4 = RankableAction(id='imports_append', features=[{'name':'imports_append'}])
 	return [action1, action2, action3, action4]
 
+def get_user_preference():
+    res = {}
+    taste_features = ['salty','sweet']
+    pref = input("What type of food would you prefer? Enter number 1.salty 2.sweet\n")
+    
+    try:
+        ppref = int(pref)
+        if(ppref<=0 or ppref>len(taste_features)):
+            raise IndexError
+        res['taste_preference'] = taste_features[ppref-1]
+    except (ValueError, IndexError):
+        print("Entered value is invalid. Setting feature value to", taste_features[0]+ ".")
+        res['taste_preference'] = taste_features[0]
+    return res
+
 if __name__ == "__main__":
 
 	rn = RangeNormalize(-0.5,0.5)
@@ -81,7 +96,9 @@ if __name__ == "__main__":
 		state = env.reset()
 		state_norm = rn(state)
 
-		state_dict = { str(i) : str(state_norm[i]) for i in range(0, len(state_norm) ) }
+		#state_dict = { str(i) : str(state_norm[i]) for i in range(0, len(state_norm) ) }
+
+		state_dict = get_user_preference()
 
 		print(type(state_dict))
 	
