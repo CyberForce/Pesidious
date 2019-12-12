@@ -80,6 +80,10 @@ if __name__ == "__main__":
 		eventid = str(uuid.uuid4())
 		state = env.reset()
 		state_norm = rn(state)
+
+		state_dict = { i : state_norm[i] for i in range(0, len(state_norm) ) }
+
+
 		for mutation in range(1, 80):
 			rank_request = RankRequest( actions=actions, context_features=state_norm, eventid=eventid)
 			response = client.rank(rank_request=rank_request)
