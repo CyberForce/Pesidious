@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
 
 		for mutation in range(1, 80):
-			rank_request = RankRequest( actions=actions, context_features=state_norm, eventid=eventid)
+			rank_request = RankRequest( actions=actions, context_features=state_dict, eventid=eventid)
 			response = client.rank(rank_request=rank_request)
 
 			print("Personalizer service ranked the actions with the probabilities listed below:")
