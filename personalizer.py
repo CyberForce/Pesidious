@@ -98,6 +98,6 @@ if __name__ == "__main__":
 			rankedList = response.ranking
 			for ranked in rankedList:
 			    print(ranked.id, ':',ranked.probability)
-			client.events.reward(event_id=eventid, value=reward_val)
+			client.events.reward(event_id=eventid, value=0)
 
 
