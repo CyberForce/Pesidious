@@ -7,8 +7,8 @@ infile = sys.argv[1]
 outputfile = sys.argv[2]
 outfile = open(outputfile, 'w')
 
-with open(infile, 'r') as imports:
-	imports.readlines()
+with open(infile, 'r') as importsFile:
+	imports = importsFile.readlines()
 
 adversarial_imports_dict = {}
 dll = ""
