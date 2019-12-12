@@ -61,11 +61,11 @@ if __name__ == "__main__":
 
 	rn = RangeNormalize(-0.5,0.5)
 	print(ACTION_LOOKUP)
-	actions = []
-	for key in ACTION_LOOKUP:
-		actions.append(ACTION_LOOKUP[key])
+	actions = ['overlay_append', 'section_rename', 'section_add', 'imports_append']
+	# for key in ACTION_LOOKUP:
+	# 	actions.append(ACTION_LOOKUP[key])
 
-	print(actions)
+	# print(actions)
 	
 	for episode in range(1, 2000):
 		state = env.reset()
