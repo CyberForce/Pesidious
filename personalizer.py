@@ -106,10 +106,15 @@ if __name__ == "__main__":
 			action = actionList.index(rankedList[0].id)
 			next_state, reward, done, _ = env.step(action)
 
+			print('reward : ' + str(reward))
+
 			client.events.reward(event_id=eventid, value=reward)
 
 			next_state_norm = rn(next_state) 
 			next_state_dict = { str(i) : str(next_state_norm[i]) for i in range(0, len(next_state_norm) ) } 
 			state_dict = [next_state_dict]
+
+			if done:
+				break
 
 
