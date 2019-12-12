@@ -69,6 +69,10 @@ if __name__ == "__main__":
 
 	rn = RangeNormalize(-0.5,0.5)
 	print(ACTION_LOOKUP)
+
+	actionList = ['overlay_append', 'section_rename', 'section_add', 'imports_append']
+
+
 	actions = get_actions()
 	# for key in ACTION_LOOKUP:
 	# 	actions.append(ACTION_LOOKUP[key])
@@ -99,7 +103,7 @@ if __name__ == "__main__":
 			for ranked in rankedList:
 			    print(ranked.id, ':',ranked.probability)
 
-			action = ACTION_LOOKUP.index(rankedList[0].id)
+			action = actionList.index(rankedList[0].id)
 			next_state, reward, done, _ = env.step(action)
 
 			client.events.reward(event_id=eventid, value=reward)
