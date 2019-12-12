@@ -90,11 +90,11 @@ if __name__ == "__main__":
 
 	rn = RangeNormalize(-0.5,0.5)
 	print(ACTION_LOOKUP)
-	actions = get_actions1()
+	actions = get_actions()
 	# for key in ACTION_LOOKUP:
 	# 	actions.append(ACTION_LOOKUP[key])
 
-	print(actions)
+	#print(actions)
 
 
 
