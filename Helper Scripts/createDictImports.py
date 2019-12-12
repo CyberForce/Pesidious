@@ -15,11 +15,11 @@ dll = ""
 
 for line in imports:
 	if ".dll" in line:
-		dll = line
+		dll = line[:-1]
 		if(dll not in adversarial_imports_dict):
 			adversarial_imports_dict[dll] = []
 	else:
-		adversarial_imports_dict[dll] = line
+		adversarial_imports_dict[dll] = line[:-1]
 
 for key in adversarial_imports_dict:
 	for value in adversarial_imports_dict[key]:
