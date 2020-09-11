@@ -134,7 +134,7 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
 
     SECTION_INDEX = index
 
-    info(f"Import extraction completed with {SECTION_INDEX} imports")
+    info(f"Import extraction completed with {SECTION_INDEX} imports... \n")
     info("Starting section extraction ...")
 
     # for i, file in enumerate(malware_pe_files + benign_pe_files):
@@ -165,9 +165,9 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
 
         debug("Index Section : {index_section}")
 
-    info("Section extraction completed with {index_section} sections")
-    info("Features mapping to index is complete ...")
-    debug("Total size of feature vector mapping : {len(feature_vector_mapping)}")
+    info(f"Section extraction completed with {index_section} sections ... \n")
+    info("Features mapping to index is complete ... \n")
+    debug(f"Total size of feature vector mapping : {len(feature_vector_mapping)} \n")
     info("Pickling Feature vector mapping ...")
 
     for i, import_lib in enumerate(feature_vector_mapping):
@@ -220,7 +220,7 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
     info("Creating feature vector with sections for benign set...")
     benign_pe_files_section_feature_set = torch.Tensor(feature_generation(benign_pe_files, section_feature_vector_mapping))
     
-    debug(f"malware_pe_files_section_feature_set type : {str(malware_pe_files_section_feature_set)", extra={"markup":True})
+    debug(f"malware_pe_files_section_feature_set type : {str(malware_pe_files_section_feature_set)}", extra={"markup":True})
     debug(f"malware_pe_files_section_feature_set size : {str(malware_pe_files_section_feature_set.shape)}")
 
     pickle.dump(malware_pe_files_section_feature_set, open(os.path.join(malware_feature_vector_directory, "malware_pe_files_section_feature_set.pk"), 'wb'))
@@ -300,7 +300,7 @@ def feature_generation(pe_files: list, feature_vector_mapping: dict):
         # debug("pe_files_feature_vectors (features, file)" + str(pe_files_feature_vectors))
         pe_files_feature_set.append(feature_vector)
 
-    debug(f"Vectors Type : {str(type(pe_files_feature_set))")
+    debug(f"Vectors Type : {str(type(pe_files_feature_set))}")
     info("Feature Extraction complete ...")
 
     return pe_files_feature_set
