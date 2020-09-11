@@ -39,10 +39,7 @@ import requests
 import json
 from collections import defaultdict
 
-
-
-
-
+module_path = os.path.split(os.path.abspath(sys.modules[__name__].__file__))[0]
 
 #COMMON_SECTION_NAMES = pickle.load(open(os.path.join(module_path, 'RL_Features/adversarial_sections_set1.pk'), "rb"))
 COMMON_SECTION_NAMES = open(os.path.join(module_path, 'section_names.txt'), 'r').read().rstrip().split('\n')
