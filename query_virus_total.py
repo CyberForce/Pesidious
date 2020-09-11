@@ -39,26 +39,16 @@ import requests
 import json
 from collections import defaultdict
 
-from keras.models import load_model
-
-ACTION_LOOKUP = {i: act for i, act in enumerate(manipulate.ACTION_TABLE.keys())}
-
-from chainrl import create_acer_agent
-import gym
 module_path = os.path.split(os.path.abspath(sys.modules[__name__].__file__))[0]
-
-
 
 #COMMON_SECTION_NAMES = pickle.load(open(os.path.join(module_path, 'RL_Features/adversarial_sections_set1.pk'), "rb"))
 COMMON_SECTION_NAMES = open(os.path.join(module_path, 'section_names.txt'), 'r').read().rstrip().split('\n')
-COMMON_IMPORTS = pickle.load(open(os.path.join(module_path, 'RL_Features/adversarial_imports_set1.pk'), "rb"))
+#COMMON_IMPORTS = open(os.path.join(module_path, 'imports.txt'), 'r').read().rstrip().split('\n')
 section_content = "manipulation_content/section-content.txt"
-
+COMMON_IMPORTS = json.load(open(os.path.join(module_path, 'small_dll_imports.json'), 'r'))
 min_score = 100.0
 
-outfile = sys.argv[2]
 
-outputFile = open(outfile, "w")
 
 
 
@@ -69,45 +59,48 @@ def evaluate(pefile):
         bytez = binfile.read()
 
     previous_bytez = bytez
-    previous_score = virus_total_score(pefile)
-    print("original score : " + str(previous_score))
 
-    while(True):
+    for i in range(80):
         
         action = random.randint(1,5)
+
        
         if(action == 1):
+            print("overlay_append")
             bytez = overlay_append(bytez)
         
         elif(action == 2):
+            print("section_rename")
             bytez = section_rename(bytez)
     
         elif(action == 3):
+            print("section_add")
             bytez = section_add(bytez)
 
         elif(action == 4):
+            print("imports_append")
             bytez = imports_append(bytez)
 
         #bytez = manipulate.modify_without_breaking( bytez, [action] )
-        with open("mutated.exe", 'wb') as file1:
-            file1.write(bytez)
+        # with open("mutated.exe", 'wb') as file1:
+        #     file1.write(bytez)
 
-        score = virus_total_score("mutated.exe")
+        # score = virus_total_score("mutated.exe")
 
-        print("score : " + str(score))
+        # print("score : " + str(score))
 
-        if(score > previous_score):
-            bytez = previous_bytez
-            outputFile.write("Remove\n") # dont add the previous action
+        # if(score > previous_score):
+        #     bytez = previous_bytez
+        #     outputFile.write("Remove\n") # dont add the previous action
 
-        else:
-            previous_score = score
-            previous_bytez = bytez
+        # else:
+        #     previous_score = score
+        #     previous_bytez = bytez
         
-        if(score < 10):
-            with open("Mutated_malware/queried.exe", 'wb') as file1:
-                file1.write(bytez)
-            exit(1)
+        # if(score < 10):
+        #     with open("Mutated_malware/queried.exe", 'wb') as file1:
+        #         file1.write(bytez)
+        #     exit(1)
 
         
 
@@ -153,18 +146,15 @@ def overlay_append(bytez):
     # upper=126 would append with "printable ascii"
     # upper=255 would append with any character
     print("appended random bytes\n")
-    outputFile.write("appended random bytes\n")
     return bytez + bytes([random.randint(0, upper) for _ in range(L)])
 
 def imports_append(bytez):
     #COMMON_IMPORTS_NAMES = ['ADVAPI32.DLL', 'SHLWAPI.DLL', 'KERNEL32.DLL','USER32.DLL']
     
+    print("imports append")
     importsFile = open("imports.txt" , 'w')
 
     libname = random.choice(list(COMMON_IMPORTS))
-
-    while("hal" in libname): 
-        libname = random.choice(list(COMMON_IMPORTS))
 
     while(len(list(COMMON_IMPORTS[libname])) < 20 ):
         libname = random.choice(list(COMMON_IMPORTS))
@@ -172,22 +162,18 @@ def imports_append(bytez):
     importsFile.write(libname + '\n')
     for fun in (list(COMMON_IMPORTS[libname])):
         importsFile.write(fun + '\n')
-    #print('adding import library : ' + libname)
 
     importsFile.close()
 
+    #print('adding import library : ' + libname)
     with open("modified.exe", 'wb') as file1:
         file1.write(bytez)
 
-    sys.stdout.flush()
-    cmd = " ./portable-executable/project-add-imports/bin/Debug/project-append-import modified.exe imports.txt modified.exe"
+    cmd = "portable-executable/project-add-imports/bin/Debug/project-append-import modified.exe imports.txt modified.exe"
     os.system(cmd)
 
     with open("modified.exe", "rb") as binfile:
         bytez = binfile.read()
-
-    print("appended import : " + libname + "\n")
-    outputFile.write("appended import : " + libname + "\n")
 
     return bytez
 
@@ -206,7 +192,6 @@ def section_add(bytez):
         bytez = binfile.read()
     
     print("added section : " + section + "\n")  
-    outputFile.write("added section : " + section + "\n")
 
     return bytez
 
@@ -222,7 +207,6 @@ def section_rename(bytez):
     bytez = __binary_to_bytez(binary)
 
     print("section renamed from " + old_name + " to " + targeted_section.name + "\n")
-    outputFile.write("section renamed from " + old_name + " to " + targeted_section.name + "\n")
 
     return bytez
 
@@ -231,7 +215,6 @@ def remove_signature(bytez):
     binary = lief.PE.parse(bytez, name="")
 
     print("removed signature \n")
-    outputFile.write("removed signature \n")
 
     if binary.has_signature:
         for i, e in enumerate(binary.data_directories):
@@ -250,7 +233,6 @@ def remove_debug(bytez):
     binary = lief.PE.parse(bytez, name="")
 
     print("removed debug \n" )
-    outputFile.write("removed debug \n" )
 
     if binary.has_debug:
         for i, e in enumerate(binary.data_directories):
@@ -270,28 +252,6 @@ def calculate_hash(bytez):
     m = hashlib.sha256()
     m.update( bytez )
 
-def virus_total_score(file):
-   
-    url = 'https://www.virustotal.com/vtapi/v2/file/scan'
-    params = {'apikey': 'bbd8c5dc4df8a8dc4d4c0cd3d9ec38b96471ab711bb71c2e608d45d6430fc328'}
-    files = {'file': ('myfile.exe', open(file, 'rb'))}
-    response = requests.post(url, files=files, params=params)
-    sha =  response.json()['sha1']
-
-    while(True):
-        time.sleep(10)
-        url = 'https://www.virustotal.com/vtapi/v2/file/report'
-        params = {'apikey': 'bbd8c5dc4df8a8dc4d4c0cd3d9ec38b96471ab711bb71c2e608d45d6430fc328', 'resource': sha}
-        response = requests.get(url, params=params)
-        #print(response.json()['positives'])
-
-        try: 
-            score = response.json()['positives']
-            print(score)
-            return score
-        except Exception as e:
-            print(e)
-            continue 
 
 if __name__ == "__main__":
 
