@@ -59,6 +59,7 @@ def evaluate(pefile):
         bytez = binfile.read()
 
     previous_bytez = bytez
+    
 
     for i in range(80):
         
