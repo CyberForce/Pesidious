@@ -420,8 +420,7 @@ def main():
     info("\tBenign Directory - " + str(args.benign_path))
     info("\tOutput Directory - " + str(args.output_dir))
     info("\tLogfile - " + str(args.logfile))
-    info("\tLog Level - " + str(args.log_level))
-    info("\tDetailed Log - " + str(args.detailed_log))
+    info("\tLog Level - " + str(args.log))
 
     malware_path = str(args.malware_path)
     benign_path = str(args.benign_path)
