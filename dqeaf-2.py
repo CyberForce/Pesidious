@@ -84,7 +84,7 @@ def update_epsilon(n):
         epsilon = epsilon_final
 
     return epsilon
-    
+
 def select_action(observation, epsilon):
     rand = np.random.random()
     if rand < epsilon:
@@ -154,15 +154,13 @@ def main():
     B = 1000 # as mentioned in the paper (number of steps before learning starts)
     n = 0
     for i_episode in range(1, D):
-
         try:
             state, ep_reward = env.reset(), 0
-
             state_norm = rn(state)
             state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
             epsilon = update_epsilon(i_episode)
             for t in range(1, T):  # Don't infinite loop while learning
-                action = select_action(state_norm)
+                action = select_action(state_norm, epsilon)
                 state, reward, done, _ = env.step(action)
                 if args.render:
                     env.render()
