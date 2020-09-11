@@ -1,5 +1,5 @@
 import argparse
-import logging
+from logging import basicConfig, debug, error, info, warning, getLogger
 import os
 import pickle
 import random
