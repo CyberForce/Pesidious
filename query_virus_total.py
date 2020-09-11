@@ -198,7 +198,7 @@ def section_add(bytez):
 def section_rename(bytez):
     # rename a random section
     #random.seed(seed)
-    binary = lief.PE.parse(bytez)
+    binary = lief.PE.parse(bytez, name="")
     for i in range(0, 10):   
         targeted_section = random.choice(binary.sections)
         old_name = targeted_section.name
@@ -212,7 +212,7 @@ def section_rename(bytez):
 
 
 def remove_signature(bytez):
-    binary = lief.PE.parse(bytez)
+    binary = lief.PE.parse(bytez, name="")
 
     print("removed signature \n")
 
@@ -230,7 +230,7 @@ def remove_signature(bytez):
     return bytez
 
 def remove_debug(bytez):
-    binary = lief.PE.parse(bytez)
+    binary = lief.PE.parse(bytez, name="")
 
     print("removed debug \n" )
 
