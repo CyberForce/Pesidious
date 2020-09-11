@@ -1,16 +1,5 @@
 # -*- coding: utf-8 -*-
-r"""
-    malgan.__init__
-    ~~~~~~~~~~~~~~~
 
-    MalGAN complete architecture.
-
-    Based on the paper: "Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN"
-    By Weiwei Hu and Ying Tan.
-
-    :copyright: (c) 2019 by Zayd Hammoudeh.
-    :license: MIT, see LICENSE for more details.
-"""
 import logging
 import os
 import sys
@@ -60,7 +49,7 @@ class MalwareDataset(Dataset):
     @property
     def num_features(self):
         r""" Number of features in the dataset """
-        logging.debug("self.x.shape[1] : " + str(self.x.shape[1]))
+        logging.debug(f"self.x.shape[1] : {str(self.x.shape[1])}")
         return self.x.shape[1]
 
 
@@ -75,8 +64,8 @@ class _DataGroup:  # pylint: disable=too-few-public-methods
         self.test = test
         self.is_loaders = False
 
-    def build_loader(self, batch_size: int = 0):
         r"""
+    def build_loader(self, batch_size: int = 0):
         Constructs loaders from the datasets
 
         :param batch_size: Batch size for training
@@ -151,16 +140,16 @@ class MalGAN(nn.Module):
 
         self._is_cuda = torch.cuda.is_available()
 
-        logging.info("Constructing new MalGAN")
+        logging.info("[*] Constructing new MalGAN ..")
         
-        logging.info("Malware Dimension (M): %d", self.M)
-        logging.info("Latent Dimension (Z): %d", self.Z)
-        logging.info("Test Split Ratio: %.3f", test_split)
-        logging.info("Generator Hidden Layer Sizes: %s", h_gen)
-        logging.info("Discriminator Hidden Layer Sizes: %s", h_discrim)
-        logging.info("Blackbox Detector Type: %s", detector_type.name)
-        logging.info("Activation Type: %s", self._g.__class__.__name__)
-        logging.info("CUDA State: %s", "Enabled" if self._is_cuda else "Disabled")
+        logging.info(f"\t[+] Malware Dimension (M): {self.M}")
+        logging.info(f"\t[+] Latent Dimension (Z): {self.Z}")
+        logging.info(f"\t[+] Test Split Ratio: { test_split}")
+        logging.info(f"\t[+] Generator Hidden Layer Sizes: {h_gen}")
+        logging.info(f"\t[+] Discriminator Hidden Layer Sizes: {h_discrim}")
+        logging.info(f"\t[+] Blackbox Detector Type: {detector_type.name}")
+        logging.info(f"\t[+] Activation Type: {self._g.__class__.__name__}")
+        logging.info(f"\t[+] CUDA State: {'[bold green] Enabled' if self._is_cuda else '[bold red] Disabled'", extra={"markup": True})
 
         self._bb = BlackBoxDetector(detector_type)
         self._gen = Generator(M=self.M, Z=self.Z, hidden_size=h_gen, g=self._g)
@@ -216,9 +205,9 @@ class MalGAN(nn.Module):
 
         merged_y = torch.cat((torch.full((len(mal_train),), MalGAN.Label.Malware.value),
                               torch.full((len(ben_train),), MalGAN.Label.Benign.value)))
-        logging.debug("Starting training of blackbox detector of type \"%s\"", self._bb.type.name)
+        logging.debug(f"[*] Starting training of blackbox detector of type {self._bb.type.name} ...")
         self._bb.fit(merged_x, merged_y)
-        logging.debug("COMPLETED training of blackbox detector of type \"%s\"", self._bb.type.name)
+        logging.debug(f"[+] Completed training of blackbox detector of type {self._bb.type.name}")
 
     def fit_one_cycle(self, cyc_len: int, quiet_mode: bool = False) -> None:
         r"""
@@ -243,7 +232,7 @@ class MalGAN(nn.Module):
             train_l_g, train_l_d = self._fit_epoch(epoch_cnt, g_optimizer, d_optimizer, quiet_mode)
             for block, loss in [("Generator", train_l_g), ("Discriminator", train_l_d)]:
                 MalGAN.tensorboard.add_scalar('Train_%s_Loss' % block, loss, epoch_cnt)
-                logging.debug("Epoch %d: Avg Train %s Loss: %.6f", epoch_cnt, block, loss)
+                logging.debug(f"[+] Epoch {epoch_cnt}: Avg Train {block} Loss: {loss}")
 
             # noinspection PyTypeChecker
             valid_l_g = self._meas_loader_gen_loss(self._mal_data.valid)
@@ -253,10 +242,10 @@ class MalGAN(nn.Module):
                 if best_epoch is not None:
                     self._delete_old_backup(best_epoch)
                 best_epoch, best_loss = epoch_cnt, valid_l_g
-                logging.debug("Epoch %d: New best validation loss: %.6f", best_epoch, best_loss)
+                logging.debug(f"[+] Epoch {best_epoch}: New best validation loss: {best_loss}")
             else:
-                logging.debug("Epoch %d: Avg Validation Generator Loss: %.6f", epoch_cnt, valid_l_g)
-        logging.debug("TRAINING COMPLETE. Best epoch is %d with loss %.6f", best_epoch, best_loss)
+                logging.debug(f"[+] Epoch {epoch_cnt}: Avg Validation Generator Loss: {valid_l_g}")
+        logging.debug(f"[+] Training complete. Best epoch is {best_epoch} with loss {best_loss}")
         MalGAN.tensorboard.close()
 
         self.load(self._build_export_name(best_epoch))
@@ -290,7 +279,7 @@ class MalGAN(nn.Module):
         try:
             os.remove(str(backup_name))
         except OSError:
-            logging.warning("Error trying to delete model: %s", backup_name)
+            logging.warning(f"[-] Error trying to delete model: {backup_name}")
 
     def _fit_epoch(self, epoch_num: int, g_optim: torch.optim.Optimizer,
                    d_optim: torch.optim.Optimizer, quiet_mode: bool) -> TensorTuple:
@@ -306,7 +295,7 @@ class MalGAN(nn.Module):
         tot_l_g = tot_l_d = 0
         num_batch = min(len(self._mal_data.train), len(self._ben_data.train))
 
-        logging.debug("Starting training epoch #%d with %d batches", epoch_num, num_batch)
+        logging.debug(f"[*] Starting training epoch #{epoch_num} with {num_batch} batches")
         desc = "Epoch %d Progress" % epoch_num
         batch_generator = merged_data = zip(self._mal_data.train, self._ben_data.train)
         if not quiet_mode:
@@ -330,7 +319,7 @@ class MalGAN(nn.Module):
                 # torch.nn.utils.clip_grad_value_(l_d, 1)
                 d_optim.step()
                 tot_l_d += l_d
-        logging.debug("COMPLETED training epoch #%d", epoch_num)
+        logging.debug(f"[+] Completed training epoch #{epoch_num}")
         return tot_l_g / num_batch, tot_l_d / num_batch
 
     def _meas_loader_gen_loss(self, loader: DataLoader) -> float:
@@ -382,8 +371,8 @@ class MalGAN(nn.Module):
         valid_loss = self._meas_loader_gen_loss(self._mal_data.valid)
         # noinspection PyTypeChecker
         test_loss = self._meas_loader_gen_loss(self._mal_data.test)
-        logging.debug("Final Validation Loss: %.6f", valid_loss)
-        logging.debug("Final Test Loss: %.6f", test_loss)
+        logging.debug(f"[+] Final Validation Loss: {valid_loss}")
+        logging.debug(f"[+] Final Test Loss: {test_loss}")
 
         num_mal_test = 0
         y_mal_orig, m_prime_arr, bits_changed = [], [], []
@@ -408,7 +397,7 @@ class MalGAN(nn.Module):
         avg_changed_bits = torch.cat(bits_changed).mean()
         
         pickle.dump(m_prime_arr, open(os.path.join(adversarial_feature_vector_directory, output_filename), 'wb'))
-        logging.debug("Avg. Malware Bits Changed Changed: %2f", avg_changed_bits)
+        logging.debug(f"[+] Avg. Malware Bits Changed Changed: {avg_changed_bits}")
 
         # BB prediction of the malware before the generator
         y_mal_orig = torch.cat(y_mal_orig)
