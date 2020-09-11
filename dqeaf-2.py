@@ -151,6 +151,7 @@ def main():
             ep_reward += reward
             if done:
                 break
+            print("episode : " + i_episode + " turn : " + t + " reward : " + reward)
 
         running_reward = 0.05 * ep_reward + (1 - 0.05) * running_reward
         finish_episode()
