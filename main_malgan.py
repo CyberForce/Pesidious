@@ -164,9 +164,9 @@ def main():
     MalGAN.MALWARE_BATCH_SIZE = args.batch_size
 
     if torch.cuda.is_available():
-        info("Torch GPU Available. Device #%d", torch.cuda.current_device())
+        debug("Torch GPU Available. Device #%d", torch.cuda.current_device())
     else:
-        info("No GPU detected. Running CPU only.")
+        debug("No GPU detected. Running CPU only.")
 
     if str(args.feature_type).lower() == "section":
         malware_features = Path("feature_vector_directory/malware/malware_pe_files_section_feature_set.pk")
@@ -186,10 +186,10 @@ def main():
         output_filename = "adversarial_feature_set.pk"
         pass
 
-    info("Feature Type: %s", str(args.feature_type))
-    info("Malware directory: %s", str(malware_features))
-    info("Benign directory: %s", str(benign_features))
-    info("Output: " + str(os.path.join(args.output_directory, output_filename)))
+    debug("\tFeature Type: %s", str(args.feature_type))
+    debug("\tMalware directory: %s", str(malware_features))
+    debug("\tBenign directory: %s", str(benign_features))
+    debug("\tOutput: " + str(os.path.join(args.output_directory, output_filename)))
 
     malgan = MalGAN(load_dataset(str(malware_features), MalGAN.Label.Malware.value),
                     load_dataset(str(benign_features), MalGAN.Label.Benign.value),
