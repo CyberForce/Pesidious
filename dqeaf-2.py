@@ -26,6 +26,7 @@ parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                     help='interval between training status logs (default: 10)')
 args = parser.parse_args()
 
+device = torch.device("cpu")
 
 env = gym.make("malware-score-v0")
 env.seed(args.seed)
