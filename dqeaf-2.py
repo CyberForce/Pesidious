@@ -149,8 +149,10 @@ def main():
                 env.render()
             policy.rewards.append(reward)
             ep_reward += reward
+            print("episode : " + str(i_episode) + " turn : " + str(t) + " reward : " + str(reward))
             if done:
                 break
+
 
         running_reward = 0.05 * ep_reward + (1 - 0.05) * running_reward
         finish_episode()
