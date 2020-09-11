@@ -1,18 +1,9 @@
 # -*- coding: utf-8 -*-
-r"""
-    src.main
-    ~~~~~~~~
-
-    Main module for testing and debugging the MalGAN implementation.
-
-    :copyright: (c) 2019 by Zayd Hammoudeh.
-    :license: MIT, see LICENSE for more details.
-"""
 
 import argparse
 import pickle
 import sys
-import logging
+from logging import basicConfig, debug, error, info, warning, getLogger
 from typing import Union
 from pathlib import Path
 from datetime import date
@@ -23,40 +14,29 @@ import numpy as np
 import torch
 from torch import nn
 
+from rich.logging import RichHandler
+from rich.progress import Progress, TaskID, track
+from rich.traceback import install
+
 from malgan import MalGAN, MalwareDataset, BlackBoxDetector
 
 
 def setup_logger(quiet_mode: bool, filename: str = "MalGAN_" + str(date.today()) + ".log", log_level: int = logging.DEBUG):
-    r"""
-    Logger Configurator
 
-    Configures the test logger.
-
-    :param quiet_mode: True if quiet mode (i.e., disable logging to stdout) is used
-    :param filename: Log file name
-    :param log_level: Level to log
-    """
     log_dir = "Logs"
+
     if not os.path.exists(log_dir):
         os.mkdir(log_dir)
 
-    filename = os.path.join(log_dir, filename)
+    logfile = os.path.join(log_dir, filename)
 
-    date_format = '%m/%d/%Y %I:%M:%S %p'  # Example Time Format - 12/12/2010 11:46:36 AM
-    format_str = '%(asctime)s -- %(levelname)s -- %(message)s'
-    logging.basicConfig(filename=filename, level=log_level, format=format_str, datefmt=date_format)
-
-    # Also print to stdout
-    if not quiet_mode:
-        handler = logging.StreamHandler(sys.stdout)
-        handler.setLevel(log_level)
-        formatter = logging.Formatter(format_str)
-        handler.setFormatter(formatter)
-        logging.getLogger().addHandler(handler)
-
-    # Matplotlib clutters the logger so change its log level
-    # noinspection PyProtectedMember
-    # matplotlib._log.setLevel(logging.INFO)  # pylint: disable=protected-access
+    basicConfig(
+        level=log_level,
+        filemode='a',  # other options are w for write.
+        format="%(message)s",
+        filename=logfile
+    )
+    getLogger().addHandler(RichHandler())
 
     logging.info("\n\n******************* New Run Beginning *****************")
 
