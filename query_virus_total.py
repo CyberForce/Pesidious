@@ -39,13 +39,8 @@ import requests
 import json
 from collections import defaultdict
 
-from keras.models import load_model
 
-ACTION_LOOKUP = {i: act for i, act in enumerate(manipulate.ACTION_TABLE.keys())}
 
-from chainrl import create_acer_agent
-import gym
-module_path = os.path.split(os.path.abspath(sys.modules[__name__].__file__))[0]
 
 
 
