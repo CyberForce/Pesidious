@@ -20,7 +20,7 @@ from rich.traceback import install
 from malgan import MalGAN, MalwareDataset, BlackBoxDetector
 
 
-def setup_logger(quiet_mode: bool, filename: str = "MalGAN_" + str(date.today()) + ".log", log_level: int = DEBUG):
+def setup_logger(log_level: str, filename: str = "MalGAN_" + str(date.today()) + ".log"):
 
     log_dir = "Logs"
 
@@ -57,8 +57,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("-m", "--malware-features", help="Select the path to your malware feature vector", type=Path, default=("feature_vector_directory/malware/malware_feature_set.pk"))
     parser.add_argument("-b", "--benign-features", help="Select the path to your benign feature vector", type=Path, default=("feature_vector_directory/benign/benign_feature_set.pk"))
     parser.add_argument("-o", "--output-directory", help="Select the path to save your adversarial feature vector", type=Path, default=("adversarial_feature_vector_directory"))
-    
-    parser.add_argument("-q", help="Quiet mode", action='store_true', default=False)
 
     help_msg = " ".join(["Dimension of the hidden layer(s) in the GENERATOR."
                          "Multiple layers should be space separated"])
@@ -90,6 +88,17 @@ def parse_args() -> argparse.Namespace:
 
     help_msg = "Print the results to the console. Intended for slurm results analysis"
     parser.add_argument("--print-results", help=help_msg, action="store_true", default=False)
+
+    logging_level = ["debug", "info", "warning", "error", "critical"]
+    parser.add_argument(
+        "-l",
+        "--log",
+        dest="log",
+        metavar="LOGGING_LEVEL",
+        choices=logging_level,
+        default="info",
+        help=f"Select the logging level. Keep in mind increasing verbosity might affect performance. Available choices include : {logging_level}",
+    )
 
     args = parser.parse_args()
     # noinspection PyTypeChecker
@@ -147,7 +156,7 @@ def load_dataset(file_path: Union[str, Path], y: int) -> MalwareDataset:
 
 def main():
     args = parse_args()
-    setup_logger(args.q)
+    setup_logger(args.log)
 
     # print(args)
 
