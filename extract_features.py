@@ -410,11 +410,11 @@ def main():
     logging_setup(str(args.logfile), args.log)
 
     info("Setting parameters ...")
-    info("\tMalware Directory - " + str(args.malware_path))
-    info("\tBenign Directory - " + str(args.benign_path))
-    info("\tOutput Directory - " + str(args.output_dir))
-    info("\tLogfile - " + str(args.logfile))
-    info("\tLog Level - " + str(args.log))
+    debug("\tMalware Directory - " + str(args.malware_path))
+    debug("\tBenign Directory - " + str(args.benign_path))
+    debug("\tOutput Directory - " + str(args.output_dir))
+    debug("\tLogfile - " + str(args.logfile))
+    debug("\tLog Level - " + str(args.log))
 
     malware_path = str(args.malware_path)
     benign_path = str(args.benign_path)
