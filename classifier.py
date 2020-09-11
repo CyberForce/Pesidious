@@ -42,9 +42,9 @@ class FileRetrievalFailure(Exception):
 
 def main():
   file = sys.argv[1]
-  with open(location, 'rb') as infile:
+  with open(file, 'rb') as infile:
       bytez = infile.read()
-
+  label = get_label_local(bytez)
 
 
 def fetch_file(sha256):
