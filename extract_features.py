@@ -1,13 +1,13 @@
 import argparse
 import glob
-from logging import basicConfig, debug, error, info, warning
+from logging import basicConfig, debug, error, info, warning, getLogger
 import os
 import pickle
 import re
 import sys
 import time
 import traceback
-from handlers import TimedRotatingFileHandler
+# from handlers import TimedRotatingFileHandler
 from pathlib import Path
 from random import shuffle
 from tqdm import tqdm
@@ -51,7 +51,7 @@ def parse_args():
     return args
 
 def logging_setup(logfile: str , log_level: str):
-
+  
     log_dir = "Logs"
 
     if not os.path.exists(log_dir):
@@ -63,9 +63,10 @@ def logging_setup(logfile: str , log_level: str):
         level=log_level.upper(),
         filemode='a',  # other options are w for write.
         format="%(message)s",
-        handlers=[RichHandler()],
         filename=logfile
     )
+
+    getLogger().addHandler(RichHandler())
         
     info("\n\nStarting Feature Extraction Program ...")
 
@@ -406,15 +407,14 @@ def main():
 
     # print(args)
 
-    logging_setup(str(args.logfile), args.log_level)
+    logging_setup(str(args.logfile), args.log)
 
     info("Setting parameters ...")
     info("\tMalware Directory - " + str(args.malware_path))
     info("\tBenign Directory - " + str(args.benign_path))
     info("\tOutput Directory - " + str(args.output_dir))
     info("\tLogfile - " + str(args.logfile))
-    info("\tLog Level - " + str(args.log_level))
-    info("\tDetailed Log - " + str(args.detailed_log))
+    info("\tLog Level - " + str(args.log))
 
     malware_path = str(args.malware_path)
     benign_path = str(args.benign_path)
