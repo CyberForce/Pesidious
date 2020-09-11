@@ -72,8 +72,25 @@ policy = Policy()
 optimizer = optim.Adam(policy.parameters(), lr=1e-2)
 eps = np.finfo(np.float32).eps.item()
 
+def update_epsilon(n):
+    epsilon_start = 1.0
+    epsilon = epsilon_start
+    epsilon_final = 0.4
+    epsilon_decay = 1000 # N from the research paper (equation #6)
 
-def select_action(observation):
+    epsilon = 1.0 - (n/epsilon_decay)
+
+    if epsilon <= epsilon_final:
+        epsilon = epsilon_final
+
+    return epsilon
+    
+def select_action(observation, epsilon):
+    rand = np.random.random()
+    if rand < epsilon:
+        action = np.random.choice(env.action_space.n)
+        return action
+
     actions = policy.forward(observation)
     m = Categorical(actions)
     action = m.sample()
@@ -135,7 +152,7 @@ def main():
     D = 30000 # as mentioned in the research paper (total number of episodes)
     T = 80 # as mentioned in the paper (total number of mutations that the agent can perform on one file)
     B = 1000 # as mentioned in the paper (number of steps before learning starts)
-
+    n = 0
     for i_episode in range(1, D):
 
         try:
@@ -143,7 +160,7 @@ def main():
 
             state_norm = rn(state)
             state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
-
+            epsilon = update_epsilon(i_episode)
             for t in range(1, T):  # Don't infinite loop while learning
                 action = select_action(state_norm)
                 state, reward, done, _ = env.step(action)
