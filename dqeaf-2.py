@@ -136,31 +136,35 @@ def main():
     T = 80 # as mentioned in the paper (total number of mutations that the agent can perform on one file)
     B = 1000 # as mentioned in the paper (number of steps before learning starts)
 
-    for i_episode in range(1, D):
-        state, ep_reward = env.reset(), 0
+    try: 
+        for i_episode in range(1, D):
+            state, ep_reward = env.reset(), 0
 
-        state_norm = rn(state)
-        state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
+            state_norm = rn(state)
+            state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
 
-        for t in range(1, T):  # Don't infinite loop while learning
-            action = select_action(state_norm)
-            state, reward, done, _ = env.step(action)
-            if args.render:
-                env.render()
-            policy.rewards.append(reward)
-            ep_reward += reward
-            print("episode : " + str(i_episode) + " turn : " + str(t) + " reward : " + str(reward))
-            if done:
-                break
+            for t in range(1, T):  # Don't infinite loop while learning
+                action = select_action(state_norm)
+                state, reward, done, _ = env.step(action)
+                if args.render:
+                    env.render()
+                policy.rewards.append(reward)
+                ep_reward += reward
+                print("episode : " + str(i_episode) + " turn : " + str(t) + " reward : " + str(reward))
+                if done:
+                    break
 
 
-        running_reward = 0.05 * ep_reward + (1 - 0.05) * running_reward
-        finish_episode()
-        if i_episode % args.log_interval == 0:
-            print('Episode {}\tLast reward: {:.2f}\tAverage reward: {:.2f}'.format(
-                  i_episode, ep_reward, running_reward))
-        if i_episode % 1 == 0:
-            torch.save(policy.state_dict(), 'dqeaf-2' + str(i_episode) + '.pt')
+            running_reward = 0.05 * ep_reward + (1 - 0.05) * running_reward
+            finish_episode()
+            if i_episode % args.log_interval == 0:
+                print('Episode {}\tLast reward: {:.2f}\tAverage reward: {:.2f}'.format(
+                      i_episode, ep_reward, running_reward))
+            if i_episode % 1 == 0:
+                torch.save(policy.state_dict(), 'dqeaf-2' + str(i_episode) + '.pt')
+    
+    except Exception:
+        continue
 
 
 if __name__ == '__main__':
