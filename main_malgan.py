@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 import argparse
 import pickle
@@ -30,7 +31,7 @@ def setup_logger(log_level: str, filename: str = "MalGAN_" + str(date.today()) +
     logfile = os.path.join(log_dir, filename)
 
     basicConfig(
-        level=log_level,
+        level=log_level.upper(),
         filemode='a',  # other options are w for write.
         format="%(message)s",
         filename=logfile
@@ -197,7 +198,7 @@ def main():
                     h_discrim=args.discrim_hidden_sizes,
                     g_hidden=args.activation,
                     detector_type=args.detector)
-    malgan.fit_one_cycle(args.num_epoch, quiet_mode=args.q)
+    malgan.fit_one_cycle(args.num_epoch)
     results = malgan.measure_and_export_results(args.num_epoch, str(args.output_directory), output_filename)
 
 
