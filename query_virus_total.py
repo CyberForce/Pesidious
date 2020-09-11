@@ -43,9 +43,9 @@ module_path = os.path.split(os.path.abspath(sys.modules[__name__].__file__))[0]
 
 #COMMON_SECTION_NAMES = pickle.load(open(os.path.join(module_path, 'RL_Features/adversarial_sections_set1.pk'), "rb"))
 COMMON_SECTION_NAMES = open(os.path.join(module_path, 'section_names.txt'), 'r').read().rstrip().split('\n')
-COMMON_IMPORTS = open(os.path.join(module_path, 'imports.txt'), 'r').read().rstrip().split('\n')
+#COMMON_IMPORTS = open(os.path.join(module_path, 'imports.txt'), 'r').read().rstrip().split('\n')
 section_content = "manipulation_content/section-content.txt"
-
+COMMON_IMPORTS = json.load(open(os.path.join(module_path, 'small_dll_imports.json'), 'r'))
 min_score = 100.0
 
 
@@ -151,12 +151,10 @@ def overlay_append(bytez):
 def imports_append(bytez):
     #COMMON_IMPORTS_NAMES = ['ADVAPI32.DLL', 'SHLWAPI.DLL', 'KERNEL32.DLL','USER32.DLL']
     
+    print("imports append")
     importsFile = open("imports.txt" , 'w')
 
     libname = random.choice(list(COMMON_IMPORTS))
-
-    while("hal" in libname): 
-        libname = random.choice(list(COMMON_IMPORTS))
 
     while(len(list(COMMON_IMPORTS[libname])) < 20 ):
         libname = random.choice(list(COMMON_IMPORTS))
@@ -164,23 +162,20 @@ def imports_append(bytez):
     importsFile.write(libname + '\n')
     for fun in (list(COMMON_IMPORTS[libname])):
         importsFile.write(fun + '\n')
-    #print('adding import library : ' + libname)
 
     importsFile.close()
 
+    #print('adding import library : ' + libname)
     with open("modified.exe", 'wb') as file1:
-        file1.write(bytez)
+        file1.write(self.bytez)
 
-    sys.stdout.flush()
-    cmd = " ./portable-executable/project-add-imports/bin/Debug/project-append-import modified.exe imports.txt modified.exe"
+    cmd = "portable-executable/project-add-imports/bin/Debug/project-append-import modified.exe imports.txt modified.exe"
     os.system(cmd)
 
     with open("modified.exe", "rb") as binfile:
-        bytez = binfile.read()
+        self.bytez = binfile.read()
 
-    print("appended import : " + libname + "\n")
-
-    return bytez
+    return self.bytez
 
 def section_add(bytez):    
     section = random.choice(COMMON_SECTION_NAMES)
