@@ -146,7 +146,6 @@ def overlay_append(bytez):
     # upper=126 would append with "printable ascii"
     # upper=255 would append with any character
     print("appended random bytes\n")
-    outputFile.write("appended random bytes\n")
     return bytez + bytes([random.randint(0, upper) for _ in range(L)])
 
 def imports_append(bytez):
@@ -180,7 +179,6 @@ def imports_append(bytez):
         bytez = binfile.read()
 
     print("appended import : " + libname + "\n")
-    outputFile.write("appended import : " + libname + "\n")
 
     return bytez
 
@@ -199,7 +197,6 @@ def section_add(bytez):
         bytez = binfile.read()
     
     print("added section : " + section + "\n")  
-    outputFile.write("added section : " + section + "\n")
 
     return bytez
 
@@ -215,7 +212,6 @@ def section_rename(bytez):
     bytez = __binary_to_bytez(binary)
 
     print("section renamed from " + old_name + " to " + targeted_section.name + "\n")
-    outputFile.write("section renamed from " + old_name + " to " + targeted_section.name + "\n")
 
     return bytez
 
@@ -224,7 +220,6 @@ def remove_signature(bytez):
     binary = lief.PE.parse(bytez, name="")
 
     print("removed signature \n")
-    outputFile.write("removed signature \n")
 
     if binary.has_signature:
         for i, e in enumerate(binary.data_directories):
@@ -243,7 +238,6 @@ def remove_debug(bytez):
     binary = lief.PE.parse(bytez, name="")
 
     print("removed debug \n" )
-    outputFile.write("removed debug \n" )
 
     if binary.has_debug:
         for i, e in enumerate(binary.data_directories):
