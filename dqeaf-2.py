@@ -79,7 +79,7 @@ def select_action(observation):
     action = m.sample()
     policy.saved_log_probs.append(m.log_prob(action))
     print(action)
-    return action
+    return action.item()
 
 
 class RangeNormalize(object):
