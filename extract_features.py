@@ -195,18 +195,18 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
     debug(f"\t -> Section Feature Vector mapping - {str(os.path.join(output_path,'section_feature_vector_mapping.pk'))} ", extra={"markup":True})
 
     # For feature vector with imports and sections:
-    info("[*] Creating feature vector with imports and sections for malware set...")
+    info("[*] Creating feature vector with imports and sections for [bold red] malware set...", extra={"markup":True})
     malware_pe_files_feature_set = torch.Tensor(feature_generation(malware_pe_files, feature_vector_mapping))
-    info("[*] Creating feature vector with imports and sections for benign set...")
+    info("[*] Creating feature vector with imports and sections for [bold green] benign set...", extra={"markup":True})
     benign_pe_files_feature_set = torch.Tensor(feature_generation(benign_pe_files, feature_vector_mapping))
 
     pickle.dump(malware_pe_files_feature_set, open(os.path.join(malware_feature_vector_directory, "malware_feature_set.pk"), 'wb'))
     pickle.dump(benign_pe_files_feature_set, open(os.path.join(benign_feature_vector_directory, "benign_feature_set.pk"), 'wb'))
 
     # For feature vector with imports:
-    info(f"[*] Creating feature vector with imports for malware set ...")
+    debug(f"[*] Creating feature vector with imports for malware set ...")
     malware_pe_files_import_feature_set = torch.Tensor(feature_generation(malware_pe_files, import_feature_vector_mapping))
-    info("[*] Creating feature vector with imports for benign set ...")
+    debug("[*] Creating feature vector with imports for benign set ...")
     benign_pe_files_import_feature_set = torch.Tensor(feature_generation(benign_pe_files, import_feature_vector_mapping))
     
     debug(f"[+] malware_pe_files_import_feature_set type : [bold green] {str(malware_pe_files_import_feature_set)}", extra={"markup":True})
@@ -216,9 +216,9 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
     pickle.dump(benign_pe_files_import_feature_set, open(os.path.join(benign_feature_vector_directory, "benign_pe_files_import_feature_set.pk"), 'wb'))
 
     # For feature vector with sections:
-    info("[*] Creating feature vector with sections for malware set...")
+    debug("[*] Creating feature vector with sections for malware set...")
     malware_pe_files_section_feature_set = torch.Tensor(feature_generation(malware_pe_files, section_feature_vector_mapping))
-    info("[*] Creating feature vector with sections for benign set...")
+    debug("[*] Creating feature vector with sections for benign set...")
     benign_pe_files_section_feature_set = torch.Tensor(feature_generation(benign_pe_files, section_feature_vector_mapping))
     
     debug(f"[+] malware_pe_files_section_feature_set type : {str(malware_pe_files_section_feature_set)}", extra={"markup":True})
@@ -302,7 +302,7 @@ def feature_generation(pe_files: list, feature_vector_mapping: dict):
         pe_files_feature_set.append(feature_vector)
 
     debug(f"\t[+] Vectors Type : {str(type(pe_files_feature_set))}")
-    info("[+] Feature Extraction complete ... \n")
+    debug("[+] Feature Extraction complete ... \n")
 
     return pe_files_feature_set
 
@@ -327,7 +327,7 @@ def extract_imports(file, feature_vector_mapping: dict, filtered_import_list: li
 
     # debug("\n\t-> Imports (After): " + str(imports))
 
-    for lib_import in track(imports, description="Loading imports ...", transient=True):
+    for lib_import in imports:
         debug(f"\t\t[+] Lib Imports: [bold yellow]{str(lib_import)}", extra={"markup":True})
 
         if lib_import not in feature_vector_mapping:
@@ -392,7 +392,7 @@ def main():
 
     info("[*] Setting parameters ...")
     debug(f"\t[*] Malware Directory - [bold green] {str(args.malware_path)}", extra={"markup":True})
-    debug(f"\t[*] Benign Directory - [bold green]{+ str(args.benign_path)}", extra={"markup":True})
+    debug(f"\t[*] Benign Directory - [bold green]{str(args.benign_path)}", extra={"markup":True})
     debug(f"\t[*] Output Directory - [bold green]{str(args.output_dir)}", extra={"markup":True})
     debug(f"\t[*] Logfile - [bold green]{str(args.logfile)}", extra={"markup":True})
     debug(f"\t[*] Log Level - [bold green]{str(args.log)}", extra={"markup":True})
