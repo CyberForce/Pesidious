@@ -64,8 +64,8 @@ class _DataGroup:  # pylint: disable=too-few-public-methods
         self.test = test
         self.is_loaders = False
 
-        r"""
     def build_loader(self, batch_size: int = 0):
+        r"""
         Constructs loaders from the datasets
 
         :param batch_size: Batch size for training
