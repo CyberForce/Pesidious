@@ -63,7 +63,6 @@ class _DataGroup:  # pylint: disable=too-few-public-methods
         self.valid = valid
         self.test = test
         self.is_loaders = False
-
         
     def build_loader(self, batch_size: int = 0):
         r"""
@@ -233,7 +232,7 @@ class MalGAN(nn.Module):
             train_l_g, train_l_d = self._fit_epoch(epoch_cnt, g_optimizer, d_optimizer, quiet_mode)
             for block, loss in [("Generator", train_l_g), ("Discriminator", train_l_d)]:
                 MalGAN.tensorboard.add_scalar('Train_%s_Loss' % block, loss, epoch_cnt)
-                logging.debug(f"[+] Epoch {epoch_cnt}: Avg Train {block} Loss: {loss}")
+                logging.debug(f"\t[+] Epoch {epoch_cnt}: Avg Train {block} Loss: {loss}")
 
             # noinspection PyTypeChecker
             valid_l_g = self._meas_loader_gen_loss(self._mal_data.valid)
@@ -243,9 +242,9 @@ class MalGAN(nn.Module):
                 if best_epoch is not None:
                     self._delete_old_backup(best_epoch)
                 best_epoch, best_loss = epoch_cnt, valid_l_g
-                logging.debug(f"[+] Epoch {best_epoch}: New best validation loss: {best_loss}\n")
+                logging.debug(f"\t[+] Epoch {best_epoch}: New best validation loss: {best_loss}\n")
             else:
-                logging.debug(f"[+] Epoch {epoch_cnt}: Avg Validation Generator Loss: {valid_l_g}\n")
+                logging.debug(f"\t[+] Epoch {epoch_cnt}: Avg Validation Generator Loss: {valid_l_g}\n")
         logging.debug(f"[+] Training complete. Best epoch is {best_epoch} with loss {best_loss}")
         MalGAN.tensorboard.close()
 
@@ -320,7 +319,7 @@ class MalGAN(nn.Module):
                 # torch.nn.utils.clip_grad_value_(l_d, 1)
                 d_optim.step()
                 tot_l_d += l_d
-        logging.debug(f"[+] Completed training epoch #{epoch_num}")
+        logging.debug(f"\t[+] Completed training epoch #{epoch_num}")
         return tot_l_g / num_batch, tot_l_d / num_batch
 
     def _meas_loader_gen_loss(self, loader: DataLoader) -> float:
