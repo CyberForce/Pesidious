@@ -31,7 +31,7 @@ from gym_malware.envs.utils.pefeatures2 import PEFeatureExtractor2
 from sklearn.externals import joblib
 feature_extractor =  PEFeatureExtractor()
 feature_extractor2 =  PEFeatureExtractor2()
-local_model = joblib.load(os.path.join(module_path, 'gradient_boosting.pkl') )
+local_model = joblib.load(os.path.join(module_path, 'gym_malware/envs/utils/gradient_boosting.pkl') )
 local_model_threshold = 0.10
 
 class ClassificationFailure(Exception):
