@@ -136,8 +136,9 @@ def main():
     T = 80 # as mentioned in the paper (total number of mutations that the agent can perform on one file)
     B = 1000 # as mentioned in the paper (number of steps before learning starts)
 
-    try: 
-        for i_episode in range(1, D):
+    for i_episode in range(1, D):
+
+        try:
             state, ep_reward = env.reset(), 0
 
             state_norm = rn(state)
@@ -162,9 +163,10 @@ def main():
                       i_episode, ep_reward, running_reward))
             if i_episode % 500 == 0:
                 torch.save(policy.state_dict(), 'dqeaf-2' + str(i_episode) + '.pt')
-    
-    except Exception:
-        continue
+        
+        except Exception:
+            continue
+
 
 
 if __name__ == '__main__':
