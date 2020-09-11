@@ -66,13 +66,7 @@ def logging_setup(logfile: str , log_level: str):
         filename=logfile
     )
 
-    # handler = logging.StreamHandler(sys.stdout)
-    # handler.setLevel(logging.DEBUG)
-    # formatter = logging.Formatter(format_str)
-    # handler.setFormatter(formatter)
     getLogger().addHandler(RichHandler())
-
-    # handlers=[RichHandler()]
         
     info("\n\nStarting Feature Extraction Program ...")
 
