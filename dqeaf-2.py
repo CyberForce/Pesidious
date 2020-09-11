@@ -159,7 +159,7 @@ def main():
         if i_episode % args.log_interval == 0:
             print('Episode {}\tLast reward: {:.2f}\tAverage reward: {:.2f}'.format(
                   i_episode, ep_reward, running_reward))
-        if i_episode % 500 == 0:
+        if i_episode % 1 == 0:
             torch.save(policy.state_dict(), 'dqeaf-2' + str(i_episode) + '.pt')
 
 
