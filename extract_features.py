@@ -1,6 +1,6 @@
 import argparse
 import glob
-from logging import basicConfig, debug, error, info, warning
+from logging import basicConfig, debug, error, info, warning, getLogger
 import os
 import pickle
 import re
@@ -51,7 +51,7 @@ def parse_args():
     return args
 
 def logging_setup(logfile: str , log_level: str):
-
+  
     log_dir = "Logs"
 
     if not os.path.exists(log_dir):
@@ -63,9 +63,16 @@ def logging_setup(logfile: str , log_level: str):
         level=log_level.upper(),
         filemode='a',  # other options are w for write.
         format="%(message)s",
-        handlers=[RichHandler()],
         filename=logfile
     )
+
+    # handler = logging.StreamHandler(sys.stdout)
+    # handler.setLevel(logging.DEBUG)
+    # formatter = logging.Formatter(format_str)
+    # handler.setFormatter(formatter)
+    getLogger().addHandler(RichHandler())
+
+    # handlers=[RichHandler()]
         
     info("\n\nStarting Feature Extraction Program ...")
 
