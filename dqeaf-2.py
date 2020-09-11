@@ -9,6 +9,12 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch.distributions import Categorical
 
+import gym_malware
+from gym_malware.envs.utils import interface, pefeatures
+from gym_malware.envs.controls import manipulate2 as manipulate
+from collections import namedtuple, deque
+from statistics import mean 
+
 parser = argparse.ArgumentParser(description='PyTorch REINFORCE example')
 parser.add_argument('--gamma', type=float, default=0.99, metavar='G',
                     help='discount factor (default: 0.99)')
