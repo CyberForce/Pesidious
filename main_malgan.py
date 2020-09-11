@@ -38,9 +38,6 @@ def setup_logger(log_level: str, filename: str = "MalGAN_" + str(date.today()) +
     )
     getLogger().addHandler(RichHandler())
 
-    info("\n\n******************* New Run Beginning *****************")
-
-
 def parse_args() -> argparse.Namespace:
     r"""
     Parse the command line arguments
@@ -160,13 +157,14 @@ def main():
     setup_logger(args.log)
 
     # print(args)
+    info("[*] Starting Malware mutation using Generative Adversarial Networks ...")
 
     MalGAN.MALWARE_BATCH_SIZE = args.batch_size
 
     if torch.cuda.is_available():
-        debug("Torch GPU Available. Device #%d", torch.cuda.current_device())
+        debug(f"[+] Torch GPU Available. Device #{torch.cuda.current_device()}")
     else:
-        debug("No GPU detected. Running CPU only.")
+        debug(f"[-] No GPU detected. Running CPU only.")
 
     if str(args.feature_type).lower() == "section":
         malware_features = Path("feature_vector_directory/malware/malware_pe_files_section_feature_set.pk")
@@ -186,10 +184,10 @@ def main():
         output_filename = "adversarial_feature_set.pk"
         pass
 
-    debug("\tFeature Type: %s", str(args.feature_type))
-    debug("\tMalware directory: %s", str(malware_features))
-    debug("\tBenign directory: %s", str(benign_features))
-    debug("\tOutput: " + str(os.path.join(args.output_directory, output_filename)))
+    debug(f"\t[+] Feature Type: [bold green] {str(args.feature_type)}", extra={"markup":True})
+    debug(f"\t[+] Malware directory: [bold green]{str(malware_features)}", extra={"markup":True})
+    debug(f"\t[+] Benign directory: [bold green]{str(benign_features)}", extra={"markup":True})
+    debug(f"\t[+] Output: [bold green]{str(os.path.join(args.output_directory, output_filename))}", extra={"markup":True})
 
     malgan = MalGAN(load_dataset(str(malware_features), MalGAN.Label.Malware.value),
                     load_dataset(str(benign_features), MalGAN.Label.Benign.value),
