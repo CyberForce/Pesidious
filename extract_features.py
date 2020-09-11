@@ -7,7 +7,7 @@ import re
 import sys
 import time
 import traceback
-from handlers import TimedRotatingFileHandler
+# from handlers import TimedRotatingFileHandler
 from pathlib import Path
 from random import shuffle
 from tqdm import tqdm
