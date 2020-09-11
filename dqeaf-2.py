@@ -78,6 +78,7 @@ def select_action(observation):
     m = Categorical(actions)
     action = m.sample()
     policy.saved_log_probs.append(m.log_prob(action))
+    print("action  : " + action)
     return action
 
 
