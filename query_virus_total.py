@@ -167,15 +167,15 @@ def imports_append(bytez):
 
     #print('adding import library : ' + libname)
     with open("modified.exe", 'wb') as file1:
-        file1.write(self.bytez)
+        file1.write(bytez)
 
     cmd = "portable-executable/project-add-imports/bin/Debug/project-append-import modified.exe imports.txt modified.exe"
     os.system(cmd)
 
     with open("modified.exe", "rb") as binfile:
-        self.bytez = binfile.read()
+        bytez = binfile.read()
 
-    return self.bytez
+    return bytez
 
 def section_add(bytez):    
     section = random.choice(COMMON_SECTION_NAMES)
