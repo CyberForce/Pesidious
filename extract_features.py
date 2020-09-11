@@ -406,7 +406,7 @@ def main():
 
     # print(args)
 
-    logging_setup(str(args.logfile), args.log_level)
+    logging_setup(str(args.logfile), args.log)
 
     info("Setting parameters ...")
     info("\tMalware Directory - " + str(args.malware_path))
