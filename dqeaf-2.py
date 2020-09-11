@@ -43,6 +43,9 @@ class Policy(nn.Module):
             nn.Linear(64, env.action_space.n)
         )
 
+        self.saved_log_probs = []
+        self.rewards = []
+
     def forward(self, x):
         action_scores =  self.layers(x)
         return F.softmax(action_scores, dim=1)
