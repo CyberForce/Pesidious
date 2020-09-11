@@ -4,10 +4,6 @@ gym_malware\envs\controls
 virtual_environments
 Data
 Logs
-portable-executable/project-add-imports/bin
-portable-executable/project-add-imports/obj
-portable-executable/project-add-imports/project-add-imports.cbp
-portable-executable/project-add-imports/project-add-imports.layout
 tester.log
 feature_vector_directory
 __pycache__
