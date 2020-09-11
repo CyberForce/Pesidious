@@ -228,7 +228,7 @@ class MalGAN(nn.Module):
         g_optimizer = torch.optim.Adam(self._gen.parameters(), lr=1e-4)
 
         best_epoch, best_loss = None, np.inf
-        for epoch_cnt in range(1, cyc_len + 1):
+        for epoch_cnt in track(range(1, cyc_len + 1), description="Training GAN ...", transient=True):
             train_l_g, train_l_d = self._fit_epoch(epoch_cnt, g_optimizer, d_optimizer, quiet_mode)
             for block, loss in [("Generator", train_l_g), ("Discriminator", train_l_d)]:
                 MalGAN.tensorboard.add_scalar('Train_%s_Loss' % block, loss, epoch_cnt)
@@ -296,7 +296,7 @@ class MalGAN(nn.Module):
         num_batch = min(len(self._mal_data.train), len(self._ben_data.train))
 
         logging.debug(f"[*] Starting training epoch #{epoch_num} with {num_batch} batches")
-        desc = "Epoch %d Progress" % epoch_num
+        desc = f"Epoch {epoch_num} Progress"
         batch_generator = merged_data = zip(self._mal_data.train, self._ben_data.train)
         if not quiet_mode:
             batch_generator = track(merged_data, total=num_batch, description=desc, transient=True)
