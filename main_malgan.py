@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import argparse
 import pickle
 import sys
@@ -21,7 +20,7 @@ from rich.traceback import install
 from malgan import MalGAN, MalwareDataset, BlackBoxDetector
 
 
-def setup_logger(quiet_mode: bool, filename: str = "MalGAN_" + str(date.today()) + ".log", log_level: int = logging.DEBUG):
+def setup_logger(quiet_mode: bool, filename: str = "MalGAN_" + str(date.today()) + ".log", log_level: int = DEBUG):
 
     log_dir = "Logs"
 
@@ -38,7 +37,7 @@ def setup_logger(quiet_mode: bool, filename: str = "MalGAN_" + str(date.today())
     )
     getLogger().addHandler(RichHandler())
 
-    logging.info("\n\n******************* New Run Beginning *****************")
+    info("\n\n******************* New Run Beginning *****************")
 
 
 def parse_args() -> argparse.Namespace:
@@ -134,7 +133,7 @@ def load_dataset(file_path: Union[str, Path], y: int) -> MalwareDataset:
     if file_ext in {".npy", ".npz"}:
         data = np.load(file_path)
         # DEBUG
-        logging.info(data.view())
+        info(data.view())
 
     elif file_ext in {".pt", ".pth"}:
         data = torch.load(str(file_path))
@@ -155,9 +154,9 @@ def main():
     MalGAN.MALWARE_BATCH_SIZE = args.batch_size
 
     if torch.cuda.is_available():
-        logging.info("Torch GPU Available. Device #%d", torch.cuda.current_device())
+        info("Torch GPU Available. Device #%d", torch.cuda.current_device())
     else:
-        logging.info("No GPU detected. Running CPU only.")
+        info("No GPU detected. Running CPU only.")
 
     if str(args.feature_type).lower() == "section":
         malware_features = Path("feature_vector_directory/malware/malware_pe_files_section_feature_set.pk")
@@ -177,10 +176,10 @@ def main():
         output_filename = "adversarial_feature_set.pk"
         pass
 
-    logging.info("Feature Type: %s", str(args.feature_type))
-    logging.info("Malware directory: %s", str(malware_features))
-    logging.info("Benign directory: %s", str(benign_features))
-    logging.info("Output: " + str(os.path.join(args.output_directory, output_filename)))
+    info("Feature Type: %s", str(args.feature_type))
+    info("Malware directory: %s", str(malware_features))
+    info("Benign directory: %s", str(benign_features))
+    info("Output: " + str(os.path.join(args.output_directory, output_filename)))
 
     malgan = MalGAN(load_dataset(str(malware_features), MalGAN.Label.Malware.value),
                     load_dataset(str(benign_features), MalGAN.Label.Benign.value),
