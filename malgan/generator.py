@@ -1,17 +1,5 @@
 # -*- coding: utf-8 -*-
-r"""
-    malgan.generator
-    ~~~~~~~~~~~~~
 
-    Generator block for MalGAN.
-
-    Based on the paper: "Generating Adversarial Malware Examples for Black-Box Attacks Based on GAN"
-    By Weiwei Hu and Ying Tan.
-
-    :version: 0.0.0
-    :copyright: (c) 2019 by Zayd Hammoudeh.
-    :license: MIT, see LICENSE for more details.
-"""
 from typing import List, Tuple
 
 import warnings
