@@ -72,7 +72,7 @@ eps = np.finfo(np.float32).eps.item()
 
 def select_action(observation):
     actions = policy.forward(observation)
-    m = Categorical(probs)
+    m = Categorical(actions)
     action = m.sample()
     policy.saved_log_probs.append(m.log_prob(action))
     return action
