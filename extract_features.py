@@ -10,9 +10,10 @@ import traceback
 # from handlers import TimedRotatingFileHandler
 from pathlib import Path
 from random import shuffle
-from tqdm import tqdm
 
 from datetime import date
+
+from pyfiglet import Figlet
 
 from sklearn.model_selection import train_test_split
 
@@ -386,8 +387,26 @@ def setup_directories(malware_path: str, benign_path: str, output_path: str):
     return malware_feature_vector_directory, benign_feature_vector_directory
 
 def main():
-    args = parse_args()
 
+    from rich import print
+    from rich.panel import Panel
+    from rich.text import Text
+    from rich.table import Table
+
+    f = Figlet(font="banner4")
+    # print(Text.assemble((f.renderText('PE'), "bold red"), f.renderText('Sidious'), justify="center"))
+    # print(Text.assemble((f.renderText('PESidious'), "bold red"), justify="center"))
+
+    grid = Table.grid(expand=True, padding=1, pad_edge=True)
+    grid.add_column(justify="right", ratio=40)
+    grid.add_column(justify="left", ratio=60)
+    grid.add_row(Text.assemble((f.renderText('PE'), "bold red")), Text(f.renderText('Sidious')))
+    
+    print(grid)
+    
+    print(Panel(Text.assemble(("Creating Chaos with Mutated Evasive Malware with Reinforcement Learning and Generative Adversarial Networks", "bold yellow"), justify="center")))
+
+    args = parse_args()
     logging_setup(str(args.logfile), args.log)
 
     info("[*] Setting parameters ...")
