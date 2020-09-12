@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 import logging
 from logging import basicConfig, exception, debug, error, info, warning, getLogger
 import argparse
@@ -219,7 +222,7 @@ def main():
                 
                 policy.rewards.append(reward)
                 ep_reward += reward
-                debug(f"\t[+] Episode #: {i_episode} , Mutation #: {t}")
+                debug(f"\t[+] Episode : {i_episode} , Mutation : {t}")
                 debug(f'\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}'  )
 
                 if done:
