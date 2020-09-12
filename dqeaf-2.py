@@ -36,11 +36,14 @@ class Policy(nn.Module):
     def __init__(self):
         super(Policy, self).__init__()
         self.layers = nn.Sequential(
-            nn.Linear(env.observation_space.shape[0], 256),
-            nn.ReLU(),
-            nn.Linear(256, 64),
-            nn.ReLU(),
-            nn.Linear(64, env.action_space.n)
+            nn.Dropout(0.1),
+            nn.Linear(env.observation_space.shape[0], 1024),
+            nn.BatchNorm1d(1024),
+            nn.ELU(alpha=1.0),
+            nn.Linear(1024, 256),
+            nn.BatchNorm1d(256),
+            nn.ELU(alpha=1.0),
+            nn.Linear(256, env.action_space.n)
         )
 
         self.saved_log_probs = []
@@ -48,7 +51,7 @@ class Policy(nn.Module):
 
     def forward(self, x):
         action_scores =  self.layers(x)
-        return F.softmax(action_scores, dim=1)
+        return action_scores
 
 # class Policy(nn.Module):
 #     def __init__(self):
@@ -72,11 +75,27 @@ policy = Policy()
 optimizer = optim.Adam(policy.parameters(), lr=1e-2)
 eps = np.finfo(np.float32).eps.item()
 
+def update_epsilon(n):
+    epsilon_start = 1.0
+    epsilon = epsilon_start
+    epsilon_final = 0.4
+    epsilon_decay = 1000 # N from the research paper (equation #6)
 
-def select_action(observation):
+    epsilon = 1.0 - (n/epsilon_decay)
+
+    if epsilon <= epsilon_final:
+        epsilon = epsilon_final
+
+    return epsilon
+
+def select_action(observation, epsilon):
+    rand = np.random.random()
+    if rand < epsilon:
+        action = np.random.choice(env.action_space.n)
+        return action
+
     actions = policy.forward(observation)
-    m = Categorical(actions)
-    action = m.sample()
+    action = torch.argmax(actions).item()
     policy.saved_log_probs.append(m.log_prob(action))
     print(action)
     return action.item()
@@ -135,32 +154,36 @@ def main():
     D = 30000 # as mentioned in the research paper (total number of episodes)
     T = 80 # as mentioned in the paper (total number of mutations that the agent can perform on one file)
     B = 1000 # as mentioned in the paper (number of steps before learning starts)
-
+    n = 0
     for i_episode in range(1, D):
-        state, ep_reward = env.reset(), 0
+        try:
+            state, ep_reward = env.reset(), 0
+            state_norm = rn(state)
+            state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
+            epsilon = update_epsilon(i_episode)
+            for t in range(1, T):  # Don't infinite loop while learning
+                action = select_action(state_norm, epsilon)
+                state, reward, done, _ = env.step(action)
+                if args.render:
+                    env.render()
+                policy.rewards.append(reward)
+                ep_reward += reward
+                print("episode : " + str(i_episode) + " turn : " + str(t) + " reward : " + str(reward))
+                if done:
+                    break
 
-        state_norm = rn(state)
-        state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
 
-        for t in range(1, T):  # Don't infinite loop while learning
-            action = select_action(state_norm)
-            state, reward, done, _ = env.step(action)
-            if args.render:
-                env.render()
-            policy.rewards.append(reward)
-            ep_reward += reward
-            print("episode : " + str(i_episode) + " turn : " + str(t) + " reward : " + str(reward))
-            if done:
-                break
+            running_reward = 0.05 * ep_reward + (1 - 0.05) * running_reward
+            finish_episode()
+            if i_episode % args.log_interval == 0:
+                print('Episode {}\tLast reward: {:.2f}\tAverage reward: {:.2f}'.format(
+                      i_episode, ep_reward, running_reward))
+            if i_episode % 500 == 0:
+                torch.save(policy.state_dict(), 'dqeaf-2' + str(i_episode) + '.pt')
+        
+        except Exception:
+            continue
 
-
-        running_reward = 0.05 * ep_reward + (1 - 0.05) * running_reward
-        finish_episode()
-        if i_episode % args.log_interval == 0:
-            print('Episode {}\tLast reward: {:.2f}\tAverage reward: {:.2f}'.format(
-                  i_episode, ep_reward, running_reward))
-        if i_episode % args.log_interval == 0:
-            torch.save(policy.state_dict(), 'dqeaf-2' + str(i_episode) + '.pt')
 
 
 if __name__ == '__main__':
