@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 			}
 
 			 no_of_words = int(rand()%100);
-<<<<<<< HEAD
+
 
 
 
@@ -97,28 +97,27 @@ int main(int argc, char *argv[])
 
 
 
-=======
+
 			 //std::cout << "[+] Randomly generated number of Words : " << no_of_words << std::endl;
 
 			 sec_content = "MS ";
->>>>>>> 73c74a534211342f1172d73f45b5847d9e4e110b
+
 
 			 for(int index = 0; index < no_of_words; index++)
 			 {
 			 	sec_content += section_word.at(rand()%section_word.size() - 1) + " ";
 			 }
 
-<<<<<<< HEAD
 
 
 
 			//std::cout << "[+] Randomly generated section content : " << sec_content << std::endl << std::endl;
 
 
-=======
+
 			//std::cout << "[+] Randomly generated section content : " << sec_content << std::endl << std::endl;
 
->>>>>>> 73c74a534211342f1172d73f45b5847d9e4e110b
+
 			new_section.readable(true).writeable(true);		// Make The Section Readable And Writable
 			new_section.set_name(section_name);				// Set the section name - maximum 8 characters
 			new_section.set_raw_data("Thank you for choosing Microsoft Office 2013. This is a license agreement between you and Microsoft Corporation (or, based on where you live, one of its affiliates) that describes your rights to use the Office 2013 software. For your convenience, we’ve organized this agreement into two parts. The first part includes introductory terms; "); // Set section data
@@ -148,16 +147,14 @@ int main(int argc, char *argv[])
 		// Rebuild the PE file
 		rebuild_pe(image, new_pe_file, true, true);
 
-<<<<<<< HEAD
 
 
 			// << "[*] PE was rebuilt and saved to " << modified_filename << std::endl;
 
 
-=======
-		std::cout << std::endl
-			<< "[*] PE was rebuilt and saved to " << modified_filename << std::endl;
->>>>>>> 73c74a534211342f1172d73f45b5847d9e4e110b
+		//std::cout << std::endl
+			//<< "[*] PE was rebuilt and saved to " << modified_filename << std::endl;
+
 	}
 	catch (const pe_exception &e)
 	{

@@ -111,7 +111,7 @@ int main(int argc, char* argv[])
 		//???????????? PE-????
 		rebuild_pe(image, new_pe_file, true, true);
 
-		std::cout << "PE was rebuilt and saved to " << base_file_name << std::endl;
+		//std::cout << "PE was rebuilt and saved to " << base_file_name << std::endl;
 	}
 	catch(const pe_exception& e)
 	{
