@@ -7,7 +7,7 @@ from logging import basicConfig, exception, debug, error, info, warning, getLogg
 from pathlib import Path
 from tqdm import tqdm
 from datetime import date
-import 
+import os
 
 from rich.logging import RichHandler
 from rich.progress import Progress, TaskID, track
@@ -180,7 +180,7 @@ def main():
     D = args.rl_episodes # as mentioned in the research paper (total number of episodes)
     T = args.rl_mutations # as mentioned in the paper (total number of mutations that the agent can perform on one file)
     n = 0
-    
+
     for i_episode in track(range(D), description="Running Episodes ... ", transient=True):
         try:
             state, ep_reward = env.reset(), 0
