@@ -80,7 +80,7 @@ def logging_setup(logfile: str , log_level: str):
     logfile = os.path.join(log_dir, logfile)
 
     basicConfig(
-        level=DEBUG,
+        level=log_level.upper,
         filemode='a',  # other options are w for write.
         format="%(message)s",
         filename=logfile
