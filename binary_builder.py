@@ -71,7 +71,7 @@ def parse_args():
 
     logging_level = ["debug", "info", "warning", "error", "critical"]
     parser.add_argument(
-        "-l",
+        "-ll",
         "--log",
         dest="log",
         metavar="LOGGING_LEVEL",
@@ -133,9 +133,7 @@ def imports_to_dict(adversarial_imports_set: list):
         else:
             functions = adversarial_imports_dict[library]
             functions.append(function_name)
-            debug(f"[!] adversarial_imports_dict[library] : {adversarial_imports_dict[library]}")
 
-    input("[bold yellow]Debug - press any key to continue ...", extra={"markup":True})
     debug(f"[+] The adversarial imports dict : {str(adversarial_imports_dict)}\n")
 
     return adversarial_imports_dict, adversarial_imports_set
@@ -326,7 +324,7 @@ def binary_builder(
                 os.remove(file)
 
         # Limit this to a number_of_mutated_files mutations.
-        debug(f"[+] Total number of mutated_files: {len(number_of_mutated_files)}")
+        debug(f"[+] Total number of mutated_files: {(number_of_mutated_files)}")
         for index in track(range(number_of_mutated_files),description="Writing imports to file ...", transient=True):
             # for index in range(len(adversarial_imports_set)):
 
@@ -758,7 +756,7 @@ def features_extractor(adversarial_vector: str, feature_mapping: str):
             for i in range(len(sample)):
                 if sample[i] > 0:
                     adversial_features.append(feature_vector_mapping[i])
-                    debug("\t\t[+] feature : {feature_vector_mapping[i]}")
+                    debug(f"\t\t[+] feature : [bold green]{feature_vector_mapping[i]}", extra={"markup":True})
 
             for feature in adversial_features:
                 if ":" in feature:
@@ -776,7 +774,6 @@ def features_extractor(adversarial_vector: str, feature_mapping: str):
 
             # debug("Import mapping for adversarial feature vector [" + str(count) + "] completed with " + str(len(adversial_imports)) + " imports ...\n")
             count = count + 1
-            input("[bold yellow]Debug - press any key to continue ...", extra={"markup":True})
 
     debug(f"[+] Number of feature vectors : {len(adversarial_imports_set)}")
     debug(f"[+] Number of features in the set : {len(adversarial_imports_set[0])}")
@@ -927,7 +924,6 @@ def main():
     debug(f"\t[+] Output Directory - {str(args.output_dir)}")
     debug(f"\t[+] Logfile - {str(args.logfile)}")
     debug(f"\t[+] Log Level - {str(args.log)}")
-    debug(f"\t[+] Detailed Log - {str(args.detailed_log)}")
     debug(f"\t[+] Feature vector type - {str(args.feature_vector)}")
 
     binary_builder(
