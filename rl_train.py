@@ -1,6 +1,5 @@
 from logging import basicConfig, exception, debug, error, info, warning, getLogger
 import argparse
-import gym
 import numpy as np
 from itertools import count
 
@@ -13,19 +12,23 @@ from rich.logging import RichHandler
 from rich.progress import Progress, TaskID, track
 from rich.traceback import install
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-from torch.distributions import Categorical
-
-import gym_malware
-from gym_malware.envs.utils import interface, pefeatures
-from gym_malware.envs.controls import manipulate2 as manipulate
-ACTION_LOOKUP = {i: act for i, act in enumerate(
-    manipulate.ACTION_TABLE.keys())}
 from collections import namedtuple, deque
 from statistics import mean 
+
+def more_imports():
+    import torch
+    import torch.nn as nn
+    import torch.nn.functional as F
+    import torch.optim as optim
+    from torch.distributions import Categorical
+
+    import gym
+    import gym_malware
+    from gym_malware.envs.utils import interface, pefeatures
+    from gym_malware.envs.controls import manipulate2 as manipulate
+    ACTION_LOOKUP = {i: act for i, act in enumerate(
+        manipulate.ACTION_TABLE.keys())}
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Reinforcement Training Module')
@@ -182,6 +185,8 @@ def main():
 
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
+
+    more_imports()
 
     device = torch.device("cpu")
     info(f"Printing device : {device}")
