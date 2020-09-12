@@ -21,7 +21,7 @@ except FileNotFoundError:
           "username": "username",    # Username
           "password": "password",    # password
           "version": "1.0",          # version
-          "threshold": 0.10          # threshold
+          "threshold": 0.70          # threshold
     }
     # you may also need to change get_score_remote and/or get_label_remote below
 
