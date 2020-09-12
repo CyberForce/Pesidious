@@ -45,7 +45,7 @@ def parse_args():
     parser.add_argument('--rl_output_directory', type= Path, default=Path("rl_models"),
                         help='number of episodes to execute (default: rl_models/)') #gitul
 
-    parser.add_argument('-f', "--logfile", help = "The file path to store the logs. (default : rl_training_logs_" + str(date.today()) + ".log)", type = Path, default = Path("extract_features_logs_" + str(date.today()) + ".log"))
+    parser.add_argument('-f', "--logfile", help = "The file path to store the logs. (default : rl_features_logs_" + str(date.today()) + ".log)", type = Path, default = Path("rl_features_logs_" + str(date.today()) + ".log"))
     logging_level = ["debug", "info", "warning", "error", "critical"]
     parser.add_argument(
         "-l",
@@ -58,6 +58,7 @@ def parse_args():
     )
 
     args = parser.parse_args()
+    print(args)
     return args
 
 def logging_setup(logfile: str , log_level: str):
@@ -183,6 +184,7 @@ def main():
     logging_setup(str(args.logfile), args.log)
 
     device = torch.device("cpu")
+    info(f"Printing device : {device}")
 
     info("[*] Initilializing environment ...\n")
     env = gym.make("malware-score-v0")
