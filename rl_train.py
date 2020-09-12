@@ -76,37 +76,38 @@ def logging_setup(logfile: str , log_level: str):
 
     logfile = os.path.join(log_dir, logfile)
 
-    # basicConfig(
-    #     level=DEBUG,
-    #     filemode='a',  # other options are w for write.
-    #     format="%(message)s",
-    #     filename=logfile
-    # )
-
-    # getLogger().addHandler(RichHandler())
-        
     logger = logging.getLogger('MAIN LOGGER')
-    logger.setLevel(log_level.upper())
-    
-    # create file handler which logs even debug messages
-    fh = logging.FileHandler(logfile)
-    fh.setLevel(logging.DEBUG)
-    
-    # create console handler with a higher log level
-    ch = logging.StreamHandler()
-    ch.setLevel(log_level.upper())
-    
-    # create formatter and add it to the handlers
-    formatter = logging.Formatter('%(message)s')
-    ch.setFormatter(formatter)
-    fh.setFormatter(formatter)
-    
-    # add the handlers to logger
-    logger.addHandler(ch)
-    logger.addHandler(fh)
+    logger.basicConfig(
+        level=DEBUG,
+        filemode='a',  # other options are w for write.
+        format="%(message)s",
+        filename=logfile
+    )
+
     logger.addHandler(RichHandler())
+        
+    # logger.setLevel(log_level.upper())
+    
+    # # create file handler which logs even debug messages
+    # fh = logging.FileHandler(logfile)
+    # fh.setLevel(logging.DEBUG)
+    
+    # # create console handler with a higher log level
+    # ch = logging.StreamHandler()
+    # ch.setLevel(log_level.upper())
+    
+    # # create formatter and add it to the handlers
+    # formatter = logging.Formatter('%(message)s')
+    # ch.setFormatter(formatter)
+    # fh.setFormatter(formatter)
+    
+    # # add the handlers to logger
+    # # logger.addHandler(ch)
+    # # logger.addHandler(fh)
+    # logger.addHandler(RichHandler())
     
     logger.info("[*] Starting Reinforcement Learning Agent's Training ...\n")
+    return logger
 
 class Policy(nn.Module):
     def __init__(self, env):
@@ -202,7 +203,7 @@ def finish_episode(gamma, policy):
 
 def main():
     args = parse_args()
-    logging_setup(str(args.logfile), args.log)
+    logger = logging_setup(str(args.logfile), args.log)
 
     device = torch.device("cpu")
     logger.info(f"Printing device : {device}")
