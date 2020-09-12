@@ -209,14 +209,14 @@ def main():
     T = args.rl_mutations # as mentioned in the paper (total number of mutations that the agent can perform on one file)
     n = 0
     
-    for i_episode in track(range(D), description="Running Episodes ... ", transient=True):
+    for i_episode in range(D):
         try:
             
             state, ep_reward = env.reset(), 0
             state_norm = rn(state)
             state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
             epsilon = update_epsilon(i_episode)
-            for t in track(range(T), description=" Making Mutation ... ", transient=True):  # Don't infinite loop while learning
+            for t in range(T):  # Don't infinite loop while learning
                 action = select_action(state_norm, epsilon, env, policy)
                 state, reward, done, _ = env.step(action)
                 
