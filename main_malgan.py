@@ -38,7 +38,7 @@ def setup_logger(log_level: str, filename: str = "MalGAN_" + str(date.today()) +
     )
     getLogger().addHandler(RichHandler())
 
-def parse_args() -> argparse.Namespace:
+def parse_args():
     r"""
     Parse the command line arguments
 
@@ -197,6 +197,7 @@ def main():
                     g_hidden=args.activation,
                     detector_type=args.detector)
     malgan.fit_one_cycle(args.num_epoch)
+    
     results = malgan.measure_and_export_results(args.num_epoch, str(args.output_directory), output_filename)
 
 
