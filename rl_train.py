@@ -81,7 +81,7 @@ def logging_setup(logfile: str , log_level: str):
     info("[*] Starting Reinforcement Learning Agent's Training ...\n")
 
 class Policy(nn.Module):
-    def __init__(self):
+    def __init__(self, env):
         super(Policy, self).__init__()
         self.layers = nn.Sequential(
             nn.Dropout(0.1),
@@ -114,7 +114,7 @@ def update_epsilon(n):
 
     return epsilon
 
-def select_action(observation, epsilon):
+def select_action(observation, epsilon, env, policy):
     rand = np.random.random()
     if rand < epsilon:
         action = np.random.choice(env.action_space.n)
@@ -153,12 +153,13 @@ class RangeNormalize(object):
             outputs.append(_input)
         return outputs if idx > 1 else outputs[0]
 
-def finish_episode():
+def finish_episode(gamma, policy):
+
     R = 0
     policy_loss = []
     returns = []
     for r in policy.rewards[::-1]:
-        R = r + args.gamma * R
+        R = r + gamma * R
         returns.insert(0, R)
     returns = torch.tensor(returns)
     returns = (returns - returns.mean()) / (returns.std() + eps)
@@ -172,6 +173,21 @@ def finish_episode():
     del policy.saved_log_probs[:]
 
 def main():
+
+    args = parse_args()
+    logging_setup(str(args.logfile), args.log)
+
+    device = torch.device("cpu")
+
+    info("[*] Initilializing environment ...\n")
+    env = gym.make("malware-score-v0")
+    env.seed(args.seed)
+    torch.manual_seed(args.seed)
+
+    info("[*] Initilializing Neural Network model ...")
+    policy = Policy(env)
+    optimizer = optim.Adam(policy.parameters(), lr=1e-2)
+    eps = np.finfo(np.float32).eps.item()
     
     info("[*] Starting training ...")
     running_reward = 10
@@ -188,7 +204,7 @@ def main():
             state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
             epsilon = update_epsilon(i_episode)
             for t in track(range(T), description=" Making Mutation ... ", transient=True):  # Don't infinite loop while learning
-                action = select_action(state_norm, epsilon)
+                action = select_action(state_norm, epsilon, env, policy)
                 state, reward, done, _ = env.step(action)
                 if args.render:
                     env.render()
@@ -201,7 +217,7 @@ def main():
                     break
 
             debug(f'\t[+] Episode Over')
-            finish_episode()
+            finish_episode(args.gamma, policy)
             if i_episode % 500 == 0:
                 if not os.path.exists(args.rl_output_directory):
                     os.mkdir(args.rl_output_directory)
@@ -211,21 +227,6 @@ def main():
         
         except Exception:
             continue
-
-args = parse_args()
-logging_setup(str(args.logfile), args.log)
-
-device = torch.device("cpu")
-
-info("[*] Initilializing environment ...\n")
-env = gym.make("malware-score-v0")
-env.seed(args.seed)
-torch.manual_seed(args.seed)
-
-info("[*] Initilializing Neural Network model ...")
-policy = Policy()
-optimizer = optim.Adam(policy.parameters(), lr=1e-2)
-eps = np.finfo(np.float32).eps.item()
 
 if __name__ == '__main__':
     main()
