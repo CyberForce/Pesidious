@@ -194,7 +194,7 @@ def finish_episode(gamma, policy):
     del policy.saved_log_probs[:]
 
 def main():
-
+    reset_logging_configuration()
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
 
