@@ -107,6 +107,7 @@ def logging_setup(logfile: str , log_level: str):
     logger.addHandler(RichHandler())
     
     logger.info("[*] Starting Reinforcement Learning Agent's Training ...\n")
+    return logger
 
 class Policy(nn.Module):
     def __init__(self, env):
@@ -202,7 +203,7 @@ def finish_episode(gamma, policy):
 
 def main():
     args = parse_args()
-    logging_setup(str(args.logfile), args.log)
+    logger = logging_setup(str(args.logfile), args.log)
 
     device = torch.device("cpu")
     logger.info(f"Printing device : {device}")
