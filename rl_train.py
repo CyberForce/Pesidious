@@ -219,11 +219,10 @@ def main():
                 policy.rewards.append(reward)
                 ep_reward += reward
                 debug("\t[+] Episode : " + str(i_episode) + " , Mutation # : " + str(t) + " , Mutation : " + str(ACTION_LOOKUP[action]) + " , Reward : " + str(reward))
-
                 if done:
                     break
 
-            debug(f'\t[+] Episode Over')
+            debug('\t[+] Episode Over')
             finish_episode(args.gamma, policy)
             print("here epside " + str(i_episode) + " arg " + str(args.rl_save_model_interval))
             if i_episode % args.rl_save_model_interval == 0:
@@ -234,6 +233,7 @@ def main():
                 info("[*] Saving model in rl-model/ directory ...")
         
         except Exception:
+            print("exception")
             continue
 
 if __name__ == '__main__':
