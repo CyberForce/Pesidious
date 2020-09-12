@@ -1,5 +1,3 @@
-import logging
-import logging.config
 from logging import basicConfig, exception, debug, error, info, warning, getLogger
 import argparse
 import numpy as np
@@ -17,6 +15,9 @@ from rich.traceback import install
 from collections import namedtuple, deque
 from statistics import mean 
 
+args = parse_args()
+logging_setup(str(args.logfile), args.log)
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -32,17 +33,6 @@ ACTION_LOOKUP = {i: act for i, act in enumerate(
 
 
 
-def reset_logging_configuration():
-    logging._acquireLock()
-    for logger in logging.Logger.manager.loggerDict.values():
-        if not isinstance(logger, logging.Logger):
-            continue
-        logger.handlers.clear()        # unset all logger handlers
-        logger.filters.clear()         # unset all logger filters
-        logger.level = logging.NOTSET  # unset logger level
-        logger.propagate = True        # enable logger propagation
-    logging._releaseLock()
-    logging.config.dictConfig(basicConfig)  # load actual config
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Reinforcement Training Module')
@@ -196,9 +186,6 @@ def finish_episode(gamma, policy):
     del policy.saved_log_probs[:]
 
 def main():
-    reset_logging_configuration()
-    args = parse_args()
-    logging_setup(str(args.logfile), args.log)
 
     device = torch.device("cpu")
     info(f"Printing device : {device}")
