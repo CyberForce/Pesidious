@@ -222,7 +222,7 @@ def main():
                 
                 policy.rewards.append(reward)
                 ep_reward += reward
-                debug(f"\t[+] Episode : {i_episode} , Mutation : {t} Mutation: {ACTION_TABLE[action]} , Reward: {reward}")
+                debug(f"\t[+] Episode : {i_episode} , Mutation : {t} , Mutation: {ACTION_TABLE[action]} , Reward: {reward}")
                 #debug(f"\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}"  )
 
                 if done:
