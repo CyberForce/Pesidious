@@ -21,6 +21,8 @@ from torch.distributions import Categorical
 import gym_malware
 from gym_malware.envs.utils import interface, pefeatures
 from gym_malware.envs.controls import manipulate2 as manipulate
+ACTION_LOOKUP = {i: act for i, act in enumerate(
+    manipulate.ACTION_TABLE.keys())}
 from collections import namedtuple, deque
 from statistics import mean 
 
@@ -228,7 +230,8 @@ def main():
                     env.render()
                 policy.rewards.append(reward)
                 ep_reward += reward
-                debug(f'\t[+] Episode: {i_episode} - Mutation: {t} - Reward: {reward}')
+                debug(f'\t[+] Episode #: {i_episode} , Mutation #: {t} - Reward: {reward}')
+                debug(f'\t[+] Reward: {reward} ,  Mutation: {ACTION_TABLE[action]}')
                 if done:
                     break
 
