@@ -45,7 +45,7 @@ def parse_args():
     parser.add_argument('--rl_output_directory', type= Path, default=Path("rl_models"),
                         help='number of episodes to execute (default: rl_models/)') #gitul
 
-    parser.add_argument('-f', "--logfile", help = "The file path to store the logs. (default : extract_features_logs_" + str(date.today()) + ".log)", type = Path, default = Path("extract_features_logs_" + str(date.today()) + ".log"))
+    parser.add_argument('-f', "--logfile", help = "The file path to store the logs. (default : rl_training_logs_" + str(date.today()) + ".log)", type = Path, default = Path("extract_features_logs_" + str(date.today()) + ".log"))
     logging_level = ["debug", "info", "warning", "error", "critical"]
     parser.add_argument(
         "-l",
@@ -61,6 +61,8 @@ def parse_args():
     return args
 
 def logging_setup(logfile: str , log_level: str):
+
+    print("TEst")
   
     log_dir = "Logs"
 
@@ -68,6 +70,8 @@ def logging_setup(logfile: str , log_level: str):
         os.mkdir(log_dir)
 
     logfile = os.path.join(log_dir, logfile)
+    print(f"logfile is {logfile}")
+    print(f"log level is {log_level}")
 
     basicConfig(
         level=log_level.upper(),
@@ -79,6 +83,7 @@ def logging_setup(logfile: str , log_level: str):
     getLogger().addHandler(RichHandler())
         
     info("[*] Starting Reinforcement Learning Agent's Training ...\n")
+    print("[*] Starting Reinforcement Learning Agent's Training ...\n")
 
 class Policy(nn.Module):
     def __init__(self, env):
