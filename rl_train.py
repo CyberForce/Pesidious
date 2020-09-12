@@ -8,6 +8,9 @@ from pathlib import Path
 from tqdm import tqdm
 from datetime import date
 import os
+from rich.logging import RichHandler
+from rich.progress import Progress, TaskID, track
+from rich.traceback import install
 
 import torch
 import torch.nn as nn
