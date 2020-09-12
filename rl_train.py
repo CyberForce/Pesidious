@@ -86,7 +86,6 @@ def logging_setup(logfile: str , log_level: str):
 
     getLogger().addHandler(RichHandler())
     
-    debug("Dummy value here in the log setup function")
     info("[*] Starting Reinforcement Learning Agent's Training ...\n")
 
 class Policy(nn.Module):
@@ -116,8 +115,6 @@ def update_epsilon(n):
     epsilon_final = 0.4
     epsilon_decay = 1000 # N from the research paper (equation #6)
 
-    debug("Update epsilon")
-
     epsilon = 1.0 - (n/epsilon_decay)
 
     if epsilon <= epsilon_final:
@@ -126,16 +123,11 @@ def update_epsilon(n):
     return epsilon
 
 def select_action(observation, epsilon, env, policy):
-    debug(f"Entering select action")
 
     rand = np.random.random()
-    debug(f"Random number = {rand} | epsilon : {epsilon}")
     if rand < epsilon:
         action = np.random.choice(env.action_space.n)
-        debug(f"Just beore returning from select | action: {action} \n")
         return action
-
-    debug("select action")
 
     actions = policy.forward(observation)
     action = torch.argmax(actions).item()
@@ -216,23 +208,18 @@ def main():
     
     for i_episode in track(range(D), description="Running Episodes ... ", transient=True):
         try:
-            debug("Loop one")
+            
             state, ep_reward = env.reset(), 0
             state_norm = rn(state)
             state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
             epsilon = update_epsilon(i_episode)
             for t in track(range(T), description=" Making Mutation ... ", transient=True):  # Don't infinite loop while learning
-                debug("entering loop two")
                 action = select_action(state_norm, epsilon, env, policy)
-                info(f"Action: {action}")
                 state, reward, done, _ = env.step(action)
-                info(f"state : {state} | reward : {reward} | done : {done}")
                 
-                info("Check here")
                 policy.rewards.append(reward)
                 ep_reward += reward
-                debug(f"ep_reward: {ep_reward}")
-                debug(f"\t[+] Episode \#: {i_episode} , Mutation \#: {t}")
+                debug(f"\t[+] Episode #: {i_episode} , Mutation #: {t}")
                 debug(f'\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}'  )
 
                 if done:
