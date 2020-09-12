@@ -311,6 +311,7 @@ def binary_builder(
 
         # Create a directory that stores all the imports in text files.
         RL_features = os.path.join(RL_features, "all_features")
+
         RL_features_imports = os.path.join(RL_features, "imports")
         if not os.path.exists(RL_features_imports):
             info("Constructing imports feature directory ...")
@@ -324,7 +325,9 @@ def binary_builder(
                 os.remove(file)
 
         # Limit this to a number_of_mutated_files mutations.
-        debug(f"[+] Total number of mutated_files: {(number_of_mutated_files)}")
+        debug(
+            f"[+] Total number of mutated_files: {(number_of_mutated_files)}"
+            )
         for index in track(range(number_of_mutated_files),description="Writing imports to file ...", transient=True):
             # for index in range(len(adversarial_imports_set)):
 
@@ -779,9 +782,6 @@ def features_extractor(adversarial_vector: str, feature_mapping: str):
     debug(f"[+] Number of features in the set : {len(adversarial_imports_set[0])}")
 
     return adversarial_imports_set, adversarial_sections_set
-
-
-# From ALFA Adv-mlaware-viz
 
 
 def filter_imported_functions(func_string_with_library):
