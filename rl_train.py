@@ -1,7 +1,5 @@
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
 import logging
-# from logging import basicConfig, exception, debug, error, info, warning, getLogger
+from logging import basicConfig, exception, debug, error, info, warning, getLogger
 import argparse
 import numpy as np
 from itertools import count
@@ -69,6 +67,9 @@ def parse_args():
 
 def logging_setup(logfile: str , log_level: str):
 
+    # from imp import reload
+    # reload(logging)
+
     log_dir = "Logs"
 
     if not os.path.exists(log_dir):
@@ -76,38 +77,16 @@ def logging_setup(logfile: str , log_level: str):
 
     logfile = os.path.join(log_dir, logfile)
 
-    # basicConfig(
-    #     level=DEBUG,
-    #     filemode='a',  # other options are w for write.
-    #     format="%(message)s",
-    #     filename=logfile
-    # )
+    basicConfig(
+        level=DEBUG,
+        filemode='a',  # other options are w for write.
+        format="%(message)s",
+        filename=logfile
+    )
 
-    # getLogger().addHandler(RichHandler())
+    getLogger().addHandler(RichHandler())
         
-    logger = logging.getLogger('MAIN LOGGER')
-    logger.setLevel(log_level.upper())
-    
-    # create file handler which logs even debug messages
-    # fh = logging.FileHandler(logfile)
-    # fh.setLevel(logging.DEBUG)
-    
-    # create console handler with a higher log level
-    # ch = logging.StreamHandler()
-    # ch.setLevel(log_level.upper())
-    
-    # create formatter and add it to the handlers
-    formatter = logging.Formatter('%(message)s')
-    # ch.setFormatter(formatter)
-    # fh.setFormatter(formatter)
-    
-    # add the handlers to logger
-    # logger.addHandler(ch)
-    # logger.addHandler(fh)
-    logger.addHandler(RichHandler())
-    
-    logger.info("[*] Starting Reinforcement Learning Agent's Training ...\n")
-    return logger
+    info("[*] Starting Reinforcement Learning Agent's Training ...\n")
 
 class Policy(nn.Module):
     def __init__(self, env):
@@ -203,22 +182,22 @@ def finish_episode(gamma, policy):
 
 def main():
     args = parse_args()
-    logger = logging_setup(str(args.logfile), args.log)
+    logging_setup(str(args.logfile), args.log)
 
     device = torch.device("cpu")
-    logger.info(f"Printing device : {device}")
+    info(f"Printing device : {device}")
 
-    logger.info("[*] Initilializing environment ...\n")
+    info("[*] Initilializing environment ...\n")
     env = gym.make("malware-score-v0")
     env.seed(args.seed)
     torch.manual_seed(args.seed)
 
-    logger.info("[*] Initilializing Neural Network model ...")
+    info("[*] Initilializing Neural Network model ...")
     policy = Policy(env)
     optimizer = optim.Adam(policy.parameters(), lr=1e-2)
     eps = np.finfo(np.float32).eps.item()
     
-    logger.info("[*] Starting training ...")
+    info("[*] Starting training ...")
     running_reward = 10
 
     rn = RangeNormalize(-0.5,0.5)
@@ -240,21 +219,20 @@ def main():
                     env.render()
                 policy.rewards.append(reward)
                 ep_reward += reward
-                logger.debug(f'\t[+] Episode #: {i_episode} , Mutation #: {t}')
-                print(f'\t[+] Episode #: {i_episode} , Mutation #: {t}')
-                logger.debug(f'\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}'  )
+                debug(f'\t[+] Episode #: {i_episode} , Mutation #: {t}')
+                debug(f'\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}'  )
                 if done:
-                    logger.debug(f'\t[+] Episode Over')
+                    debug(f'\t[+] Episode Over')
                     break
 
-            logger.debug(f'\t[+] Episode Over')
+            debug(f'\t[+] Episode Over')
             finish_episode(args.gamma, policy)
             if i_episode % 500 == 0:
                 if not os.path.exists(args.rl_output_directory):
                     os.mkdir(args.rl_output_directory)
-                    logger.debug(f"[+] Feature vector directory has been created at : [bold green]{args.rl_output_directory}", extra={"markup":True})
+                    debug(f"[+] Feature vector directory has been created at : [bold green]{args.rl_output_directory}", extra={"markup":True})
                 torch.save(policy.state_dict(), os.path.join(args.rl_output_directory, "rl-model-" + str(i_episode) + "-" +str(date.today()) + ".pt" ))
-                logger.info("[*] Saving model in rl-model/ directory ...")
+                info("[*] Saving model in rl-model/ directory ...")
         
         except Exception:
             continue
