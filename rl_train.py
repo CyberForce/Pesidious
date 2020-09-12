@@ -15,19 +15,20 @@ from rich.traceback import install
 from collections import namedtuple, deque
 from statistics import mean 
 
-def more_imports():
-    import torch
-    import torch.nn as nn
-    import torch.nn.functional as F
-    import torch.optim as optim
-    from torch.distributions import Categorical
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+from torch.distributions import Categorical
 
+import gym_malware
+from gym_malware.envs.utils import interface, pefeatures
+from gym_malware.envs.controls import manipulate2 as manipulate
+ACTION_LOOKUP = {i: act for i, act in enumerate(
+    manipulate.ACTION_TABLE.keys())}
+
+def import_gym():
     import gym
-    import gym_malware
-    from gym_malware.envs.utils import interface, pefeatures
-    from gym_malware.envs.controls import manipulate2 as manipulate
-    ACTION_LOOKUP = {i: act for i, act in enumerate(
-        manipulate.ACTION_TABLE.keys())}
 
 
 def parse_args():
@@ -186,7 +187,7 @@ def main():
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
 
-    more_imports()
+    import_gym()
 
     device = torch.device("cpu")
     info(f"Printing device : {device}")
