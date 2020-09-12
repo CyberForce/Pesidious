@@ -36,7 +36,7 @@ class Policy(nn.Module):
     def __init__(self):
         super(Policy, self).__init__()
         self.layers = nn.Sequential(
-            nn.add(Dropout(0.1)),
+            nn.Dropout(0.1),
             nn.Linear(env.observation_space.shape[0], 1024),
             nn.BatchNorm1d(1024),
             nn.ELU(alpha=1.0),
