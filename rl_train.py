@@ -1,3 +1,5 @@
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
 import logging
 # from logging import basicConfig, exception, debug, error, info, warning, getLogger
 import argparse
