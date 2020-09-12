@@ -76,38 +76,37 @@ def logging_setup(logfile: str , log_level: str):
 
     logfile = os.path.join(log_dir, logfile)
 
-    logger = logging.getLogger('MAIN LOGGER')
-    logger.basicConfig(
-        level=DEBUG,
-        filemode='a',  # other options are w for write.
-        format="%(message)s",
-        filename=logfile
-    )
+    # basicConfig(
+    #     level=DEBUG,
+    #     filemode='a',  # other options are w for write.
+    #     format="%(message)s",
+    #     filename=logfile
+    # )
 
-    logger.addHandler(RichHandler())
+    # getLogger().addHandler(RichHandler())
         
-    # logger.setLevel(log_level.upper())
+    logger = logging.getLogger('MAIN LOGGER')
+    logger.setLevel(log_level.upper())
     
-    # # create file handler which logs even debug messages
-    # fh = logging.FileHandler(logfile)
-    # fh.setLevel(logging.DEBUG)
+    # create file handler which logs even debug messages
+    fh = logging.FileHandler(logfile)
+    fh.setLevel(logging.DEBUG)
     
-    # # create console handler with a higher log level
+    # create console handler with a higher log level
     # ch = logging.StreamHandler()
     # ch.setLevel(log_level.upper())
     
-    # # create formatter and add it to the handlers
-    # formatter = logging.Formatter('%(message)s')
+    # create formatter and add it to the handlers
+    formatter = logging.Formatter('%(message)s')
     # ch.setFormatter(formatter)
-    # fh.setFormatter(formatter)
+    fh.setFormatter(formatter)
     
-    # # add the handlers to logger
-    # # logger.addHandler(ch)
-    # # logger.addHandler(fh)
-    # logger.addHandler(RichHandler())
+    # add the handlers to logger
+    # logger.addHandler(ch)
+    logger.addHandler(fh)
+    logger.addHandler(RichHandler())
     
     logger.info("[*] Starting Reinforcement Learning Agent's Training ...\n")
-    return logger
 
 class Policy(nn.Module):
     def __init__(self, env):
@@ -203,7 +202,7 @@ def finish_episode(gamma, policy):
 
 def main():
     args = parse_args()
-    logger = logging_setup(str(args.logfile), args.log)
+    logging_setup(str(args.logfile), args.log)
 
     device = torch.device("cpu")
     logger.info(f"Printing device : {device}")
