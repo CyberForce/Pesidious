@@ -66,10 +66,7 @@ def logging_setup(logfile: str , log_level: str):
 
 device = torch.device("cpu")
 
-info("[*] Initilializing environment ...\n")
-env = gym.make("malware-score-v0")
-env.seed(args.seed)
-torch.manual_seed(args.seed)
+
 
 class Policy(nn.Module):
     def __init__(self):
@@ -189,6 +186,11 @@ def finish_episode():
 def main():
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
+
+    info("[*] Initilializing environment ...\n")
+    env = gym.make("malware-score-v0")
+    env.seed(args.seed)
+    torch.manual_seed(args.seed)
 
     info("[*] Starting training ...")
     running_reward = 10
