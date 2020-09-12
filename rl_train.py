@@ -21,15 +21,26 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch.distributions import Categorical
 
+import gym
 import gym_malware
 from gym_malware.envs.utils import interface, pefeatures
 from gym_malware.envs.controls import manipulate2 as manipulate
 ACTION_LOOKUP = {i: act for i, act in enumerate(
     manipulate.ACTION_TABLE.keys())}
 
-def import_gym():
-    import gym
 
+
+def reset_logging_configuration():
+    logging._acquireLock()
+    for logger in logging.Logger.manager.loggerDict.values():
+        if not isinstance(logger, logging.Logger):
+            continue
+        logger.handlers.clear()        # unset all logger handlers
+        logger.filters.clear()         # unset all logger filters
+        logger.level = logging.NOTSET  # unset logger level
+        logger.propagate = True        # enable logger propagation
+    logging._releaseLock()
+    logging.config.dictConfig(basicConfig)  # load actual config
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Reinforcement Training Module')
@@ -186,8 +197,6 @@ def main():
 
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
-
-    import_gym()
 
     device = torch.device("cpu")
     info(f"Printing device : {device}")
