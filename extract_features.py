@@ -76,8 +76,6 @@ def logging_setup(logfile: str , log_level: str):
     )
 
     getLogger().addHandler(RichHandler())
-        
-    info("[*] Starting Feature Extraction Program ...\n")
 
 
 def features_mapping_index(malware_path: str, benign_path: str, output_path: str):
@@ -399,15 +397,17 @@ def main():
     # Printing heading banner
     f = Figlet(font="banner4")
     grid = Table.grid(expand=True, padding=1, pad_edge=True)
-    grid.add_column(justify="right", ratio=40)
-    grid.add_column(justify="left", ratio=60)
-    grid.add_row(Text.assemble((f.renderText('PE'), "bold red")), Text(f.renderText('Sidious')))    
+    grid.add_column(justify="right", ratio=38)
+    grid.add_column(justify="left", ratio=62)
+    grid.add_row(Text.assemble((f.renderText('PE'), "bold red")), Text(f.renderText('Sidious'), "bold white"))    
     print(grid)    
-    print(Panel(Text.assemble(("Creating Chaos with Mutated Evasive Malware with Reinforcement Learning and Generative Adversarial Networks", "bold yellow"), justify="center")))
+    print(Panel(Text.assemble(("Creating Chaos with Mutated Evasive Malware with ", "grey"), ("Reinforcement Learning ", "bold red"), ("and "), ("Generative Adversarial Networks", "bold red"), justify="center")))
 
     # Read arguments and set logging configurations.
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
+
+    info("[bold red][*] Starting Feature Extraction Program ...\n", extra={"markup":True})
 
     info("[*] Setting parameters ...")
     debug(f"\t[*] Malware Directory - [bold green] {str(args.malware_path)}", extra={"markup":True})
