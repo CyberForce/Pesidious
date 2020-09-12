@@ -36,11 +36,14 @@ class Policy(nn.Module):
     def __init__(self):
         super(Policy, self).__init__()
         self.layers = nn.Sequential(
-            nn.Linear(env.observation_space.shape[0], 256),
-            nn.ReLU(),
-            nn.Linear(256, 64),
-            nn.ReLU(),
-            nn.Linear(64, env.action_space.n)
+            nn.add(Dropout(0.1))
+            nn.Linear(env.observation_space.shape[0], 1024),
+            nn.BatchNorm1d(1024),
+            nn.ELU(alpha=1.0),
+            nn.Linear(1024, 256),
+            nn.BatchNorm1d(256),
+            nn.ELU(alpha=1.0),
+            nn.Linear(256, env.action_space.n)
         )
 
         self.saved_log_probs = []
@@ -48,7 +51,7 @@ class Policy(nn.Module):
 
     def forward(self, x):
         action_scores =  self.layers(x)
-        return F.softmax(action_scores, dim=1)
+        return action_scores
 
 # class Policy(nn.Module):
 #     def __init__(self):
@@ -92,8 +95,7 @@ def select_action(observation, epsilon):
         return action
 
     actions = policy.forward(observation)
-    m = Categorical(actions)
-    action = m.sample()
+    action = torch.argmax(actions).item()
     policy.saved_log_probs.append(m.log_prob(action))
     print(action)
     return action.item()
