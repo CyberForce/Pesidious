@@ -1,4 +1,5 @@
 import logging
+import logging.config
 from logging import basicConfig, exception, debug, error, info, warning, getLogger
 import argparse
 import numpy as np
