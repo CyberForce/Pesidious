@@ -220,15 +220,9 @@ def main():
                 state, reward, done, _ = env.step(action)
                 policy.rewards.append(reward)
                 ep_reward += reward
-                debug("episode : " + str(i_episode) + " turn : " + str(t) + " reward : " + str(reward))
-                #print(f"\t[+] Episode : {i_episode} , Mutation : {t}")
-                #print(f"\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}")
-
-                #debug(f"\t[+] Episode : {i_episode} , Mutation : {t}")
-                #debug(f"\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}"  )
+                debug("\t [+] Episode : " + str(i_episode) + " Mutation # : " + str(t) + " Mutation : " + str(ACTION_LOOKUP[action]) + " Reward : " + str(reward))
 
                 if done:
-                    debug(f'\t[+] Episode Over')
                     break
 
             debug(f'\t[+] Episode Over')
