@@ -1,9 +1,9 @@
+from logging import basicConfig, exception, debug, error, info, warning, getLogger
 import argparse
 import gym
 import numpy as np
 from itertools import count
 
-from logging import basicConfig, exception, debug, error, info, warning, getLogger
 from pathlib import Path
 from tqdm import tqdm
 from datetime import date
