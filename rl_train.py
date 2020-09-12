@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 import logging
 from logging import basicConfig, exception, debug, error, info, warning, getLogger
 import argparse
@@ -206,21 +209,23 @@ def main():
     T = args.rl_mutations # as mentioned in the paper (total number of mutations that the agent can perform on one file)
     n = 0
     
-    for i_episode in track(range(D), description="Running Episodes ... ", transient=True):
-        try:
-            
+    for i_episode in range(1, D):
+        try: 
             state, ep_reward = env.reset(), 0
             state_norm = rn(state)
             state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
             epsilon = update_epsilon(i_episode)
-            for t in track(range(T), description=" Making Mutation ... ", transient=True):  # Don't infinite loop while learning
+            for t in range(1, T):  # Don't infinite loop while learning
                 action = select_action(state_norm, epsilon, env, policy)
                 state, reward, done, _ = env.step(action)
-                
                 policy.rewards.append(reward)
                 ep_reward += reward
-                debug(f"\t[+] Episode #: {i_episode} , Mutation #: {t}")
-                debug(f'\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}'  )
+                print("episode : " + str(i_episode) + " turn : " + str(t) + " reward : " + str(reward))
+                #print(f"\t[+] Episode : {i_episode} , Mutation : {t}")
+                #print(f"\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}")
+
+                #debug(f"\t[+] Episode : {i_episode} , Mutation : {t}")
+                #debug(f"\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}"  )
 
                 if done:
                     debug(f'\t[+] Episode Over')
