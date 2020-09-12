@@ -7,7 +7,8 @@ from logging import basicConfig, exception, debug, error, info, warning, getLogg
 from pathlib import Path
 from tqdm import tqdm
 from datetime import date
-import os
+import 
+
 from rich.logging import RichHandler
 from rich.progress import Progress, TaskID, track
 from rich.traceback import install
@@ -79,18 +80,6 @@ def logging_setup(logfile: str , log_level: str):
         
     info("[*] Starting Reinforcement Learning Agent's Training ...\n")
 
-args = parse_args()
-logging_setup(str(args.logfile), args.log)
-
-
-device = torch.device("cpu")
-
-info("[*] Initilializing environment ...\n")
-env = gym.make("malware-score-v0")
-env.seed(args.seed)
-torch.manual_seed(args.seed)
-
-
 class Policy(nn.Module):
     def __init__(self):
         super(Policy, self).__init__()
@@ -111,28 +100,6 @@ class Policy(nn.Module):
     def forward(self, x):
         action_scores =  self.layers(x)
         return action_scores
-
-# class Policy(nn.Module):
-#     def __init__(self):
-#         super(Policy, self).__init__()
-#         self.affine1 = nn.Linear(4, 128)
-#         self.dropout = nn.Dropout(p=0.6)
-#         self.affine2 = nn.Linear(128, 2)
-
-#         self.saved_log_probs = []
-#         self.rewards = []
-
-#     def forward(self, x):
-#         x = self.affine1(x)
-#         x = self.dropout(x)
-#         x = F.relu(x)
-#         action_scores = self.affine2(x)
-#         return F.softmax(action_scores, dim=1)
-
-info("[*] Initilializing Neural Network model ...")
-policy = Policy()
-optimizer = optim.Adam(policy.parameters(), lr=1e-2)
-eps = np.finfo(np.float32).eps.item()
 
 def update_epsilon(n):
     epsilon_start = 1.0
@@ -158,7 +125,6 @@ def select_action(observation, epsilon):
     policy.saved_log_probs.append(m.log_prob(action))
     print(action)
     return action.item()
-
 
 class RangeNormalize(object):
     def __init__(self, 
@@ -205,11 +171,8 @@ def finish_episode():
     del policy.rewards[:]
     del policy.saved_log_probs[:]
 
-
 def main():
     
-
-
     info("[*] Starting training ...")
     running_reward = 10
 
@@ -217,13 +180,14 @@ def main():
     D = args.rl_episodes # as mentioned in the research paper (total number of episodes)
     T = args.rl_mutations # as mentioned in the paper (total number of mutations that the agent can perform on one file)
     n = 0
+    
     for i_episode in track(range(D), description="Running Episodes ... ", transient=True):
         try:
             state, ep_reward = env.reset(), 0
             state_norm = rn(state)
             state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
             epsilon = update_epsilon(i_episode)
-            for t in track(range(T), description="Making Mutation ... ", transient=True):  # Don't infinite loop while learning
+            for t in track(range(T), description=" Making Mutation ... ", transient=True):  # Don't infinite loop while learning
                 action = select_action(state_norm, epsilon)
                 state, reward, done, _ = env.step(action)
                 if args.render:
@@ -248,7 +212,20 @@ def main():
         except Exception:
             continue
 
+args = parse_args()
+logging_setup(str(args.logfile), args.log)
 
+device = torch.device("cpu")
+
+info("[*] Initilializing environment ...\n")
+env = gym.make("malware-score-v0")
+env.seed(args.seed)
+torch.manual_seed(args.seed)
+
+info("[*] Initilializing Neural Network model ...")
+policy = Policy()
+optimizer = optim.Adam(policy.parameters(), lr=1e-2)
+eps = np.finfo(np.float32).eps.item()
 
 if __name__ == '__main__':
     main()
