@@ -1,3 +1,4 @@
+import logging
 from logging import basicConfig, exception, debug, error, info, warning, getLogger
 import argparse
 import numpy as np
@@ -15,20 +16,20 @@ from rich.traceback import install
 from collections import namedtuple, deque
 from statistics import mean 
 
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+from torch.distributions import Categorical
 
-def import_things():
-    import torch
-    import torch.nn as nn
-    import torch.nn.functional as F
-    import torch.optim as optim
-    from torch.distributions import Categorical
+import gym
+import gym_malware
+from gym_malware.envs.utils import interface, pefeatures
+from gym_malware.envs.controls import manipulate2 as manipulate
+ACTION_LOOKUP = {i: act for i, act in enumerate(
+    manipulate.ACTION_TABLE.keys())}
 
-    import gym
-    import gym_malware
-    from gym_malware.envs.utils import interface, pefeatures
-    from gym_malware.envs.controls import manipulate2 as manipulate
-    ACTION_LOOKUP = {i: act for i, act in enumerate(
-        manipulate.ACTION_TABLE.keys())}
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Reinforcement Training Module')
@@ -87,7 +88,6 @@ def logging_setup(logfile: str , log_level: str):
     getLogger().addHandler(RichHandler())
         
     info("[*] Starting Reinforcement Learning Agent's Training ...\n")
-    print("[*] Starting Reinforcement Learning Agent's Training ...\n")
 
 class Policy(nn.Module):
     def __init__(self, env):
@@ -182,11 +182,12 @@ def finish_episode(gamma, policy):
     del policy.saved_log_probs[:]
 
 def main():
+    from imp import reload
+    reload(logging)
 
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
 
-    import_things()
     device = torch.device("cpu")
     info(f"Printing device : {device}")
 
@@ -222,7 +223,7 @@ def main():
                 policy.rewards.append(reward)
                 ep_reward += reward
                 debug(f'\t[+] Episode #: {i_episode} , Mutation #: {t}')
-                #debug(f'\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}'  )
+                debug(f'\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}'  )
                 if done:
                     debug(f'\t[+] Episode Over')
                     break
