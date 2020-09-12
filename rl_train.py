@@ -26,19 +26,31 @@ def parse_args():
 
     parser.add_argument('--rl_gamma', type=float, default=0.99, metavar='G',
                         help='discount factor (default: 0.99)')
+    parser.add_argument('--seed', type=int, default=543, metavar='N',
+                        help='random seed (default: 543)')
+    
     parser.add_argument('--rl_episodes', type=float, default=30000,
                         help='number of episodes to execute (default: 30000)')
     parser.add_argument('--rl_mutations', type=float, default=80,
                         help='number of maximum mutations allowed (default: 80)')
+    
     parser.add_argument('--rl_save_model_interval', type=float, default=500,
                         help='Interval at which models should be saved (default: 500)') #gitul
     parser.add_argument('--rl_output_directory', type= Path, default=Path("rl_models"),
                         help='number of episodes to execute (default: rl_models/)') #gitul
-    parser.add_argument('--seed', type=int, default=543, metavar='N',
-                        help='random seed (default: 543)')
-    parser.add_argument('--render', action='store_true',
-                        help='render the environment')
+
     parser.add_argument('-f', "--logfile", help = "The file path to store the logs. (default : extract_features_logs_" + str(date.today()) + ".log)", type = Path, default = Path("extract_features_logs_" + str(date.today()) + ".log"))
+    logging_level = ["debug", "info", "warning", "error", "critical"]
+    parser.add_argument(
+        "-l",
+        "--log",
+        dest="log",
+        metavar="LOGGING_LEVEL",
+        choices=logging_level,
+        default="info",
+        help=f"Select the logging level. Keep in mind increasing verbosity might affect performance. Available choices include : {logging_level}",
+    )
+
     args = parser.parse_args()
     return args
 
