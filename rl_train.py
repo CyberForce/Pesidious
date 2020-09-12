@@ -210,8 +210,7 @@ def main():
     n = 0
     
     for i_episode in range(D):
-        try:
-            
+        try: 
             state, ep_reward = env.reset(), 0
             state_norm = rn(state)
             state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
@@ -219,9 +218,9 @@ def main():
             for t in range(T):  # Don't infinite loop while learning
                 action = select_action(state_norm, epsilon, env, policy)
                 state, reward, done, _ = env.step(action)
-                
                 policy.rewards.append(reward)
                 ep_reward += reward
+                print(f"\t[+] Episode : {i_episode} , Mutation : {t}")
                 debug(f"\t[+] Episode : {i_episode} , Mutation : {t}")
                 debug(f"\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}"  )
 
