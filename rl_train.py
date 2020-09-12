@@ -184,6 +184,7 @@ def finish_episode(gamma, policy):
 def main():
     from imp import reload
     reload(logging)
+    logging.getLogger("gym").setLevel(logging.ERROR)
 
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
