@@ -89,8 +89,8 @@ def logging_setup(logfile: str , log_level: str):
     logger.setLevel(log_level.upper())
     
     # create file handler which logs even debug messages
-    fh = logging.FileHandler(logfile)
-    fh.setLevel(logging.DEBUG)
+    # fh = logging.FileHandler(logfile)
+    # fh.setLevel(logging.DEBUG)
     
     # create console handler with a higher log level
     # ch = logging.StreamHandler()
@@ -99,11 +99,11 @@ def logging_setup(logfile: str , log_level: str):
     # create formatter and add it to the handlers
     formatter = logging.Formatter('%(message)s')
     # ch.setFormatter(formatter)
-    fh.setFormatter(formatter)
+    # fh.setFormatter(formatter)
     
     # add the handlers to logger
     # logger.addHandler(ch)
-    logger.addHandler(fh)
+    # logger.addHandler(fh)
     logger.addHandler(RichHandler())
     
     logger.info("[*] Starting Reinforcement Learning Agent's Training ...\n")
@@ -241,6 +241,7 @@ def main():
                 policy.rewards.append(reward)
                 ep_reward += reward
                 logger.debug(f'\t[+] Episode #: {i_episode} , Mutation #: {t}')
+                print(f'\t[+] Episode #: {i_episode} , Mutation #: {t}')
                 logger.debug(f'\t[+] Mutation: {ACTION_TABLE[action]} , Reward: {reward}'  )
                 if done:
                     logger.debug(f'\t[+] Episode Over')
