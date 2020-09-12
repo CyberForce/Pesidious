@@ -38,7 +38,7 @@ def parse_args():
                         help='random seed (default: 543)')
     parser.add_argument('--render', action='store_true',
                         help='render the environment')
-    parser.add_argument('-f', "--logfile", help = "The file path to store the logs.", type = Path, default = Path("extract_features_logs_" + str(date.today()) + ".log"))
+    parser.add_argument('-f', "--logfile", help = "The file path to store the logs. (default : extract_features_logs_" + str(date.today()) + ".log)", type = Path, default = Path("extract_features_logs_" + str(date.today()) + ".log"))
     args = parser.parse_args()
     return args
 
