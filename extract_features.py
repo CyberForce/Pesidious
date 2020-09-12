@@ -21,9 +21,17 @@ import lief
 import torch
 from torch.utils.data import DataLoader, Dataset
 
+# Installing rich modules for pretty printing
 from rich.logging import RichHandler
-from rich.progress import Progress, TaskID, track
+from rich.progress import track
 from rich.traceback import install
+from rich import print
+from rich.panel import Panel
+from rich.text import Text
+from rich.table import Table
+
+install()
+
 
 SECTION_INDEX = 0
 
@@ -388,24 +396,16 @@ def setup_directories(malware_path: str, benign_path: str, output_path: str):
 
 def main():
 
-    from rich import print
-    from rich.panel import Panel
-    from rich.text import Text
-    from rich.table import Table
-
+    # Printing heading banner
     f = Figlet(font="banner4")
-    # print(Text.assemble((f.renderText('PE'), "bold red"), f.renderText('Sidious'), justify="center"))
-    # print(Text.assemble((f.renderText('PESidious'), "bold red"), justify="center"))
-
     grid = Table.grid(expand=True, padding=1, pad_edge=True)
     grid.add_column(justify="right", ratio=40)
     grid.add_column(justify="left", ratio=60)
-    grid.add_row(Text.assemble((f.renderText('PE'), "bold red")), Text(f.renderText('Sidious')))
-    
-    print(grid)
-    
+    grid.add_row(Text.assemble((f.renderText('PE'), "bold red")), Text(f.renderText('Sidious')))    
+    print(grid)    
     print(Panel(Text.assemble(("Creating Chaos with Mutated Evasive Malware with Reinforcement Learning and Generative Adversarial Networks", "bold yellow"), justify="center")))
 
+    # Read arguments and set logging configurations.
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
 
