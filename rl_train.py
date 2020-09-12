@@ -67,16 +67,15 @@ def parse_args():
 
 def logging_setup(logfile: str , log_level: str):
 
-    print("TEst")
-  
+    from imp import reload
+    reload(logging)
+
     log_dir = "Logs"
 
     if not os.path.exists(log_dir):
         os.mkdir(log_dir)
 
     logfile = os.path.join(log_dir, logfile)
-    print(f"logfile is {logfile}")
-    print(f"log level is {log_level}")
 
     basicConfig(
         level=log_level.upper(),
@@ -182,9 +181,6 @@ def finish_episode(gamma, policy):
     del policy.saved_log_probs[:]
 
 def main():
-    from imp import reload
-    reload(logging)
-
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
 
