@@ -184,7 +184,6 @@ def finish_episode(gamma, policy):
 def main():
     from imp import reload
     reload(logging)
-    logging.getLogger("gym").setLevel(logging.ERROR)
 
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
@@ -209,7 +208,8 @@ def main():
     D = args.rl_episodes # as mentioned in the research paper (total number of episodes)
     T = args.rl_mutations # as mentioned in the paper (total number of mutations that the agent can perform on one file)
     n = 0
-
+    
+    logging_setup(str(args.logfile), args.log)
     for i_episode in track(range(D), description="Running Episodes ... ", transient=True):
         try:
             state, ep_reward = env.reset(), 0
