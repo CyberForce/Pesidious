@@ -65,7 +65,6 @@ def parse_args():
     )
 
     args = parser.parse_args()
-    print(args)
     return args
 
 def logging_setup(logfile: str , log_level: str):
@@ -189,7 +188,6 @@ def main():
     logging_setup(str(args.logfile), args.log)
 
     device = torch.device("cpu")
-    debug(f"Printing device : {device}")
 
     info("[*] Initilializing environment ...\n")
     env = gym.make("malware-score-v0")
@@ -220,7 +218,7 @@ def main():
                 state, reward, done, _ = env.step(action)
                 policy.rewards.append(reward)
                 ep_reward += reward
-                debug("\t [+] Episode : " + str(i_episode) + " Mutation # : " + str(t) + " Mutation : " + str(ACTION_LOOKUP[action]) + " Reward : " + str(reward))
+                debug("\t[+] Episode : " + str(i_episode) + " , Mutation # : " + str(t) + " , Mutation : " + str(ACTION_LOOKUP[action]) + " , Reward : " + str(reward))
 
                 if done:
                     break
@@ -230,7 +228,7 @@ def main():
             if i_episode % 500 == 0:
                 if not os.path.exists(args.rl_output_directory):
                     os.mkdir(args.rl_output_directory)
-                    debug(f"[+] Feature vector directory has been created at : [bold green]{args.rl_output_directory}", extra={"markup":True})
+                    info("[*] Feature vector directory has been created at : " + args.rl_output_directory)
                 torch.save(policy.state_dict(), os.path.join(args.rl_output_directory, "rl-model-" + str(i_episode) + "-" +str(date.today()) + ".pt" ))
                 info("[*] Saving model in rl-model/ directory ...")
         
