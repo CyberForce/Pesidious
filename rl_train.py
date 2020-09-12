@@ -225,7 +225,7 @@ def main():
 
             debug(f'\t[+] Episode Over')
             finish_episode(args.gamma, policy)
-            if i_episode % 500 == 0:
+            if i_episode % args.rl_save_model_interval == 0:
                 if not os.path.exists(args.rl_output_directory):
                     os.mkdir(args.rl_output_directory)
                     info("[*] Feature vector directory has been created at : " + args.rl_output_directory)
