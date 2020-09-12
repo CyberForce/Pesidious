@@ -230,11 +230,13 @@ def main():
                     env.render()
                 policy.rewards.append(reward)
                 ep_reward += reward
-                debug(f'\t[+] Episode #: {i_episode} , Mutation #: {t} - Reward: {reward}')
-                debug(f'\t[+] Reward: {reward} ,  Mutation: {ACTION_TABLE[action]}')
+                debug(f'\t[+] Episode #: {i_episode} , Mutation #: {t}')
+                debug(f'\t[+] Mutation: {ACTION_TABLE[action]}' , Reward: {reward}  )
                 if done:
+                    debug(f'\t[+] Episode Over')
                     break
-
+                    
+            debug(f'\t[+] Episode Over')
             finish_episode()
             if i_episode % 500 == 0:
                 if not os.path.exists(args.rl_output_directory):
