@@ -164,7 +164,7 @@ def generate_mutated_malware(file, model, args):
 	pe = pefeatures2.PEFeatureExtractor2()
 	rn = RangeNormalize(-0.5,0.5)
 
-	info("\n\n[*] Reading file : " + str(file))
+	info("[*] Reading file : " + str(file))
 	bytez = []
 	with open(str(file), 'rb') as infile:
 		bytez = infile.read()
@@ -179,6 +179,7 @@ def generate_mutated_malware(file, model, args):
 		rand = np.random.random()
 		action = np.random.choice(env.action_space.n)
 		action = ACTION_LOOKUP[action]
+		debug("\t[+] Mutation : " + action)
 		
 		bytez = bytes(manipulate.modify_without_breaking(bytez, [action]))
 		
@@ -188,7 +189,7 @@ def generate_mutated_malware(file, model, args):
 			break
 
 	output_file = os.path.join(args.o, "mutated_" + str(os.path.basename(file)))
-	info("[*] Writing mutated file to : " + str(output_file))
+	info("[*] Writing mutated file to : " + str(output_file) + "\n\n")
 	with open(str(output_file), mode='wb') as file1:
 		file1.write(bytes(bytez))
 
