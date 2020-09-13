@@ -37,7 +37,30 @@ from gym_malware.envs.controls import manipulate2 as manipulate
 ACTION_LOOKUP = {i: act for i, act in enumerate(
     manipulate.ACTION_TABLE.keys())}
 
+def put_banner():
+    # Printing heading banner
+    f = Figlet(font="banner4")
+    grid = Table.grid(expand=True, padding=1, pad_edge=True)
+    grid.add_column(justify="right", ratio=38)
+    grid.add_column(justify="left", ratio=62)
+    grid.add_row(
+        Text.assemble((f.renderText("PE"), "bold red")),
+        Text(f.renderText("Sidious"), "bold white"),
+    )
+    print(grid)
+    print(
+        Panel(
+            Text.assemble(
+                ("Creating Chaos with Mutated Evasive Malware with ", "grey"),
+                ("Reinforcement Learning ", "bold red"),
+                ("and "),
+                ("Generative Adversarial Networks", "bold red"),
+                justify="center",
+            )
+        )
+    )
 
+put_banner()
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Reinforcement Training Module')
@@ -207,30 +230,7 @@ optimizer = optim.Adam(policy.parameters(), lr=1e-2)
 eps = np.finfo(np.float32).eps.item()
 
 def main():
-
-    # Printing heading banner
-    f = Figlet(font="banner4")
-    grid = Table.grid(expand=True, padding=1, pad_edge=True)
-    grid.add_column(justify="right", ratio=38)
-    grid.add_column(justify="left", ratio=62)
-    grid.add_row(
-        Text.assemble((f.renderText("PE"), "bold red")),
-        Text(f.renderText("Sidious"), "bold white"),
-    )
-    print(grid)
-    print(
-        Panel(
-            Text.assemble(
-                ("Creating Chaos with Mutated Evasive Malware with ", "grey"),
-                ("Reinforcement Learning ", "bold red"),
-                ("and "),
-                ("Generative Adversarial Networks", "bold red"),
-                justify="center",
-            )
-        )
-    )
     
-
     info("[*] Starting training ...")
     running_reward = 10
 

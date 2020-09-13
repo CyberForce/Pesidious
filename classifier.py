@@ -48,7 +48,30 @@ from sklearn.externals import joblib
 feature_extractor =  PEFeatureExtractor()
 feature_extractor2 =  PEFeatureExtractor2()
 
+def put_banner():
+    # Printing heading banner
+    f = Figlet(font="banner4")
+    grid = Table.grid(expand=True, padding=1, pad_edge=True)
+    grid.add_column(justify="right", ratio=38)
+    grid.add_column(justify="left", ratio=62)
+    grid.add_row(
+        Text.assemble((f.renderText("PE"), "bold red")),
+        Text(f.renderText("Sidious"), "bold white"),
+    )
+    print(grid)
+    print(
+        Panel(
+            Text.assemble(
+                ("Creating Chaos with Mutated Evasive Malware with ", "grey"),
+                ("Reinforcement Learning ", "bold red"),
+                ("and "),
+                ("Generative Adversarial Networks", "bold red"),
+                justify="center",
+            )
+        )
+    )
 
+put_banner()
 
 def parse_args():
 		parser = argparse.ArgumentParser(description='Reinforcement Training Module')
@@ -154,28 +177,6 @@ def get_label_local(bytez, local_model, local_model_threshold):
 		return score, label
 
 def main():
-
-    # Printing heading banner
-    f = Figlet(font="banner4")
-    grid = Table.grid(expand=True, padding=1, pad_edge=True)
-    grid.add_column(justify="right", ratio=38)
-    grid.add_column(justify="left", ratio=62)
-    grid.add_row(
-        Text.assemble((f.renderText("PE"), "bold red")),
-        Text(f.renderText("Sidious"), "bold white"),
-    )
-    print(grid)
-    print(
-        Panel(
-            Text.assemble(
-                ("Creating Chaos with Mutated Evasive Malware with ", "grey"),
-                ("Reinforcement Learning ", "bold red"),
-                ("and "),
-                ("Generative Adversarial Networks", "bold red"),
-                justify="center",
-            )
-        )
-    )
 
 	args = parse_args()
 	logging_setup(str(args.logfile), args.log)
