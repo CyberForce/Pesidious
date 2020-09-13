@@ -169,7 +169,7 @@ def generate_mutated_malware(file, model, args):
 	with open(str(file), 'rb') as infile:
 		bytez = infile.read()
 
-	for t in track(range(1, args.rl_mutations), , description="Generating mutation ...", transient=True):
+	for t in track(range(1, args.rl_mutations) , description="Generating mutation ...", transient=True):
 		state = pe.extract( bytez )
 		state_norm = rn(state)
 		state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
