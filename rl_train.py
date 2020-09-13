@@ -15,6 +15,11 @@ import os
 from rich.logging import RichHandler
 from rich.progress import Progress, TaskID, track
 from rich.traceback import install
+from rich import print
+from rich.panel import Panel
+from rich.text import Text
+from rich.table import Table
+from pyfiglet import Figlet
 
 from collections import namedtuple, deque
 from statistics import mean 
@@ -190,6 +195,7 @@ def finish_episode(gamma, policy):
 
 
 device = torch.device("cpu")
+
 info("[*] Initilializing environment ...\n")
 env = gym.make("malware-score-v0")
 env.seed(args.seed)
@@ -201,6 +207,29 @@ optimizer = optim.Adam(policy.parameters(), lr=1e-2)
 eps = np.finfo(np.float32).eps.item()
 
 def main():
+
+    # Printing heading banner
+    f = Figlet(font="banner4")
+    grid = Table.grid(expand=True, padding=1, pad_edge=True)
+    grid.add_column(justify="right", ratio=38)
+    grid.add_column(justify="left", ratio=62)
+    grid.add_row(
+        Text.assemble((f.renderText("PE"), "bold red")),
+        Text(f.renderText("Sidious"), "bold white"),
+    )
+    print(grid)
+    print(
+        Panel(
+            Text.assemble(
+                ("Creating Chaos with Mutated Evasive Malware with ", "grey"),
+                ("Reinforcement Learning ", "bold red"),
+                ("and "),
+                ("Generative Adversarial Networks", "bold red"),
+                justify="center",
+            )
+        )
+    )
+    
 
     info("[*] Starting training ...")
     running_reward = 10

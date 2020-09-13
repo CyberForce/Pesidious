@@ -20,6 +20,12 @@ from rich.logging import RichHandler
 from rich.progress import track
 from rich.traceback import install
 
+from rich import print
+from rich.panel import Panel
+from rich.text import Text
+from rich.table import Table
+from pyfiglet import Figlet
+
 # try:
 #     # for RESTful interface to remote model
 #     __private_data = json.load(open(os.path.join(module_path, 'params.json'), 'r'))
@@ -148,6 +154,28 @@ def get_label_local(bytez, local_model, local_model_threshold):
 		return score, label
 
 def main():
+
+    # Printing heading banner
+    f = Figlet(font="banner4")
+    grid = Table.grid(expand=True, padding=1, pad_edge=True)
+    grid.add_column(justify="right", ratio=38)
+    grid.add_column(justify="left", ratio=62)
+    grid.add_row(
+        Text.assemble((f.renderText("PE"), "bold red")),
+        Text(f.renderText("Sidious"), "bold white"),
+    )
+    print(grid)
+    print(
+        Panel(
+            Text.assemble(
+                ("Creating Chaos with Mutated Evasive Malware with ", "grey"),
+                ("Reinforcement Learning ", "bold red"),
+                ("and "),
+                ("Generative Adversarial Networks", "bold red"),
+                justify="center",
+            )
+        )
+    )
 
 	args = parse_args()
 	logging_setup(str(args.logfile), args.log)
