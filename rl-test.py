@@ -186,12 +186,13 @@ def generate_mutated_malware(file, model, args):
 		new_score = interface.get_score_local( bytez )
 
 		if(new_score < interface.local_model_threshold):
-			break
+			output_file = os.path.join(args.o, "mutated_" + str(os.path.basename(file)))
+			info("[*] Writing mutated file to : " + str(output_file) + "\n\n")
+			with open(str(output_file), mode='wb') as file1:
+				file1.write(bytes(bytez))
+			return
 
-	output_file = os.path.join(args.o, "mutated_" + str(os.path.basename(file)))
-	info("[*] Writing mutated file to : " + str(output_file) + "\n\n")
-	with open(str(output_file), mode='wb') as file1:
-		file1.write(bytes(bytez))
+
 
 
 def main():
