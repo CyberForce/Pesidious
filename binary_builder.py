@@ -372,7 +372,7 @@ def binary_builder(
             write_to_file(adversarial_sections_set[index], str(filepath), False)
 
         info(f"[+] Section list completed with len(adversarial_sections_set) sections ...")
-        info(f"[+] Imports list completed with {len(adversarial_imports_set)} imports ..." \n)
+        info(f"[+] Imports list completed with {len(adversarial_imports_set)} imports ...\n")
 
     try:
 
