@@ -10,9 +10,10 @@ import traceback
 # from handlers import TimedRotatingFileHandler
 from pathlib import Path
 from random import shuffle
-from tqdm import tqdm
 
 from datetime import date
+
+from pyfiglet import Figlet
 
 from sklearn.model_selection import train_test_split
 
@@ -20,9 +21,17 @@ import lief
 import torch
 from torch.utils.data import DataLoader, Dataset
 
+# Installing rich modules for pretty printing
 from rich.logging import RichHandler
-from rich.progress import Progress, TaskID, track
+from rich.progress import track
 from rich.traceback import install
+from rich import print
+from rich.panel import Panel
+from rich.text import Text
+from rich.table import Table
+
+install()
+
 
 SECTION_INDEX = 0
 
@@ -67,8 +76,6 @@ def logging_setup(logfile: str , log_level: str):
     )
 
     getLogger().addHandler(RichHandler())
-        
-    info("[*] Starting Feature Extraction Program ...\n")
 
 
 def features_mapping_index(malware_path: str, benign_path: str, output_path: str):
@@ -386,9 +393,21 @@ def setup_directories(malware_path: str, benign_path: str, output_path: str):
     return malware_feature_vector_directory, benign_feature_vector_directory
 
 def main():
-    args = parse_args()
 
+    # Printing heading banner
+    f = Figlet(font="banner4")
+    grid = Table.grid(expand=True, padding=1, pad_edge=True)
+    grid.add_column(justify="right", ratio=38)
+    grid.add_column(justify="left", ratio=62)
+    grid.add_row(Text.assemble((f.renderText('PE'), "bold red")), Text(f.renderText('Sidious'), "bold white"))    
+    print(grid)    
+    print(Panel(Text.assemble(("Creating Chaos with Mutated Evasive Malware with ", "grey"), ("Reinforcement Learning ", "bold red"), ("and "), ("Generative Adversarial Networks", "bold red"), justify="center")))
+
+    # Read arguments and set logging configurations.
+    args = parse_args()
     logging_setup(str(args.logfile), args.log)
+
+    info("[bold red][*] Starting Feature Extraction Program ...\n", extra={"markup":True})
 
     info("[*] Setting parameters ...")
     debug(f"\t[*] Malware Directory - [bold green] {str(args.malware_path)}", extra={"markup":True})
