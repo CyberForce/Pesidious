@@ -1,5 +1,5 @@
 import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore")
 
 import logging
 from logging import basicConfig, exception, debug, error, info, warning, getLogger
@@ -52,7 +52,7 @@ def parse_args():
     parser.add_argument('--rl_output_directory', type= Path, default=Path("rl_models"),
                         help='number of episodes to execute (default: rl_models/)') #gitul
 
-    parser.add_argument('-f', "--logfile", help = "The file path to store the logs. (default : rl_features_logs_" + str(date.today()) + ".log)", type = Path, default = Path("rl_features_logs_" + str(date.today()) + ".log"))
+    parser.add_argument("--logfile", help = "The file path to store the logs. (default : rl_features_logs_" + str(date.today()) + ".log)", type = Path, default = Path("rl_features_logs_" + str(date.today()) + ".log"))
     logging_level = ["debug", "info", "warning", "error", "critical"]
     parser.add_argument(
         "-l",
@@ -89,6 +89,10 @@ def logging_setup(logfile: str , log_level: str):
     getLogger().addHandler(RichHandler())
     
     info("[*] Starting Reinforcement Learning Agent's Training ...\n")
+
+args = parse_args()
+logging_setup(str(args.logfile), args.log)
+
 
 class Policy(nn.Module):
     def __init__(self, env):
@@ -132,7 +136,8 @@ def select_action(observation, epsilon, env, policy):
         return action
 
     actions = policy.forward(observation)
-    action = torch.argmax(actions).item()
+    m = Categorical(actions)
+    action = m.sample()
     policy.saved_log_probs.append(m.log_prob(action))
     debug(f"PRinting ACtion [bold green] {action}", extra={"markup":True})
     return action.item()
@@ -183,22 +188,20 @@ def finish_episode(gamma, policy):
     del policy.rewards[:]
     del policy.saved_log_probs[:]
 
+
+device = torch.device("cpu")
+info("[*] Initilializing environment ...\n")
+env = gym.make("malware-score-v0")
+env.seed(args.seed)
+torch.manual_seed(args.seed)
+
+info("[*] Initilializing Neural Network model ...")
+policy = Policy(env)
+optimizer = optim.Adam(policy.parameters(), lr=1e-2)
+eps = np.finfo(np.float32).eps.item()
+
 def main():
-    args = parse_args()
-    logging_setup(str(args.logfile), args.log)
 
-    device = torch.device("cpu")
-
-    info("[*] Initilializing environment ...\n")
-    env = gym.make("malware-score-v0")
-    env.seed(args.seed)
-    torch.manual_seed(args.seed)
-
-    info("[*] Initilializing Neural Network model ...")
-    policy = Policy(env)
-    optimizer = optim.Adam(policy.parameters(), lr=1e-2)
-    eps = np.finfo(np.float32).eps.item()
-    
     info("[*] Starting training ...")
     running_reward = 10
 
@@ -233,7 +236,7 @@ def main():
                 info("[*] Saving model in rl-model/ directory ...")
         
         except Exception as e:
-            print("exception " + e)
+            #print("exception " + e)
             continue
 
 if __name__ == '__main__':

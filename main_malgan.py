@@ -15,7 +15,7 @@ import torch
 from torch import nn
 
 from rich.logging import RichHandler
-from rich.progress import Progress, TaskID, track
+from rich.progress import track
 from rich.traceback import install
 
 from malgan import MalGAN, MalwareDataset, BlackBoxDetector

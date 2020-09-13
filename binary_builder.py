@@ -122,9 +122,9 @@ def imports_to_dict(adversarial_imports_set: list):
     for imports in adversarial_imports_set:
         # debug("\t\t--> Imports : " + str(imports))
         if len(imports.split(":")) > 2:
-            debug("[*] Deleting import : {imports}")
+            debug("\t[*] Deleting import : {imports}")
             adversarial_imports_set.remove(imports)
-            debug(f"[-] {imports} has been deleted ...")
+            debug(f"\t[-] {imports} has been deleted ...")
             continue
 
         function_name, library = imports.split(":")
@@ -134,7 +134,7 @@ def imports_to_dict(adversarial_imports_set: list):
             functions = adversarial_imports_dict[library]
             functions.append(function_name)
 
-    debug(f"[+] The adversarial imports dict : {str(adversarial_imports_dict)}\n")
+    debug(f"\t[+] The adversarial imports dict : [bold yellow]{adversarial_imports_dict}\n", extra={"markup":True})
 
     return adversarial_imports_dict, adversarial_imports_set
 
@@ -282,32 +282,30 @@ def binary_builder(
         # output_path = os.path.join(output_path, "all_features")
         output_path = os.path.join(output_path, "all_features")
         if not os.path.exists(str(output_path)):
-            info("[*] Constructing output directory ...")
+            info("\t[*] Constructing output directory ...")
             os.makedirs(str(output_path))
-        # else:
-        #     folder_contents = os.listdir(output_path)
-        #     folder_contents = [os.path.join(output_path, file) for file in folder_contents]
-        #     for file in folder_contents:
-        #         os.remove(file)
 
-        info("[*] Constructing section and imports list ...")
+        info("\t[*] Constructing section and imports list ...")
         adversarial_imports_set, adversarial_sections_set = features_extractor(
             adversarial_vector, feature_mapping
         )
 
-        # Changing the pickled files to pickling just one set of features.
-        adversarial_imports_dict, adversarial_imports_set[0] = imports_to_dict(
-            adversarial_imports_set[0]
-        )
+        number_of_mutated_files = len(adversarial_imports_set)
+
+        # NOTE: Uncomment this block if something breaks
+        # # Changing the pickled files to pickling just one set of features.
+        # adversarial_imports_dict, adversarial_imports_set[0] = imports_to_dict(
+        #     adversarial_imports_set[0]
+        # )
         
-        pickle.dump(
-            adversarial_imports_dict,
-            open(os.path.join(RL_features, "adversarial_imports_set.pk"), "wb"),
-        )
-        pickle.dump(
-            adversarial_sections_set[0],
-            open(os.path.join(RL_features, "adversarial_sections_set.pk"), "wb"),
-        )
+        # pickle.dump(
+        #     adversarial_imports_dict,
+        #     open(os.path.join(RL_features, "adversarial_imports_set.pk"), "wb"),
+        # )
+        # pickle.dump(
+        #     adversarial_sections_set[0],
+        #     open(os.path.join(RL_features, "adversarial_sections_set.pk"), "wb"),
+        # )
 
         # Create a directory that stores all the imports in text files.
         RL_features = os.path.join(RL_features, "all_features")
@@ -317,17 +315,21 @@ def binary_builder(
             info("Constructing imports feature directory ...")
             os.makedirs(RL_features_imports)
         else:
-            folder_contents = os.listdir(RL_features_imports)
-            folder_contents = [
-                os.path.join(RL_features_imports, file) for file in folder_contents
-            ]
-            for file in folder_contents:
-                os.remove(file)
+            if os.listdir(RL_features_imports):            
+                debug(f"[*] [bold red]{RL_features_imports}[/bold red] not empty. Deleting previous content ...", extra={"markup":True})
+                folder_contents = [
+                    os.path.join(RL_features_imports, file) for file in os.listdir(RL_features_imports)
+                ]
+                for file in folder_contents:
+                    os.remove(file)
+                    debug(f"[-] [bold red]{file}[/bold red] has been deleted ...", extra={"markup":True})
 
         # Limit this to a number_of_mutated_files mutations.
         debug(
             f"[+] Total number of mutated_files: {(number_of_mutated_files)}"
             )
+
+        info(f"[*] Writing imports to a file ...")
         for index in track(range(number_of_mutated_files),description="Writing imports to file ...", transient=True):
             # for index in range(len(adversarial_imports_set)):
 
@@ -337,7 +339,6 @@ def binary_builder(
                 )
             )
 
-            debug(f"[+] Filepath - {filepath}")
             adversarial_imports_dict, adversarial_imports_set[index] = imports_to_dict(
                 adversarial_imports_set[index]
             )
@@ -346,16 +347,19 @@ def binary_builder(
         # Creating a directory to store all the sections in text files.
         RL_features_section = os.path.join(RL_features, "sections")
         if not os.path.exists(RL_features_section):
-            info("Constructing sections feature directory ...")
+            info("[*] Constructing sections feature directory ...")
             os.makedirs(RL_features_section)
         else:
-            folder_contents = os.listdir(RL_features_section)
-            folder_contents = [
-                os.path.join(RL_features_section, file) for file in folder_contents
-            ]
-            for file in folder_contents:
-                os.remove(file)
+            if os.listdir(RL_features_section):
+                debug(f"[*] [bold red]{RL_features_section}[/bold red] not empty. Deleting previous content ...", extra={"markup":True})
+                folder_contents = [
+                    os.path.join(RL_features_section, file) for file in os.listdir(RL_features_section)
+                ]
+                for file in folder_contents:
+                    os.remove(file)
+                    debug(f"[-] [bold red]{file}[/bold red] has been deleted ...", extra={"markup":True})
 
+        info(f"[*] Writing Sections to a file ...")
         # Limit this to a number_of_mutated_files mutations.
         for index in track(range(number_of_mutated_files), description="Writing sections to file ...", transient=True):
             # for index in range(len(adversarial_sections_set)):
@@ -367,26 +371,23 @@ def binary_builder(
             )
             write_to_file(adversarial_sections_set[index], str(filepath), False)
 
-        lenght_of_features = len(adversarial_imports_set)
-        info(
-            f"[+] Section list completed with len(adversarial_sections_set) sections ..."
-        )
-        info(f"[+] Imports list completed with {len(adversarial_imports_set)} imports ...")
+        info(f"[+] Section list completed with len(adversarial_sections_set) sections ...")
+        info(f"[+] Imports list completed with {len(adversarial_imports_set)} imports ...\n")
 
     try:
 
         info("[*] Generating malware samples ...")
         # info("Generating " + str(lenght_of_features) + " mutated malware binaries...")
         info(
-            f"Generating {number_of_mutated_files} mutated malware binaries..."
+            f"\t[+] Generating {number_of_mutated_files} mutated malware binaries..."
         )
 
         # for index in tqdm(range(lenght_of_features), desc="Progress : "):
         for index in track(
-            range(number_of_mutated_files), desc=" Generating Mutated malwares ...", transient=True
+            range(number_of_mutated_files), description=" Generating Mutated malwares ...", transient=True
         ):  # For testing purposes. Shift to the above command when done testing.
             # binary = binary_original
-            debug(f"[*] Creating Malware Mutation Number : {index}")
+            debug(f"\t[*] Creating Malware Mutation Number : {index}")
             binary = lief.parse(malware_pe)
 
             imports_len = 0
@@ -394,15 +395,8 @@ def binary_builder(
             adversarial_imports_len = 0
             adversarial_sections_len = 0
 
-            # output_path = os.path.join(output_path, str(str(malware_pe).split('/')[-1]))
-            # if not os.path.exists(output_path):
-            #     os.mkdir(output_path)
-
-            # Is this required? Ivestigate more into what this does.
-            # binary.optional_header.dll_characteristics &= ~lief.PE.DLL_CHARACTERISTICS.DYNAMIC_BASE
-            # binary.optional_header.dll_characteristics &= ~lief.PE.DLL_CHARACTERISTICS.NX_COMPAT
-
             if imports_state:
+                debug("\t[*] Imports:")
                 imports = [
                     e.name + ":" + lib.name.lower()
                     for lib in binary.imports
@@ -412,16 +406,16 @@ def binary_builder(
                 imports_len = len(imports)
                 adversarial_imports_len = len(adversarial_imports_set[index])
 
-                debug(f"[+] Number of imports in original : {imports_len}")
+                debug(f"\t\t[+] Number of imports in original : {imports_len}")
                 debug(
-                    f"[+] Number of imports in adversial : {adversarial_imports_len}"
+                    f"\t\t[+] Number of imports in adversial : {adversarial_imports_len}"
                 )
 
                 imports_to_be_added = list(
                     set(adversarial_imports_set[index]).difference(set(imports))
                 )
                 debug(
-                    f"Number of imports to be added : {len(imports_to_be_added)}"
+                    f"\t\t[+] Number of imports to be added : {len(imports_to_be_added)}"
                 )
 
                 # import_count = 0
@@ -486,23 +480,24 @@ def binary_builder(
                     #       str(filepath))
 
                 else:
-                    debug("[-] There are no new imports to be added ...")
+                    debug("\t\t[-] There are no new imports to be added ...")
 
             if section_state:
+                debug("\t[*] Sections:")
                 sections = [section.name for section in binary.sections]
                 section_len = len(sections)
                 adversarial_sections_len = len(adversarial_sections_set[index])
 
-                debug(f"[+] Number of sections in original : {(section_len)}")
+                debug(f"\t\t[+] Number of sections in original : {(section_len)}")
                 debug(
-                    f"[+] Number of section in adversial : {(adversarial_sections_len)}"
+                    f"\t\t[+] Number of section in adversial : {(adversarial_sections_len)}"
                 )
 
                 sections_to_be_added = list(
                     set(adversarial_sections_set[index]).difference(set(sections))
                 )
                 debug(
-                    f"[+] Number of sections to be added : {(len(sections_to_be_added))}"
+                    f"\t\t[+] Number of sections to be added : {(len(sections_to_be_added))}"
                 )
 
                 # section_count = 0
@@ -586,7 +581,7 @@ def binary_builder(
                     #       str(filepath))
 
                 else:
-                    debug("[-] There are no new sections to be added ...")
+                    debug("\t\t[-] There are no new sections to be added ...")
 
             # builder = lief.PE.Builder(binary)
             # builder.build_dos_stub(False)  # rebuild DOS stub
@@ -613,7 +608,7 @@ def binary_builder(
             #               str(malware_file))
 
     except:
-        exception(f"[!] Exception raised at adversial feature no : {index}")
+        exception(f"\t[!] Exception raised at adversial feature no : {index}")
         raise Exception(f"[!] {malware_pe} is not parseable!")
 
     info("[+] Malware samples generation completed ...")
@@ -722,44 +717,41 @@ def section_extractor(adversarial_vector: str, feature_mapping: str):
 
 def features_extractor(adversarial_vector: str, feature_mapping: str):
 
-    info("[*] Loading feature vector mapping from pickle file ...")
+    info("\t[*] Loading feature vector mapping from pickle file ...")
     feature_vector_mapping = pickle.load(open(feature_mapping, "rb"))
-    info("[*] Loading adversarially generated feature vectors from pickle file ...")
+    info("\t[*] Loading adversarially generated feature vectors from pickle file ...")
     adversarial_feature_vector = pickle.load(open(adversarial_vector, "rb"))
 
     feature_vector_mapping = [import_lib for import_lib in feature_vector_mapping]
 
-    debug(f"[+] adversarial_feature_vector length : {len(adversarial_feature_vector)}")
+    debug(f"\t[+] adversarial_feature_vector length : {len(adversarial_feature_vector)}")
 
     adversarial_imports_set = []
     adversarial_sections_set = []
     count = 0
 
-    info("[*] Generating imports and section set from adversarially generated feature vectors ...")
-    debug(f"[+] adversarial_feature_vector : {adversarial_feature_vector} \n\n\n")
+    info("\t[*] Generating imports and section set from adversarially generated feature vectors ...")
     for index in track(range(len(adversarial_feature_vector)), description=" Mapping imports and sections ...", transient=True):
         info(
-            f"[+] Mapping imports and sections from batch {index}  with {len(adversarial_feature_vector[index])} adversarial feature vectors ...",
+            f"\t\t[+] Mapping imports and sections from batch {index}  with {len(adversarial_feature_vector[index])} adversarial feature vectors ...",
         )
 
-        debug(f"[+] adversarial_feature_vector[{index}]: {adversarial_feature_vector[index]} \n\n\n")
         for i in track(
             range(len(adversarial_feature_vector[index])), description=" Extracting ...", transient=True
         ):
-            debug(f"[+] adversarial_feature_vector[{index}][{i}] : {adversarial_feature_vector[index][i]}")
             sample = adversarial_feature_vector[index][i]
             sample = sample.tolist()
             adversial_imports = []
             adversial_section = []
             adversial_features = []
 
-            debug(f"[+] Sample lenght  : {len(sample)}")
-            debug(f"\t[+] Adv Feature Vector : {(sample)}")
+            debug(f"\t\t[+] Sample lenght  : {len(sample)}")
+            debug(f"\t\t[+] Adv Feature Vector : {(sample)}")
 
             for i in range(len(sample)):
                 if sample[i] > 0:
                     adversial_features.append(feature_vector_mapping[i])
-                    debug(f"\t\t[+] feature : [bold green]{feature_vector_mapping[i]}", extra={"markup":True})
+                    debug(f"\t\t\t[+] feature : [bold green]{feature_vector_mapping[i]}", extra={"markup":True})
 
             for feature in adversial_features:
                 if ":" in feature:
@@ -778,8 +770,7 @@ def features_extractor(adversarial_vector: str, feature_mapping: str):
             # debug("Import mapping for adversarial feature vector [" + str(count) + "] completed with " + str(len(adversial_imports)) + " imports ...\n")
             count = count + 1
 
-    debug(f"[+] Number of feature vectors : {len(adversarial_imports_set)}")
-    debug(f"[+] Number of features in the set : {len(adversarial_imports_set[0])}")
+    info("\t[+] Adversarial Imports and sections have been extracted ...")
 
     return adversarial_imports_set, adversarial_sections_set
 
@@ -855,7 +846,7 @@ def write_to_file(feature, filepath: str, is_imports: bool):
     with open(filepath, "w") as data:
         data.write(plaintext)
 
-    info(f"\t[+] File have been writen to : {filepath}")
+    info(f"\t[+] {'Imports' if is_import else 'Sections'} written to - [bold green]{filepath}", extra={"markup":True})
 
 
 def call_c_application_for_imports(
