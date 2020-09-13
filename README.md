@@ -8,6 +8,6 @@ The purpose of the tool is to use artificial intelligence to mutate a malware sa
 
 ![Diagram](https://github.com/CyberForce/Pesidious/blob/master/Pesidious%20architecture%20(simplified).png)
 
-Find our full documentation [here](https://vaya97chandni.gitbook.io/pesidious/) 
+Find our full documentation for the tool installation [here](https://vaya97chandni.gitbook.io/pesidious/) 
 
 
