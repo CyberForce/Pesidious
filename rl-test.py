@@ -164,7 +164,7 @@ def generate_mutated_malware(file, model, args):
 	pe = pefeatures2.PEFeatureExtractor2()
 	rn = RangeNormalize(-0.5,0.5)
 
-	info("[*] Reading file : " + str(file))
+	info("\n\n[*] Reading file : " + str(file))
 	bytez = []
 	with open(str(file), 'rb') as infile:
 		bytez = infile.read()
