@@ -349,7 +349,7 @@ if __name__ == "__main__":
 			if not os.path.exists(args.rl_output_directory):
 				os.mkdir(args.rl_output_directory)
 				info("[*] model directory has been created at : " + str(args.rl_output_directory))
-			torch.save(current_model.state_dict(), os.path.join(args.rl_output_directory, "rl-model-" + str(i_episode) + "-" +str(date.today()) + ".pt" ))
+			torch.save(current_model.state_dict(), os.path.join(args.rl_output_directory, "rl-model-" + str(episode) + "-" +str(date.today()) + ".pt" ))
 			info("[*] Saving model in rl-model/ directory ...")
 
 	torch.save(current_model.state_dict(), 'dqeaf.pt')
