@@ -34,8 +34,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 import gym_malware
-from gym_malware.envs.utils import interface, pefeatures
-from gym_malware.envs.utils.Model import DQN
+from gym_malware.envs.utils import interface, pefeatures, Model
 from gym_malware.envs.controls import manipulate2 as manipulate
 from collections import namedtuple, deque
 from statistics import mean 
@@ -209,8 +208,8 @@ def update_epsilon(n):
 replay_buffer = NaivePrioritizedBuffer(500000)
 
 info("[*] Initilializing Neural Network model ...")
-current_model = DQN().to(device)
-target_model  = DQN().to(device)
+current_model = Model.DQN().to(device)
+target_model  = Model.DQN().to(device)
 
 optimizer = optim.Adam(current_model.parameters())
 
