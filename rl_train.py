@@ -33,10 +33,6 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 
-from IPython.display import clear_output
-import matplotlib.pyplot as plt
-import torch.autograd as autograd 
-
 import gym_malware
 from gym_malware.envs.utils import interface, pefeatures
 from gym_malware.envs.controls import manipulate2 as manipulate
