@@ -3,7 +3,7 @@ import warnings
 warnings.filterwarnings("ignore")
 import math, random
 
-from rl_train import DQN
+
 
 import gym
 import numpy as np
@@ -156,6 +156,8 @@ class RangeNormalize(object):
 
 def load_model(saved_model):
 	#from rl_train import Policy
+	from rl_train import DQN
+	
 	model = DQN().to(device)
 	model.load_state_dict(torch.load(str(saved_model)))
 	model.eval()
