@@ -169,8 +169,6 @@ class RangeNormalize(object):
 
 def load_model(saved_model):
 	#from rl_train import Policy
-	from rl_train import DQN
-
 	model = DQN().to(device)
 	model.load_state_dict(torch.load(str(saved_model)))
 	model.eval()
