@@ -3,8 +3,6 @@ import warnings
 warnings.filterwarnings("ignore")
 import math, random
 
-
-
 import gym
 import numpy as np
 import sys
@@ -127,6 +125,21 @@ def logging_setup(logfile: str , log_level: str):
 
 	getLogger().addHandler(RichHandler())
 
+# create a dqn class
+class DQN(nn.Module):
+	def __init__(self):
+		super(DQN, self).__init__()
+		self.layers = nn.Sequential(
+			nn.Linear(env.observation_space.shape[0], 256),
+			nn.ReLU(),
+			nn.Linear(256, 64),
+			nn.ReLU(),
+			nn.Linear(64, env.action_space.n)
+		)
+
+	def forward(self, x):
+		return self.layers(x)
+
 class RangeNormalize(object):
 	def __init__(self, 
 				 min_val, 
@@ -157,7 +170,7 @@ class RangeNormalize(object):
 def load_model(saved_model):
 	#from rl_train import Policy
 	from rl_train import DQN
-	
+
 	model = DQN().to(device)
 	model.load_state_dict(torch.load(str(saved_model)))
 	model.eval()
