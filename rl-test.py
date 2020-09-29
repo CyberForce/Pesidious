@@ -3,6 +3,8 @@ import warnings
 warnings.filterwarnings("ignore")
 import math, random
 
+from rl_train import DQN
+
 import gym
 import numpy as np
 import sys
