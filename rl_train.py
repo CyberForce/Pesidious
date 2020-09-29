@@ -295,10 +295,8 @@ class RangeNormalize(object):
 			outputs.append(_input)
 		return outputs if idx > 1 else outputs[0]
 
-
-if __name__ == "__main__":
+def main():
 	info("[*] Starting training ...")
-
 	D = args.rl_episodes 
 	T = args.rl_mutations # as mentioned in the paper (total number of mutations that the agent can perform on one file)
 	B = 1000 # as mentioned in the paper (number of steps before learning starts)
@@ -351,9 +349,8 @@ if __name__ == "__main__":
 	torch.save(current_model.state_dict(), 'dqeaf.pt')
 	info("[*] Saving model in rl-model/ directory ...")
 	
-
-
-
+if __name__ == '__main__':
+    main()
 
 
 
