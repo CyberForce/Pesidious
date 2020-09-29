@@ -83,7 +83,7 @@ def parse_args():
 	parser.add_argument('-o', type=Path, default=Path('Mutated_malware/')
 						,help='Path to output directory (default : Mutated_malware/)')
 
-	parser.add_argument('--saved_model', type=Path,
+	parser.add_argument('--saved_model', type=Path, default=Path('models/rl-model.pt')
 						help='Path to saved model')
 
 	parser.add_argument('--rl_mutations', type=int, default=80,
@@ -191,9 +191,6 @@ def generate_mutated_malware(file, model, args):
 			with open(str(output_file), mode='wb') as file1:
 				file1.write(bytes(bytez))
 			return
-
-
-
 
 def main():
 
