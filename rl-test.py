@@ -152,12 +152,12 @@ class RangeNormalize(object):
 			outputs.append(_input)
 		return outputs if idx > 1 else outputs[0]
 
-def load_model(args):
+def load_model(saved_model):
 	#from rl_train import Policy
-	#model = Policy().to(device)
-	#model.load_state_dict(torch.load(args.saved_model))
-	#model.eval()
-	return ""
+	model = DQN().to(device)
+	model.load_state_dict(torch.load(str(saved_model)))
+	model.eval()
+	return model
 
 def generate_mutated_malware(file, model, args):
 
@@ -174,10 +174,8 @@ def generate_mutated_malware(file, model, args):
 		state_norm = rn(state)
 		state_norm = torch.from_numpy(state_norm).float().unsqueeze(0).to(device)
 		
-		#actions = model.forward(state_norm)
-		#action = torch.argmax(actions).item()
-		rand = np.random.random()
-		action = np.random.choice(env.action_space.n)
+		actions = model.forward(state_norm)
+		action = torch.argmax(actions).item()
 		action = ACTION_LOOKUP[action]
 		debug("\t[+] Mutation : " + action)
 		
@@ -187,7 +185,7 @@ def generate_mutated_malware(file, model, args):
 
 		if(new_score < interface.local_model_threshold):
 			break
-			
+
 	if not os.path.exists(args.o):
 		os.mkdir(args.o)
 		info("[*] output directory has been created at : " + str(args.o))
