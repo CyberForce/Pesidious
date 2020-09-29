@@ -34,7 +34,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 import gym_malware
-from gym_malware.envs.utils import interface, pefeatures, Model
+from gym_malware.envs.utils import interface, pefeatures
 from gym_malware.envs.controls import manipulate2 as manipulate
 from collections import namedtuple, deque
 from statistics import mean 
@@ -205,11 +205,39 @@ def update_epsilon(n):
 
 	return epsilon
 
+# create a dqn class
+class DQN(nn.Module):
+	def __init__(self):
+		super(DQN, self).__init__()
+		self.layers = nn.Sequential(
+			nn.Linear(env.observation_space.shape[0], 256),
+			nn.ReLU(),
+			nn.Linear(256, 64),
+			nn.ReLU(),
+			nn.Linear(64, env.action_space.n)
+		)
+
+	def forward(self, x):
+		return self.layers(x)
+
+
+	def chooseAction(self, observation, epsilon):
+		rand = np.random.random()
+		if rand > epsilon:
+			#observation = torch.from_numpy(observation).float().unsqueeze(0).to(device)
+			actions = self.forward(observation)
+			action = torch.argmax(actions).item()
+
+		else:
+			action = np.random.choice(env.action_space.n)
+
+		return action
+
 replay_buffer = NaivePrioritizedBuffer(500000)
 
 info("[*] Initilializing Neural Network model ...")
-current_model = Model.DQN().to(device)
-target_model  = Model.DQN().to(device)
+current_model = DQN().to(device)
+target_model  = DQN().to(device)
 
 optimizer = optim.Adam(current_model.parameters())
 
