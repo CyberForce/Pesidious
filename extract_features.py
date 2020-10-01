@@ -317,8 +317,9 @@ def feature_generation(pe_files: list, feature_vector_mapping: dict):
                     feature_vector[index] = 1
 
         except:
-            exception("\t[-] {file} is not parseable!")
-            raise Exception("\t[-] {file} is not parseable!")
+            exception(f"\t[-] {file} is not parseable!")
+            raise Exception(f"\t[-] {file} is not parseable!")
+            
         
         # pe_files_feature_vectors.append(feature_vector)
         # pe_files_feature_vectors.append(file)
