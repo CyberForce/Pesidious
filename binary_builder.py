@@ -658,6 +658,8 @@ def import_extractor(adversarial_vector: str, feature_mapping: str):
                 f"Import mapping for adversarial feature vector [{count}] completed with {len(adversial_imports)} imports ...\n"
             )
             count = count + 1
+            break
+        break
 
     # info("%d adversarial feature vectors have been mapped ...", count)
 
@@ -705,7 +707,11 @@ def section_extractor(adversarial_vector: str, feature_mapping: str):
             debug(
                 f"Section mapping for adversarial feature vector [{count}] completed with {len(adversial_section)} imports ...\n"
             )
+
+            break
             count = count + 1
+
+        break
 
     # info("%d adversarial feature vectors have been mapped ...", count)
 
@@ -769,6 +775,8 @@ def features_extractor(adversarial_vector: str, feature_mapping: str):
 
             # debug("Import mapping for adversarial feature vector [" + str(count) + "] completed with " + str(len(adversial_imports)) + " imports ...\n")
             count = count + 1
+            break
+        break
 
     info("\t[+] Adversarial Imports and sections have been extracted ...")
 
