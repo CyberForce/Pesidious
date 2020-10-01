@@ -50,7 +50,7 @@ The following steps will guide you through all the installations required to set
     ```
 
 1. [Set up and activate a virtual environment with Python 3.6](https://docs.python.org/3/tutorial/venv.html)
-    > :information: It is recommended to use a virtual environment to avoid conflicts between packages used by different applications
+    > It is recommended to use a virtual environment to avoid conflicts between packages used by different applications
 
 
 1. Make sure that you have pip 8.1.1 installed and set up.
