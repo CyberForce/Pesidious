@@ -8,7 +8,7 @@ The purpose of the tool is to use artificial intelligence to mutate a malware (P
 
 ![Diagram](https://github.com/CyberForce/Pesidious/blob/master/Pesidious%20architecture%20(simplified).png)
 
-Find our full documentation for the tool installation [here](https://vaya97chandni.gitbook.io/pesidious/) 
+Find our full documentation for the tool [here](https://vaya97chandni.gitbook.io/pesidious/) 
 
 ## Installation Instructions
 
@@ -124,12 +124,9 @@ The output from GAN has already been stored as (`RL_Features/adverarial_imports_
 
 ## Acknowledgments
 
-* The gym-malware environment (https://github.com/endgameinc/gym-malware) was modified to extract only 518 out of 2350 features for the training of the agent i.e. byte histogram normalized to sum to unity and two-dimensional entropy histogram. Additionaly only 4 actions are used for the mutation i.e. append random bytes, append import, append section and remove signature.
-
-* Gym-Malware Environment : https://github.com/endgameinc/gym-malware <br>
-Deep Reinforcement Learning : https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8676031
-
-* Yanming Lai's ([here])(https://github.com/yanminglai/Malware-GAN) and Zayd Hammoudeh's ([here])(https://github.com/ZaydH/MalwareGAN) work on implementation on Han and Tan's MalGAN played a crucial role in our understanding of the architecture. A mojority of the implementation of the MalGAN used in this project has been forked off Hammoudeh's work. 
+* Gym-Malware Environment:  https://github.com/endgameinc/gym-malware. The environment was modified to add GAN and the mutations were added/changed/removed to improve the evasiveness of the malware and maintain functionality.
+* Yanming Lai's (https://github.com/yanminglai/Malware-GAN) and 
+* Zayd Hammoudeh's (https://github.com/ZaydH/MalwareGAN) work on implementation on Han and Tan's MalGAN played a crucial role in our understanding of the architecture. A majority of the implementation of the MalGAN used in this project has been forked off Hammoudeh's work. 
 
 ## References
 
