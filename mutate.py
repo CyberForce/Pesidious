@@ -14,7 +14,6 @@ import torch.optim as optim
 import torch.nn.functional as F
 import torch.autograd as autograd 
 
-import gym_malware
 from gym_malware.envs.utils import interface, pefeatures2
 from gym_malware.envs.controls import manipulate2 as manipulate
 from collections import namedtuple, deque
