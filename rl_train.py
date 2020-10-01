@@ -127,7 +127,6 @@ info("[*] Initilializing environment ...\n")
 env_id = "malware-score-v0"
 env = gym.make(env_id)
 env.seed(123)
-print(env.action_space.n)
 
 from collections import deque
 np.random.seed(123)

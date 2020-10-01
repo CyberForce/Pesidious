@@ -1,4 +1,3 @@
-
 import warnings
 warnings.filterwarnings("ignore")
 import math, random
@@ -14,7 +13,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 import torch.autograd as autograd 
 
-import gym_malware
+#import gym_malware
 from gym_malware.envs.utils import interface, pefeatures2
 from gym_malware.envs.controls import manipulate2 as manipulate
 from collections import namedtuple, deque
@@ -63,9 +62,9 @@ def put_banner():
 
 put_banner()
 
-env_id = "malware-score-v0"
-env = gym.make(env_id)
-env.seed(123)
+#env_id = "malware-score-v0"
+#env = gym.make(env_id)
+#env.seed(123)
 device = torch.device("cpu")
 
 from collections import deque
@@ -130,11 +129,11 @@ class DQN(nn.Module):
 	def __init__(self):
 		super(DQN, self).__init__()
 		self.layers = nn.Sequential(
-			nn.Linear(env.observation_space.shape[0], 256),
+			nn.Linear(2350, 256),
 			nn.ReLU(),
 			nn.Linear(256, 64),
 			nn.ReLU(),
-			nn.Linear(64, env.action_space.n)
+			nn.Linear(64, len(manipulate.ACTION_TABLE.keys()))
 		)
 
 	def forward(self, x):
@@ -192,7 +191,6 @@ def generate_mutated_malware(file, model, args):
 		actions = model.forward(state_norm)
 		action = torch.argmax(actions).item()
 		action = ACTION_LOOKUP[action]
-		debug("\t[+] Mutation : " + action)
 		
 		bytez = bytes(manipulate.modify_without_breaking(bytez, [action]))
 		
