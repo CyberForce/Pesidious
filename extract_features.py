@@ -159,7 +159,7 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
         # Check if the file threw an error before, and if it does, skip it. 
         if file in error_files:
             warning(f"[-] This file is in the error_files list and will be skipped!")
-            input("stop here")
+            # input("stop here")
             continue
 
         try:
