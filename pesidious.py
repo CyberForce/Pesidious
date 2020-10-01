@@ -5,7 +5,7 @@ cmd = sys.argv[1]
 
 if("classifier" in cmd):
 	cmd_args = cmd.split(' ',3)
-	os.system("python classifier.py " + cmd_args )
+	os.system("python classifier.py " + cmd_args[2] )
 
 if("mutate" in cmd):
 	os.system("python rl-test.py -d ~/Downloads/test-samples --log debug")
