@@ -16,11 +16,10 @@ Find our full documentation for the tool installation [here](https://vaya97chand
 
 + [Overview](#overview)
 + [Installation Instructions](#installation-instructions)
-+ [Training and Testing Data](#training-and-testing-data)
++ [Getting Training Data](#getting-training-data)
 + [Running Instructions](#running-instructions) 
 + [Testing Procedures and results](#testing-procedures-and-results)
 + [Known Issues and Fixes](#known-issues-and-fixes)
-+ [Future Additions](#to-do)
 + [Built With](#built-with)
 + [Authors](#authors)
 + [Acknowledgments](#acknowledgments)
@@ -98,7 +97,7 @@ The following steps will guide you through all the installations required to set
      
 <!-- 1. Download malware and benign binary samples from [here](#training-and-testing-data). -->
  
-## Training and Testing Data
+## Getting Training Data
 
 ### Training Data
 
