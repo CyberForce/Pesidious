@@ -4,7 +4,7 @@ import sys
 cmd = sys.argv[1]
 
 if("classifier" in cmd):
-	cmd_args = cmd.split(3)
+	cmd_args = cmd.split(' ',3)
 	os.system("python classifier.py " + cmd_args )
 
 if("mutate" in cmd):
