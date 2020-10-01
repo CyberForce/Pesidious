@@ -80,7 +80,7 @@ def parse_args():
 	parser.add_argument('--rl_save_model_interval', type=float, default=500,
 						help='Interval at which models should be saved (default: 500)') #gitul
 	parser.add_argument('--rl_output_directory', type= Path, default=Path("models"),
-						help='Path to save the models in (default: models/)') #gitul
+						help='Path to save the models in (default: models)') #gitul
 
 	parser.add_argument("--logfile", help = "The file path to store the logs. (default : rl_features_logs_" + str(date.today()) + ".log)", type = Path, default = Path("rl_features_logs_" + str(date.today()) + ".log"))
 	logging_level = ["debug", "info", "warning", "error", "critical"]
@@ -298,7 +298,7 @@ def main():
 	info("[*] Starting training ...")
 	D = int(args.rl_episodes)
 	T = int(args.rl_mutations) 
-	B = 1000 # as mentioned in the paper (number of steps before learning starts)
+	B = 1 # as mentioned in the paper (number of steps before learning starts)
 	batch_size = 32 # as mentioned in the paper (batch_size)
 	losses = []
 	reward_ben = 20
@@ -343,10 +343,10 @@ def main():
 				os.mkdir(args.rl_output_directory)
 				info("[*] model directory has been created at : " + str(args.rl_output_directory))
 			torch.save(current_model.state_dict(), os.path.join(args.rl_output_directory, "rl-model-" + str(episode) + "-" +str(date.today()) + ".pt" ))
-			info("[*] Saving model in rl-model/ directory ...")
+			info("[*] Saving model in models/ directory ...")
 
-	torch.save(current_model.state_dict(), 'dqeaf.pt')
-	info("[*] Saving model in rl-model/ directory ...")
+	torch.save(current_model.state_dict(), os.path.join(args.rl_output_directory, "rl-model-" + str(D) + "-" +str(date.today()) + ".pt" ))
+	info("[*] Saving model in models/ directory ...")
 	
 if __name__ == '__main__':
     main()
