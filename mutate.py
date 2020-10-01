@@ -31,6 +31,7 @@ from rich import print
 from rich.panel import Panel
 from rich.text import Text
 from rich.table import Table
+from pyfiglet import Figlet
 
 from pathlib import Path
 from tqdm import tqdm
