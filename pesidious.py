@@ -2,9 +2,10 @@ import os
 import sys
 
 cmd = sys.argv[1]
-
+print(cmd)
 if("classifier" in cmd):
-	cmd_args = cmd.split(' ',3)
+	cmd_args = cmd.split(' ',2)
+	print(cmd_args)
 	os.system("python classifier.py " + cmd_args[2] )
 
 if("mutate" in cmd):
