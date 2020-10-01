@@ -79,8 +79,8 @@ def parse_args():
 	
 	parser.add_argument('--rl_save_model_interval', type=float, default=500,
 						help='Interval at which models should be saved (default: 500)') #gitul
-	parser.add_argument('--rl_output_directory', type= Path, default=Path("rl_models"),
-						help='number of episodes to execute (default: rl_models/)') #gitul
+	parser.add_argument('--rl_output_directory', type= Path, default=Path("models"),
+						help='Path to save the models in (default: models/)') #gitul
 
 	parser.add_argument("--logfile", help = "The file path to store the logs. (default : rl_features_logs_" + str(date.today()) + ".log)", type = Path, default = Path("rl_features_logs_" + str(date.today()) + ".log"))
 	logging_level = ["debug", "info", "warning", "error", "critical"]
@@ -296,9 +296,8 @@ class RangeNormalize(object):
 
 def main():
 	info("[*] Starting training ...")
-	D = args.rl_episodes 
-	T = args.rl_mutations # as mentioned in the paper (total number of mutations that the agent can perform on one file)
-	B = 1000 # as mentioned in the paper (number of steps before learning starts)
+	D = int(args.rl_episodes)
+	T = int(args.rl_mutations) 
 	batch_size = 32 # as mentioned in the paper (batch_size)
 	losses = []
 	reward_ben = 20
