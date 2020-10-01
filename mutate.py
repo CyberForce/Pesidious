@@ -192,7 +192,6 @@ def generate_mutated_malware(file, model, args):
 		actions = model.forward(state_norm)
 		action = torch.argmax(actions).item()
 		action = ACTION_LOOKUP[action]
-		debug("\t[+] Mutation : " + action)
 		
 		bytez = bytes(manipulate.modify_without_breaking(bytez, [action]))
 		
