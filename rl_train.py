@@ -298,7 +298,7 @@ def main():
 	info("[*] Starting training ...")
 	D = int(args.rl_episodes)
 	T = int(args.rl_mutations) 
-	B = 1 # as mentioned in the paper (number of steps before learning starts)
+	B = 1000 # as mentioned in the paper (number of steps before learning starts)
 	batch_size = 32 # as mentioned in the paper (batch_size)
 	losses = []
 	reward_ben = 20
