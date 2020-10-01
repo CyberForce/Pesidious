@@ -102,29 +102,32 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
     info("[*] Creating import features mapping ... \n")
     
     feature_vector_mapping = {}
-    import_feature_vector_mapping = {}
-    section_feature_vector_mapping =  {}
+    # import_feature_vector_mapping = {}
+    # section_feature_vector_mapping =  {}
     
     index = 0
-    index_section = 0
-    index_import = 0
+    error_files = []
+    # index_section = 0
+    # index_import = 0
     
     files = malware_pe_files + benign_pe_files
-
+    
     info("\t[*] Starting import extraction ...")
     # for i, file in enumerate(malware_pe_files + benign_pe_files):
     for i in track(range(len(files)), description="Extracting imports ... ", transient=True):
         file = files[i]
         debug(f'\t[+] Num: {i} - Name: {file} - Number of import features: {len(feature_vector_mapping)}')
+        # input("begining of the loop")
 
         try:
             win32, feature_vector_mapping, index = extract_imports(file, feature_vector_mapping, filtered_imports_file, index)
-            win32, import_feature_vector_mapping, index_import = extract_imports(file, import_feature_vector_mapping, filtered_imports_file, index_import)
+            # win32, import_feature_vector_mapping, index_import = extract_imports(file, import_feature_vector_mapping, filtered_imports_file, index_import)
 
             if not win32:
                 exception(f"\t[*] Deleting PE file : [bold red]{file}", extra={"markup":True})
                 os.remove(file)
-                files.remove(file)
+                # files.remove(file)
+                error_files.append(file)
                 exception(f"\t[-] {file} has been deleted ...")
 
             pass
@@ -133,15 +136,19 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
 
             exception(f"\t[*] Deleting PE file : [bold red]{file}", extra={"markup":True})
             os.remove(file)
-            files.remove(file)
+            # files.remove(file)
+            error_files.append(file)
             exception(f"\t[-] {file} has been deleted ...")
         
-        debug(f"\t[+] Index Import : {index_import}")
+        # debug(f"\t[+] Index Import : {index_import}")
 
     SECTION_INDEX = index
 
     info(f"\t[+] Import extraction completed with {SECTION_INDEX} imports... \n")
     info("\t[*] Starting section extraction ...")
+
+    debug(f"[-] Number of files skipped and deleted: {len(error_files)}")
+    # input("TEsT")
 
     # for i, file in enumerate(malware_pe_files + benign_pe_files):
     for i in track(range(len(files)), description="Extracting sections ...: ", transient=True):
@@ -149,14 +156,21 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
 
         debug(f'\t[+] Num: {i} - Name: {file} - Number of section features: {len(feature_vector_mapping)}')
 
+        # Check if the file threw an error before, and if it does, skip it. 
+        if file in error_files:
+            warning(f"[-] This file is in the error_files list and will be skipped!")
+            input("stop here")
+            continue
+
         try:
             win32, feature_vector_mapping, index = extract_sections(file, feature_vector_mapping, index)
-            win32, section_feature_vector_mapping, index_section = extract_sections(file, section_feature_vector_mapping, index_section)
+            # win32, section_feature_vector_mapping, index_section = extract_sections(file, section_feature_vector_mapping, index_section)
 
             if not win32:
                 exception(f"\t[*] Deleting PE file : {file}")
                 os.remove(file)
-                files.remove(file)
+                # files.remove(file)
+                error_files.append(file)
                 exception(f"\t[-] {file} has been deleted ...")
 
             pass
@@ -165,13 +179,14 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
 
             exception(f"\t[*] Deleting PE file : {file}")
             os.remove(file)
-            files.remove(file)
+            # files.remove(file)
+            error_files.append(file)
             exception(f"\t[-] {file} has been deleted ...")
             pass
 
-        debug("\t[+] Index Section : {index_section}")
+        # debug("\t[+] Index Section : {index_section}")
 
-    info(f"\t[+] Section extraction completed with {index_section} sections ... \n")
+    # info(f"\t[+] Section extraction completed with {index_section} sections ... \n")
     info("[+] Features mapping to index is complete ... \n")
     debug(f"Total size of feature vector mapping : {len(feature_vector_mapping)} \n")
     
@@ -180,25 +195,25 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
     for i, import_lib in enumerate(feature_vector_mapping):
         debug(f"\t[+] feature vector value at [{i}] : {str(import_lib)}")
 
-    for i, import_lib in enumerate(section_feature_vector_mapping):
-        debug(f"\t[+] feature vector value at [{i}] : {str(import_lib)}")
+    # for i, import_lib in enumerate(section_feature_vector_mapping):
+        # debug(f"\t[+] feature vector value at [{i}] : {str(import_lib)}")
 
-    for i, import_lib in enumerate(import_feature_vector_mapping):
-        debug(f"\t[+] feature vector value at [{i}] : {str(import_lib)}") 
+    # for i, import_lib in enumerate(import_feature_vector_mapping):
+    #     debug(f"\t[+] feature vector value at [{i}] : {str(import_lib)}") 
 
     pickle.dump(feature_vector_mapping,
                 open(os.path.join(output_path,"feature_vector_mapping.pk"), 'wb'))
 
-    pickle.dump(import_feature_vector_mapping,
-                open(os.path.join(output_path,"import_feature_vector_mapping.pk"), 'wb'))
+    # pickle.dump(import_feature_vector_mapping,
+                # open(os.path.join(output_path,"import_feature_vector_mapping.pk"), 'wb'))
 
-    pickle.dump(section_feature_vector_mapping,
-                open(os.path.join(output_path,"section_feature_vector_mapping.pk"), 'wb'))
+    # pickle.dump(section_feature_vector_mapping,
+                # open(os.path.join(output_path,"section_feature_vector_mapping.pk"), 'wb'))
 
     info(f"[+] Pickling feature vector mapping complete. You can find them at logs : [bold green]{output_path}\n", extra={"markup":True})
     debug(f"\t -> Feature Vector mapping - {str(os.path.join(output_path,'feature_vector_mapping.pk'))} ", extra={"markup":True})
-    debug(f"\t -> Import Feature Vector mapping - {str(os.path.join(output_path,'import_feature_vector_mapping.pk'))} ", extra={"markup":True})
-    debug(f"\t -> Section Feature Vector mapping - {str(os.path.join(output_path,'section_feature_vector_mapping.pk'))} ", extra={"markup":True})
+    # debug(f"\t -> Import Feature Vector mapping - {str(os.path.join(output_path,'import_feature_vector_mapping.pk'))} ", extra={"markup":True})
+    # debug(f"\t -> Section Feature Vector mapping - {str(os.path.join(output_path,'section_feature_vector_mapping.pk'))} ", extra={"markup":True})
 
     # For feature vector with imports and sections:
     info("[*] Creating feature vector with imports and sections for [bold red] malware set...", extra={"markup":True})
@@ -209,29 +224,33 @@ def features_mapping_index(malware_path: str, benign_path: str, output_path: str
     pickle.dump(malware_pe_files_feature_set, open(os.path.join(malware_feature_vector_directory, "malware_feature_set.pk"), 'wb'))
     pickle.dump(benign_pe_files_feature_set, open(os.path.join(benign_feature_vector_directory, "benign_feature_set.pk"), 'wb'))
 
-    # For feature vector with imports:
-    debug(f"[*] Creating feature vector with imports for malware set ...")
-    malware_pe_files_import_feature_set = torch.Tensor(feature_generation(malware_pe_files, import_feature_vector_mapping))
-    debug("[*] Creating feature vector with imports for benign set ...")
-    benign_pe_files_import_feature_set = torch.Tensor(feature_generation(benign_pe_files, import_feature_vector_mapping))
+    # ---------------------------------#
+    # For feature vector with imports: #
+    # ---------------------------------#
+    # debug(f"[*] Creating feature vector with imports for malware set ...")
+    # malware_pe_files_import_feature_set = torch.Tensor(feature_generation(malware_pe_files, import_feature_vector_mapping))
+    # debug("[*] Creating feature vector with imports for benign set ...")
+    # benign_pe_files_import_feature_set = torch.Tensor(feature_generation(benign_pe_files, import_feature_vector_mapping))
     
-    debug(f"[+] malware_pe_files_import_feature_set type : [bold green] {str(malware_pe_files_import_feature_set)}", extra={"markup":True})
-    debug(f"[+] malware_pe_files_import_feature_set size : [bold green]{str(malware_pe_files_import_feature_set.shape)}")
+    # debug(f"[+] malware_pe_files_import_feature_set type : [bold green] {str(malware_pe_files_import_feature_set)}", extra={"markup":True})
+    # debug(f"[+] malware_pe_files_import_feature_set size : [bold green]{str(malware_pe_files_import_feature_set.shape)}")
 
-    pickle.dump(malware_pe_files_import_feature_set, open(os.path.join(malware_feature_vector_directory, "malware_pe_files_import_feature_set.pk"), 'wb'))
-    pickle.dump(benign_pe_files_import_feature_set, open(os.path.join(benign_feature_vector_directory, "benign_pe_files_import_feature_set.pk"), 'wb'))
+    # pickle.dump(malware_pe_files_import_feature_set, open(os.path.join(malware_feature_vector_directory, "malware_pe_files_import_feature_set.pk"), 'wb'))
+    # pickle.dump(benign_pe_files_import_feature_set, open(os.path.join(benign_feature_vector_directory, "benign_pe_files_import_feature_set.pk"), 'wb'))
 
-    # For feature vector with sections:
-    debug("[*] Creating feature vector with sections for malware set...")
-    malware_pe_files_section_feature_set = torch.Tensor(feature_generation(malware_pe_files, section_feature_vector_mapping))
-    debug("[*] Creating feature vector with sections for benign set...")
-    benign_pe_files_section_feature_set = torch.Tensor(feature_generation(benign_pe_files, section_feature_vector_mapping))
+    # ---------------------------------#
+    # For feature vector with sections:#
+    # ---------------------------------#
+    # debug("[*] Creating feature vector with sections for malware set...")
+    # malware_pe_files_section_feature_set = torch.Tensor(feature_generation(malware_pe_files, section_feature_vector_mapping))
+    # debug("[*] Creating feature vector with sections for benign set...")
+    # benign_pe_files_section_feature_set = torch.Tensor(feature_generation(benign_pe_files, section_feature_vector_mapping))
     
-    debug(f"[+] malware_pe_files_section_feature_set type : {str(malware_pe_files_section_feature_set)}", extra={"markup":True})
-    debug(f"[+] malware_pe_files_section_feature_set size : {str(malware_pe_files_section_feature_set.shape)}")
+    # debug(f"[+] malware_pe_files_section_feature_set type : {str(malware_pe_files_section_feature_set)}", extra={"markup":True})
+    # debug(f"[+] malware_pe_files_section_feature_set size : {str(malware_pe_files_section_feature_set.shape)}")
 
-    pickle.dump(malware_pe_files_section_feature_set, open(os.path.join(malware_feature_vector_directory, "malware_pe_files_section_feature_set.pk"), 'wb'))
-    pickle.dump(benign_pe_files_section_feature_set, open(os.path.join(benign_feature_vector_directory, "benign_pe_files_section_feature_set.pk"), 'wb'))
+    # pickle.dump(malware_pe_files_section_feature_set, open(os.path.join(malware_feature_vector_directory, "malware_pe_files_section_feature_set.pk"), 'wb'))
+    # pickle.dump(benign_pe_files_section_feature_set, open(os.path.join(benign_feature_vector_directory, "benign_pe_files_section_feature_set.pk"), 'wb'))
 
     pass
 
@@ -277,7 +296,7 @@ def feature_generation(pe_files: list, feature_vector_mapping: dict):
     for i in track(range(len(pe_files)), description="Generating feature vectors ... ", transient=True):
         file = pe_files[i]
 
-        debug(f'\t[+] Num: {i} - Name: {file} ')
+        debug(f'\t[+] Num: {i} - Name: [bold green]{file} ', extra={"markup":True})
         feature_vector = [0] * len(feature_vector_mapping)
 
         try:
@@ -308,7 +327,7 @@ def feature_generation(pe_files: list, feature_vector_mapping: dict):
         pe_files_feature_set.append(feature_vector)
 
     debug(f"\t[+] Vectors Type : {str(type(pe_files_feature_set))}")
-    debug("[+] Feature Extraction complete ... \n")
+    debug("[+] Feature Generation complete ... \n")
 
     return pe_files_feature_set
 
@@ -316,7 +335,7 @@ def extract_imports(file, feature_vector_mapping: dict, filtered_import_list: li
 
     binary = lief.parse(file)
 
-    debug(f"\t[+] {file} File Type : [bold red]{str(binary.optional_header.magic)}", extra={"markup":True})
+    debug(f"\t[+] [bold green]{file}[/bold green] File Type : [bold red]{str(binary.optional_header.magic)}", extra={"markup":True})
     
     if str(binary.optional_header.magic) != "PE_TYPE.PE32":
         warning(f"\t[-] {file} is not a 32 bit application ...")
@@ -334,11 +353,11 @@ def extract_imports(file, feature_vector_mapping: dict, filtered_import_list: li
     # debug("\n\t-> Imports (After): " + str(imports))
 
     for lib_import in imports:
-        debug(f"\t\t[+] Lib Imports: [bold yellow]{str(lib_import)}", extra={"markup":True})
 
         if lib_import not in feature_vector_mapping:
             if lib_import in filtered_import_list and "hal.dll" not in lib_import:
                 # debug("\t\t--> Present in filtered import list")
+                debug(f"\t\t[+] Unique lib Imports added: [bold yellow]{str(lib_import)}", extra={"markup":True})
                 feature_vector_mapping[lib_import] = index
                 index += 1
 
@@ -349,7 +368,7 @@ def extract_sections(file, feature_vector_mapping: dict, index: int = 0, win32: 
     # debug(file)
     binary = lief.parse(file)
 
-    debug(f"\t[+] {file} File Type : {str(binary.optional_header.magic)}")
+    debug(f"\t[+] [bold green]{file}[/bold green] File Type : [bold red]{str(binary.optional_header.magic)}", extra={"markup":True})
     
     if str(binary.optional_header.magic) != "PE_TYPE.PE32":
         warning("\t[-] {file} is not a 32 bit application ...")
@@ -414,7 +433,7 @@ def main():
             )
         )
     )
-    
+
     # Read arguments and set logging configurations.
     args = parse_args()
     logging_setup(str(args.logfile), args.log)
@@ -434,6 +453,11 @@ def main():
     output_dir = str(args.output_dir)
 
     features_mapping_index(malware_path, benign_path, output_dir)
+
+    info(f"[bold green][+] Feature Extraction module completed successfully ...", extra={"markup":True})
+
+    list_output = "\n\t".join([os.path.join(root, file) for root, directory, files in os.walk(args.output_dir) for file in files])
+    info(f"The following files were created: \n[green] {list_output}", extra={"markup":True})
     pass
 
 if __name__ == "__main__":
