@@ -73,7 +73,7 @@ def parse_args():
 						help='random seed (default: 543)')
 	
 	parser.add_argument('--rl_episodes', type=float, default=1000,
-						help='number of episodes to execute (default: 30000)')
+						help='number of episodes to execute (default: 1000)')
 	parser.add_argument('--rl_mutations', type=float, default=80,
 						help='number of maximum mutations allowed (default: 80)')
 	
