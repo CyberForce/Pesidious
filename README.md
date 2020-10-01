@@ -10,26 +10,6 @@ The purpose of the tool is to use artificial intelligence to mutate a malware sa
 
 Find our full documentation for the tool installation [here](https://vaya97chandni.gitbook.io/pesidious/) 
 
-
-## Table of Content
-
-
-+ [Overview](#overview)
-+ [Installation Instructions](#installation-instructions)
-+ [Getting Training Data](#getting-training-data)
-+ [Running Instructions](#running-instructions) 
-+ [Known Issues and Fixes](#known-issues-and-fixes)
-+ [Built With](#built-with)
-+ [Authors](#authors)
-+ [Acknowledgments](#acknowledgments)
-+ [References](#references)
-
-
-## Overview
-
-Pesidious is an open-source tool that uses Generative Adversarial Networks (GAN) and Reinforcement Learning (RL) to generate mutative malware that can evade nextgen AI-powered anti-virus scanners. 
-
-
 ## Installation Instructions
 
 > :warning: Since this tool deals with malware files, it is strongly recommended to use a virtual machine. After installation of the tool, make sure to disconnect from the network.
