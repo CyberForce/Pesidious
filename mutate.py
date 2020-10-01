@@ -31,7 +31,6 @@ from rich import print
 from rich.panel import Panel
 from rich.text import Text
 from rich.table import Table
-from pyfiglet import Figlet
 
 from pathlib import Path
 from tqdm import tqdm
@@ -130,7 +129,7 @@ class DQN(nn.Module):
 	def __init__(self):
 		super(DQN, self).__init__()
 		self.layers = nn.Sequential(
-			nn.Linear(2350, 256),
+			nn.Linear(env.observation_space.shape[0], 256),
 			nn.ReLU(),
 			nn.Linear(256, 64),
 			nn.ReLU(),
