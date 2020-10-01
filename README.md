@@ -18,7 +18,6 @@ Find our full documentation for the tool installation [here](https://vaya97chand
 + [Installation Instructions](#installation-instructions)
 + [Getting Training Data](#getting-training-data)
 + [Running Instructions](#running-instructions) 
-+ [Testing Procedures and results](#testing-procedures-and-results)
 + [Known Issues and Fixes](#known-issues-and-fixes)
 + [Built With](#built-with)
 + [Authors](#authors)
@@ -50,37 +49,9 @@ The following steps will guide you through all the installations required to set
     cd Pesidious
     ```
 
-1. Setting up a virtual environment in Python 3.6:
+1. [Set up and activate a virtual environment with Python 3.6](https://docs.python.org/3/tutorial/venv.html)
+    > It is recommended to use a virtual environment to avoid conflicts between packages used by different applications
 
-   1. Downloading and installing _virtualenv_. 
-   
-      ```sh
-      pip install virtualenv
-      ```
-   
-   1. Create the virtual environment in Python 3.6. Refer to this documumentation for more info [here](https://docs.python.org/3/tutorial/venv.html)
-   
-      ```sh
-       virtualenv -p path\to\your\python.exe test_env
-       ```    
-       >Note: In Windows, your Python3.6 environment is most likely to be in the following directory: `C:\Python36\Python.exe`.
-   
-   1. Activate the test environment.     
-   
-        1. For Windows:
-        ```sh
-        test_env\Scripts\Activate
-        ```        
-        
-        2. For Unix:
-        ```sh
-        source test_env/bin/activate
-        ```    
-   1. Test out the version of your virtualenv environment to confirm it is in Python3.6.     
-           
-      ```sh
-      python --version
-      ```    
 
 1. Make sure that you have pip 8.1.1 installed and set up.
    > This is due to later versions of pip not playing well with the PyTorch libary. 
@@ -92,7 +63,7 @@ The following steps will guide you through all the installations required to set
 1. Install all the required libraries, by installing the requirements.txt file.
 
     ```sh
-    pip install -r requirements.txt
+    pip install -r pip_requirements\requirements.txt
     ```
      
 <!-- 1. Download malware and benign binary samples from [here](#training-and-testing-data). -->
@@ -252,31 +223,6 @@ The training tests the learning agent after every 550 episodes with 200 samples.
     ```
     Mutated_malware/mutated_<name-of-the-file>
     ```
-
-
-## Testing Procedures and Results
-
-
-##### Results comparing the number of functional mutations generated when trained with different thresholds for detection and maximum mutations allowed (Testing Data : 250 samples)
-
-
-| Threshold for detection    | Maximum mutations allowed | Mutations Generated | Functional Mutation | Average VirusTotal Score |
-|----------------------------|---------------------------|---------------------|---------------------|--------------------------|
-|             90%            |             80            |         140         |         114         |           40/69          |
-|             85%            |            120            |         115         |          62         |           29/69          |
-|             80%            |            160            |          94         |          24         |           11/69          |
-
-##### Results comparing the impact blackbox detector algorithm and activation function have on the TPR of the adversarially generated feature vector
-
-<p align="center">
- <img src="https://lh5.googleusercontent.com/N0DSZWbPwMUmNo0JRWmuVwSxDLHRUit7t2jcgUW4UfvYLOF365_fT0hvLuK_QWocZ4D9ugYXIxj11LKBAYOYqoj-lPGZzpyhBW8D0H8J" align="middle">
-</p>
-
-#### Results comparing the impact the size of the feature vector have on the TPR of the adversarially generated feature vector
-
-<p align="center">
- <img src="https://lh3.googleusercontent.com/QtenUP6It_5W4Pysmr1TKZ1HlYdh9Q9cJ7F8gQ_rneb3lwkMnnwzMdtnXfY3r3dwJcFyb3_O4AwEDOflg4LVMkdeI6KdiGBWDytBjAPGuONk6q5mN7gTMVMeRj3i384NtuE1TpHe" align="middle">
-</p>
 
 
 ## Known Issues and Fixes
