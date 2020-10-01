@@ -1,7 +1,6 @@
 *.pth
 .DS_Store
 virtual_environments
-Data
 Logs
 tester.log
 feature_vector_directory
