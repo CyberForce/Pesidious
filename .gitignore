@@ -1,5 +1,6 @@
 *.pth
 .DS_Store
+Data
 virtual_environments
 Logs
 tester.log
